@@ -17,17 +17,17 @@ I'm Nhat Minh, and this is a guide for everything, you MUST read it carefully.
 
 
 ### Guide to GitHub
-You MUST follow the following steps and rules. Things might get seriously worse if you do something wrong, basically bacause we are coding together.
+You should follow the following steps to get yourself familiar with GitHub. Things might get seriously worse if you do something wrong, basically bacause we are coding together.
 
 
-- Step 1: If you are new to GitHub, I think it will be the best for you to use GitHub Desktop. Download it and do the following jobs.
+- Step 1: I think it will be the best for you to use GitHub Desktop. Download it and do the following jobs.
 
 - You MUST understand, and know how to do the following things using GitHub for managing project, BEFORE doing anything in this repository (feel free to skip this part if you already know how to use GitHub):
 
   - Step 2: Create a repository of your own.
   - On that repository...
     - When you start working on the project for the first time:
-      - Step 3: `clone`: clone the repository to your local machine.
+        - Step 3: `clone`: clone the repository to your local machine.
     - Create, delete, and adjust files (for the first time and later times):
         - Step 4: `fetch`: "sync" everything you and others have done on the repository from cloud to your local machine, you must do this EVERYTIME you start coding.
         - Step 5: Create and write a Python `hello_world.py` file in that directory. I recommend using Visual Studio Code, but you can use any IDE/editor that you are familiar with.
