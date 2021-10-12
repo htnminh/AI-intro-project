@@ -33,9 +33,9 @@ You should follow the following steps to get yourself familiar with GitHub. Thin
         - Step 5: Create and write a Python `hello_world.py` file in that directory. I recommend using Visual Studio Code, but you can use any IDE/editor that you are familiar with.
         - Step 6: `commit`: "make a change" to what you have done in the repository, locally. (Each commit could have multiple files change). Please, write a meaningful commit message, in which you shortly describe all what you have done (e.g. create hello_world)
         - Step 7: `push`: "push all changes", i.e. "sync" your recent commit(s) from your local machine to cloud. (Each push could have multiple commits). The best practice is to split your work in an afternoon to multiple commits, and push it right after each commit. (If you cannot push because of files' conflict, do not try to push the conflict up, and let everyone knows about those files right away)
-        - Step 8: Look at your repository on web to see your pushed things. 
+        - Step 8: Take a look at your repository on the web to see your pushed commits. 
      - By now, you have a hands-on experience with basic GitHub, let's practice!
-        - Step 9: Repeat from step 4 to step 7, instead in step 5, you can try to create more files, delete some files, adjust some code, and it will work magically the same way you create the `hello_world.py` file.
+        - Step 9: Repeat from step 4 to step 8, instead in step 5, you can try to create more files, delete some files, adjust some code, and it will work magically the same way you create the `hello_world.py` file.
    
 
 ### Guide to files and directories in this project
