@@ -1,3 +1,6 @@
+import sys
+sys.path.append('C:/Github repositories/AI-intro-project/')
+
 from files.hello_world import HelloWorld
 
 def test_names():
