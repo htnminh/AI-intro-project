@@ -64,6 +64,16 @@ The directory...
   1. (Markdown for publication) Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
   2. (Formulae in Markdown) In a Markdown file, if you want to insert a mathematical formula, you must upload an image of the formula to the `formulae` directory, copy the permalink to that image, then paste it in the Markdown code, so the image is displayed. (The code to insert the image is `![](https://...)`. I will use LaTeX to convert those formulae to `.pdf` file).
 
+### Start working
+Start working only if you understand and accept to follow the rules above. It will take some time, I know. You will soon feel everything runs smoothly.
+1. Clone this repository.
+2. Open your command line, change the directory to the repository location (`AI-intro-project` by default). There are more than two ways of doing this:
+  - If you want to use VSCode: open GitHub Desktop, choose Open in Visual Studio Code. In VSCode, create a terminal, and the directory is already there.
+  - If you want to use Windows' command line: open it and `cd` there.
+3. Run `pip install .`, this will install a package named `AIIntroProject`.
+4. Take a look at [`hello_world.py`](https://github.com/htnminh/AI-intro-project/blob/main/AI_intro_project/hello_world.py) and [`test_hello_world.py`](https://github.com/htnminh/AI-intro-project/blob/main/tests/test_hello_world.py) to understand importation.
+5. Start doing your things. Remember to follow the rules, since you are not working alone.
+
 <!--
 # Docs
 - [LICENSE]()
