@@ -19,7 +19,7 @@ This is a guide for everything, you MUST read it carefully.
 
 
 ### Guide to GitHub
-You should follow the following steps to get yourself familiar with GitHub. Things might get seriously worse if you do something wrong, basically bacause we are coding together. You can see the GitHub's official guide [here](https://guides.github.com/activities/hello-world/) if you cannot do any step.
+You should follow the following steps to get yourself familiar with GitHub. Things might get seriously worse if you do something wrong, basically bacause we are coding together. You can see the GitHub's official guide [here](https://guides.github.com/activities/hello-world/) if you cannot do some steps.
 
 
 - Step 1: I think it will be the best for you to use GitHub Desktop. Download it and do the following jobs.
