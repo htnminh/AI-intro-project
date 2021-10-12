@@ -38,7 +38,7 @@ You MUST understand, and know how to do the following things using GitHub to man
     - Step 9: Repeat from step 4 to step 8, instead in step 5, you can try to create more files, delete some files, adjust some code, and it will work magically the same way you create the `hello_world.py` file.
    
 
-### Guide to files and directories in this project
+### Introduction to directories in this project
 The directory...
 - `AI_intro_project`: all the files used to run the project.
 - `tests`: scripts used to test Python files in `AI_intro_project`.
@@ -46,8 +46,14 @@ The directory...
   - `formulae`: all images of formulae used in the parent directory `publication`.
 
 
+### End-to-end rules to work in this project:
+- General rules
+  1. You must `fetch` everytime before coding.
+
+<!--
 # Docs
 - [LICENSE]()
 - [Code of Conduct]()
 - [Contributing]()
 - [Issue templates]()
+-->
