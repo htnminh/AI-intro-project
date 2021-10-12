@@ -24,18 +24,18 @@ You should follow the following steps to get yourself familiar with GitHub. Thin
 
 You MUST understand, and know how to do the following things using GitHub to manage a project, BEFORE doing anything in this repository (feel free to skip this part if you already know how to use GitHub):
 
-  - Step 2: Create a repository of your own.
-  - On that repository...
-    - When you start working on the project for the first time:
-        - Step 3: `clone`: clone the repository to your local machine.
-    - Create, delete, and adjust files (for the first time and later times):
-        - Step 4: `fetch`: "sync" everything you and others have done on the repository from cloud to your local machine, you must do this EVERYTIME you start coding.
-        - Step 5: Create and write a Python `hello_world.py` file in that directory. I recommend using Visual Studio Code, but you can use any IDE/editor that you are familiar with.
-        - Step 6: `commit`: "make a change" to what you have done in the repository, locally. (Each commit could have multiple files change). Please, write a meaningful commit message, in which you shortly describe all what you have done (e.g. create hello_world)
-        - Step 7: `push`: "push all changes", i.e. "sync" your recent commit(s) from your local machine to cloud. (Each push could have multiple commits). The best practice is to split your work in an afternoon to multiple commits, and push it right after each commit. (If you cannot push because of files' conflict, do not try to push the conflict up, and let everyone knows about those files right away)
-        - Step 8: Take a look at your repository on the web to see your pushed commits. 
-     - By now, you have a hands-on experience with basic GitHub, let's practice!
-        - Step 9: Repeat from step 4 to step 8, instead in step 5, you can try to create more files, delete some files, adjust some code, and it will work magically the same way you create the `hello_world.py` file.
+- Step 2: Create a repository of your own.
+- On that repository...
+  - When you start working on the project for the first time:
+    - Step 3: `clone`: clone the repository to your local machine.
+  - Create, delete, and adjust files (for the first time and later times):
+    - Step 4: `fetch`: "sync" everything you and others have done on the repository from cloud to your local machine, you must do this EVERYTIME you start coding.
+    - Step 5: Create and write a Python `hello_world.py` file in that directory. I recommend using Visual Studio Code, but you can use any IDE/editor that you are familiar with.
+    - Step 6: `commit`: "make a change" to what you have done in the repository, locally. (Each commit could have multiple files change). Please, write a meaningful commit message, in which you shortly describe all what you have done (e.g. create hello_world)
+    - Step 7: `push`: "push all changes", i.e. "sync" your recent commit(s) from your local machine to cloud. (Each push could have multiple commits). The best practice is to split your work in an afternoon to multiple commits, and push it right after each commit. (If you cannot push because of files' conflict, do not try to push the conflict up, and let everyone knows about those files right away)
+    - Step 8: Take a look at your repository on the web to see your pushed commits. 
+  - By now, you have a hands-on experience with basic GitHub, let's practice!
+    - Step 9: Repeat from step 4 to step 8, instead in step 5, you can try to create more files, delete some files, adjust some code, and it will work magically the same way you create the `hello_world.py` file.
    
 
 ### Guide to files and directories in this project
@@ -43,7 +43,7 @@ The directory...
 - `AI_intro_project`: all the files used to run the project.
 - `tests`: scripts used to test Python files in `AI_intro_project`.
 - `publication`: all `.txt` and `.pdf` files for publication.
-  - `formulae`: all images of formulae used in `publication`.
+  - `formulae`: all images of formulae used in the parent directory `publication`.
 
 
 # Docs
