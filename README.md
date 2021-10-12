@@ -49,8 +49,8 @@ The directory...
 ### End-to-end rules to work in this project:
 - General rules
   1. (GitHub `fetch`) You must `fetch` every time before coding.
-  2. (GitHub `commit`) You should write a meaningful (and short) commit message.
-  3. (GitHub conflict) You must announce everyone if you cannot push because of files' conflict.
+  2. (GitHub `commit` message) You should write a meaningful (and short) commit message.
+  3. (GitHub files' conflict) You must announce everyone if you cannot push because of files' conflict.
   4. (Citation) Any copied content (code or text) must has a citation at the end of the file containing that content.
   5. (What did you do?) You should add a card to the `Done` column in the [project](https://github.com/htnminh/AI-intro-project/projects/1) after you have finished something. This will be easier for scoring later on.
 - Coding rules
@@ -58,7 +58,7 @@ The directory...
   2. (Comment conventions) You must comment for every object and every method, please follow [PEP 257](https://www.python.org/dev/peps/pep-0257/).
   3. (OOP) You must use Object Oriented Programming, and try to avoid writing too much code in the main program without putting them in an object.
   4. (Absolute import) Most of the time, if you want to use an object from another file, you should use [absolute import](https://www.geeksforgeeks.org/absolute-and-relative-imports-in-python/).
-  5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every files. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until they are passed. (If the tests are wrong, please tell me). If there is a file that show too many (>10) warnings about your code conventions, you must adjust it to follow the conventions above.
+  5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every files. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until all the tests are passed. (If the tests are wrong, please tell me). If there is a file that the tests show too many warnings (>10) about your code conventions, you must adjust it to reduce the convention warnings.
   6. (No Jupyter) Avoid using Jupyter notebook (but there will be one for reporting).
 - Writing rules
   1. (Markdown for publication) Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
