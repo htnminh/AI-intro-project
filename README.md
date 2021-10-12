@@ -16,7 +16,7 @@
 I'm Nhat Minh, and this is a guide for everything, you MUST read it carefully.
 
 
-### Guide and rules to GitHub and coding
+### Guide to GitHub
 You MUST follow the following steps and rules. Things might get seriously worse if you do something wrong, basically bacause we are coding together.
 
 
