@@ -1,4 +1,4 @@
-from files.hello_world import HelloWorld
+from AI_intro_project.hello_world import HelloWorld
 
 def test_names():
     assert HelloWorld().names() == {'Minh', 'Phuc', 'Nam', 'Anh', 'Phong'}
