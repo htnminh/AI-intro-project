@@ -39,7 +39,11 @@ You MUST understand, and know how to do the following things using GitHub to man
    
 
 ### Guide to files and directories in this project
-
+The directory...
+- `AI_intro_project`: all the files used to run the project.
+- `tests`: scripts used to test Python files in `AI_intro_project`.
+- `publication`: all `.txt` and `.pdf` files for publication.
+  - `formulae`: all images of formulae used in `publication`.
 
 
 # Docs
