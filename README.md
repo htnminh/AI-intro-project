@@ -1,24 +1,26 @@
-# Name
-Description
+# (Name)
+(Description)
 
-Links to related repos
+<!-- ![preview](https://github.com/htnminh/python-template/blob/main/docs/preview.png)
+-->
 
-![preview](https://github.com/htnminh/python-template/blob/main/docs/preview.png)
+## (An Introduction)
 
-List of good files in repo:
-- []()
-- []()
-- []()
 
-## Chapter 1:
-Quick introduction about the chapter
-## Chapter 2:
-Quick introduction about the chapter
-## Chapter 3:
-Quick introduction about the chapter
+## Announcements
+
+
+## Guide for Collaborators
+
+### Guide to GitHub
+
+
+
+### Guide to coding
+
+
 
 # Docs
-- [Other files]()
 - [LICENSE]()
 - [Code of Conduct]()
 - [Contributing]()
