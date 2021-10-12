@@ -59,10 +59,10 @@ The directory...
   3. (OOP) You must use Object Oriented Programming, and try to avoid writing too much code in the main program without putting them in an object.
   4. (Absolute import) Most of the time, if you want to use an object from another file, you should use [absolute import](https://www.geeksforgeeks.org/absolute-and-relative-imports-in-python/).
   5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every files. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until they are passed. (If the tests are wrong, please tell me). If there is a file that show too many (>10) warnings about your code conventions, you must adjust it to follow the conventions above.
-  6. Avoid using Jupyter notebook (but there will be one for reporting).
+  6. (No Jupyter) Avoid using Jupyter notebook (but there will be one for reporting).
 - Writing rules
-  1. Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
-  2. In a Markdown file, if you want to insert a mathematical formula, you must upload an image of the formula to the `formulae` directory, copy the permalink to that image, then paste it in the Markdown code, so the image is displayed. (The code to insert the image is `![](https://...)`. I will use LaTeX to convert those formulae to `.pdf` file).
+  1. (Markdown for publication) Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
+  2. (Formulae in Markdown) In a Markdown file, if you want to insert a mathematical formula, you must upload an image of the formula to the `formulae` directory, copy the permalink to that image, then paste it in the Markdown code, so the image is displayed. (The code to insert the image is `![](https://...)`. I will use LaTeX to convert those formulae to `.pdf` file).
 
 <!--
 # Docs
