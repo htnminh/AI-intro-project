@@ -9,11 +9,13 @@
 
 
 ## Announcements 
-
+13/10/2021: 
+- We will start to discuss about some the topics to choose from (for the first time) in Thursday (14/10) at 3 PM in our Messenger group. Everyone should be prepared for some ideas. The discussion should take about an hour.
+- We will have a second discussion to select the final topic in Saturday (16/10). I will announce later.
 
 
 ## Guide for Collaborators
-I'm Nhat Minh, and this is a guide for everything, you MUST read it carefully.
+This is a guide for everything, you MUST read it carefully.
 
 
 ### Guide to GitHub
