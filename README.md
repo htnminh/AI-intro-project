@@ -22,7 +22,7 @@ You should follow the following steps to get yourself familiar with GitHub. Thin
 
 - Step 1: I think it will be the best for you to use GitHub Desktop. Download it and do the following jobs.
 
-- You MUST understand, and know how to do the following things using GitHub to manage a project, BEFORE doing anything in this repository (feel free to skip this part if you already know how to use GitHub):
+You MUST understand, and know how to do the following things using GitHub to manage a project, BEFORE doing anything in this repository (feel free to skip this part if you already know how to use GitHub):
 
   - Step 2: Create a repository of your own.
   - On that repository...
