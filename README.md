@@ -64,7 +64,7 @@ The directory...
 - Writing rules
   1. (Jupyter) Write reports using Jupyter notebook, even if there is no code or mathematical formula.
   2. (Structure) A report must has a hierarchical structure, using Markdown in text cells of the notebook ([Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)).
-  3. (Mathematical formulae) You can format a mathematical formula using LaTeX between `$ ... $` in text cells ([like this]())
+  3. (Mathematical formulae) You can format a mathematical formula using LaTeX between `$ ... $` in text cells ([an example](https://github.com/htnminh/AI-intro-project/blob/fc835b8cf00a72818d5662f27fde46979cc71470/publication/hello_world_example.PNG), [LaTeX formula Cheat Sheet](http://tug.ctan.org/info/undergradmath/undergradmath.pdf))
 
 
 ### Start working
