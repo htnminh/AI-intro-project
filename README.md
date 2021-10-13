@@ -31,7 +31,7 @@ You MUST understand, and know how to do the following things using GitHub to man
   - When you start working on the project for the first time:
     - Step 3: `clone`: clone the repository to your local machine.
   - Create, delete, and adjust files (for the first time and later times):
-    - Step 4: `fetch`: "sync" everything that you and others have done on the repository from cloud to your local machine, you must do this EVERY TIME you start coding.
+    - Step 4: `fetch` and `pull`: "sync" everything that you and others have done on the repository from cloud to your local machine, you must do this EVERY TIME you start coding.
     - Step 5: Create and write a Python `hello_world.py` file in that directory. I recommend using Visual Studio Code, but you can use any IDE/editor that you are familiar with.
     - Step 6: `commit`: "make a change" to what you have done in the repository, locally. (Each commit could have multiple files change). Please, write a meaningful commit message, in which you shortly describe all what you have done (e.g. create hello_world)
     - Step 7: `push`: "push all changes", i.e. "sync" your recent commit(s) from your local machine to cloud. (Each push could have multiple commits). The best practice is to split your work in an afternoon to multiple tasks, commit each task, and push it right after each commit. (If you cannot push because of files' conflict, do not try to push the conflict up, and let everyone knows about those files right away)
@@ -50,7 +50,7 @@ The directory...
 
 ### End-to-end rules to work in this project:
 - General rules
-  1. (GitHub `fetch`) You must `fetch` every time before coding.
+  1. (GitHub `fetch`) You must `fetch` (and `pull`) every time before coding.
   2. (GitHub `commit` message) You should write a meaningful (and short) commit message.
   3. (GitHub files' conflict) You must announce everyone if you cannot push because of files' conflict.
   4. (Citation) Any copied content (code or text) must has a citation at the end of the file containing that content.
