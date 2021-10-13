@@ -1,2 +1,0 @@
-You must leave a GitHub's permalink of the formula picture, not the name.
-https://github.com/htnminh/AI-intro-project/blob/752d9199cd26b851b2919546dd9d27567fd87579/publication/formulae/128958_2016-06-23%2013_45_36-Root%20Mean%20Squared%20Error%20_%20Kaggle.png
