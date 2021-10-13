@@ -31,7 +31,7 @@ You MUST understand, and know how to do the following things using GitHub to man
   - When you start working on the project for the first time:
     - Step 3: `clone`: clone the repository to your local machine.
   - Create, delete, and adjust files (for the first time and later times):
-    - Step 4: `fetch`: "sync" everything you and others have done on the repository from cloud to your local machine, you must do this EVERY TIME you start coding.
+    - Step 4: `fetch`: "sync" everything that you and others have done on the repository from cloud to your local machine, you must do this EVERY TIME you start coding.
     - Step 5: Create and write a Python `hello_world.py` file in that directory. I recommend using Visual Studio Code, but you can use any IDE/editor that you are familiar with.
     - Step 6: `commit`: "make a change" to what you have done in the repository, locally. (Each commit could have multiple files change). Please, write a meaningful commit message, in which you shortly describe all what you have done (e.g. create hello_world)
     - Step 7: `push`: "push all changes", i.e. "sync" your recent commit(s) from your local machine to cloud. (Each push could have multiple commits). The best practice is to split your work in an afternoon to multiple tasks, commit each task, and push it right after each commit. (If you cannot push because of files' conflict, do not try to push the conflict up, and let everyone knows about those files right away)
@@ -60,11 +60,13 @@ The directory...
   2. (Comment conventions) You must comment for every object and every method, please follow [PEP 257](https://www.python.org/dev/peps/pep-0257/).
   3. (OOP) You must use Object Oriented Programming, and try to avoid writing too much code in the main program without putting them in an object.
   4. (Absolute import) Most of the time, if you want to use an object from another file, you should use [absolute import](https://www.geeksforgeeks.org/absolute-and-relative-imports-in-python/).
-  5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every files. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until all the tests are passed. (If the tests are wrong, please tell me). If there is a file that the tests show too many warnings (>10) about your code conventions, you must adjust it to reduce the convention warnings.
+  5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every file. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until all the tests are passed. (If the tests are wrong, please tell me). If there is a file that the tests show too many warnings (>10) about your code conventions, you must adjust it to reduce the convention warnings.
   6. (No Jupyter) Avoid using Jupyter notebook (but there will be one for reporting).
 - Writing rules
+<!--
   1. (Markdown for publication) Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
   2. (Formulae in Markdown) In a Markdown file, if you want to insert a mathematical formula, you must upload an image of the formula to the `formulae` directory, copy the permalink to that image, then paste it in the Markdown code, so the image is displayed. (The code to insert the image is `![](https://...)`. I will use LaTeX to convert those formulae to `.pdf` file).
+-->
 
 ### Start working
 Start working only if you understand and accept to follow the rules above. It will take some time, I know. You will soon feel everything runs smoothly.
