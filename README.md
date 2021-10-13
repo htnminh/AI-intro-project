@@ -61,7 +61,7 @@ The directory...
   3. (OOP) You must use Object Oriented Programming, and try to avoid writing too much code in the main program without putting them in an object.
   4. (Absolute import) Most of the time, if you want to use an object from another file, you should use [absolute import](https://www.geeksforgeeks.org/absolute-and-relative-imports-in-python/).
   5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every file. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until all the tests are passed. (If the tests are wrong, please tell me). If there is a file that the tests show too many warnings (>10) about your code conventions, you must adjust it to reduce the convention warnings.
-  6. (No Jupyter) Avoid using Jupyter notebook (but there will be one for reporting).
+  6. (No Jupyter) Avoid using Jupyter notebook to code, but there will be some for reporting.
 - Writing rules
 <!--
   1. (Markdown for publication) Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
