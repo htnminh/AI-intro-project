@@ -44,8 +44,7 @@ You MUST understand, and know how to do the following things using GitHub to man
 The directory...
 - `AI_intro_project`: all the files used to run the project.
 - `tests`: scripts used to test Python files in `AI_intro_project`.
-- `publication`: all `.md` and `.pdf` files for publication.
-  - `formulae`: all images of formulae used in the parent directory `publication`.
+- `publication`: all `.ipynb` and `.pdf` files for publication.
 
 
 ### End-to-end rules to work in this project:
@@ -63,10 +62,10 @@ The directory...
   5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every file. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until all the tests are passed. (If the tests are wrong, please tell me). If there is a file that the tests show too many warnings (>10) about your code conventions, you must adjust it to reduce the convention warnings.
   6. (No Jupyter) Avoid using Jupyter notebook to code, but there will be some for reporting.
 - Writing rules
-<!--
-  1. (Markdown for publication) Any publication file must has a raw text `.md` file (in the `publication` directory) before converting to `.pdf` or so. If you are a writer, you must learn how to use Markdown, and this is a [guide](https://guides.github.com/features/mastering-markdown/). (Everything you see here is written by Markdown, it is beautiful, and easy).
-  2. (Formulae in Markdown) In a Markdown file, if you want to insert a mathematical formula, you must upload an image of the formula to the `formulae` directory, copy the permalink to that image, then paste it in the Markdown code, so the image is displayed. (The code to insert the image is `![](https://...)`. I will use LaTeX to convert those formulae to `.pdf` file).
--->
+  1. (Jupyter) Write reports using Jupyter notebook, even if there is no code or mathematical formula.
+  2. (Structure) A report must has a hierarchical structure, using Markdown in text cells of the notebook ([Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)).
+  3. (Mathematical formulae) You can format a mathematical formula using LaTeX between `$ ... $` in text cells ([like this]())
+
 
 ### Start working
 Start working only if you understand and accept to follow the rules above. It will take some time, I know. You will soon feel everything runs smoothly.
