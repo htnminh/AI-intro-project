@@ -1,0 +1,11 @@
+##################################################
+
+Please refer to Minh's hello_world_rmse_example.txt for group's official example!
+https://github.com/htnminh/AI-intro-project/blob/main/publication/hello_world_rmse_example.txt
+
+##################################################
+
+This is Almond trying to work with GitHub desktop.
+
+Testing pre-committed image link by using URL-accepted characters only:
+https://github.com/htnminh/AI-intro-project/blob/main/publication/formulae/Gradient-Cartesian_Coords.png
