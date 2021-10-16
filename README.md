@@ -65,7 +65,7 @@ The directory...
   2. (Structure) A report must has a hierarchical structure, using Markdown in text cells of the notebook ([Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)).
   3. (Mathematical formulae) You can format a mathematical formula using LaTeX between `$ ... $` in text cells ([an example](https://github.com/htnminh/AI-intro-project/blob/fc835b8cf00a72818d5662f27fde46979cc71470/publication/hello_world_example.PNG), [LaTeX formula Cheat Sheet](http://tug.ctan.org/info/undergradmath/undergradmath.pdf))
 
-
+<!--
 ### Start working
 Start working only if you understand and accept to follow the rules above. It will take some time, I know. You will soon feel everything runs smoothly.
 1. Clone this repository.
@@ -75,6 +75,7 @@ Start working only if you understand and accept to follow the rules above. It wi
 3. Run `pip install .`, this will install a package named `AIIntroProject`.
 4. Take a look at [`hello_world.py`](https://github.com/htnminh/AI-intro-project/blob/main/AI_intro_project/hello_world.py) and [`test_hello_world.py`](https://github.com/htnminh/AI-intro-project/blob/main/tests/test_hello_world.py) to understand importation.
 5. Start doing your things. Remember to follow the rules, since you are not working alone.
+-->
 
 <!--
 # Docs
