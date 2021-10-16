@@ -68,7 +68,8 @@ The directory...
 ### Guide to publication
 1. Write contents using ONLY Markdown, (do not use HTML), in a Jupyter notebook.
 2. Convert to LaTeX by running `jupyter notebook` in your local machine, then export the notebook as a TeX file.
-3. Upload the TeX file to <https://www.overleaf.com/project>, compile it, then download the compiled PDF file.
+3. Upload the TeX file to <https://www.overleaf.com/project>, compile it, then download the compiled PDF file. Remember to choose XeLaTeX as a compiler if the document has Vietnamese characters.
+![](https://github.com/htnminh/AI-intro-project/blob/fe8618597e60cc2ee088ec4ee46feb38f0b5e4af/publication/Compiler%20XeLaTeX.PNG)
 
 
 <!--
