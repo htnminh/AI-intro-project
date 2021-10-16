@@ -46,7 +46,7 @@ The directory...
 - `publication`: all `.ipynb` and `.pdf` files for publication.
 
 
-### End-to-end rules to work in this project:
+### End-to-end rules to work in this project
 - General rules
   1. (GitHub `fetch`) You must `fetch` (and `pull`) every time before making changes and/or uploading to the repo.
   2. (GitHub `commit` message) You should write a meaningful (and short) commit message. Description is helpful if you are making lots of changes.
@@ -64,6 +64,12 @@ The directory...
   1. (Jupyter) Write reports using Jupyter notebook, even if there is no code or mathematical formula.
   2. (Structure) A report must has a hierarchical structure, using Markdown in text cells of the notebook ([Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)).
   3. (Mathematical formulae) You can format a mathematical formula using LaTeX between `$ ... $` in text cells ([an example](https://github.com/htnminh/AI-intro-project/blob/fc835b8cf00a72818d5662f27fde46979cc71470/publication/hello_world_example.PNG), [LaTeX formula Cheat Sheet](http://tug.ctan.org/info/undergradmath/undergradmath.pdf))
+
+### Guide to publication
+1. Write contents using ONLY Markdown, (do not use HTML), in a Jupyter notebook.
+2. Convert to LaTeX by running `jupyter notebook` in your local machine, then export the notebook as a TeX file.
+3. Upload the TeX file to <https://www.overleaf.com/project>, compile it, then download the compiled PDF file.
+
 
 <!--
 ### Start working
