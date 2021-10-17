@@ -1,0 +1,82 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "06e8729f",
+   "metadata": {},
+   "source": [
+    "# Introduction\n",
+    "\n",
+    "| Name        | Student ID  | Email Address                   |\n",
+    "| :---        |    :----:   |                            ---: |\n",
+    "| Hoàng Trần Nhật Minh|20204883|minh.htn204883@sis.hust.edu.vn|\n",
+    "| Nguyễn Hoàng Phúc   |20204923|phuc.nh204923@sis.hust.edu.vn |\n",
+    "| Lý Nhật Nam         |20204886|nam.ln204886@sis.hust.edu.vn  |\n",
+    "| Lê Thảo Anh         |20200054|anh.lt200054@sis.hust.edu.vn  |\n",
+    "| Đỗ Xuân Phong       |20219701|phong.dx219701@sis.hust.edu.vn|\n",
+    "\n",
+    "\n",
+    "# Description of the problem: \n",
+    "**A extended 8-puzzle problem: 15-puzzle**\n",
+    "\n",
+    "A program to solve the extended $8$-puzzle problem from the Chapter $3$ ’s slides.  \n",
+    "In this game, $15$ tiles are arranged on a $4 \\times 4$ grid with one vacant space. The tiles are numbered from $1$ to $15$. The state of the puzzle can be changed by sliding one of the numbered tiles – adjacent to the vacant space – into the vacant space. The action is denoted by the direction, in which the numbered tile is moved. For each state, the set of\n",
+    "possible actions As is therefore a subset of $\\{up, down, left, right\\}$. The goal is to get the puzzle to the final state right by applying a sequence of actions. A puzzle configuration is considered as solvable, if there exists a sequence of actions which leads to the goal configuration. \n",
+    "\n",
+    "![[^1]](https://github.com/htnminh/AI-intro-project/blob/main/publication/15%20puzzle.png)\n",
+    "\n",
+    "**States**: There are $16!=2.092278989\\times10^{13}$ possible states  \n",
+    "(all permutations of $\\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15\\}$ where 0 is the empty space).  \n",
+    "Not all states are directly reachable from a given state. (In fact, exactly half of them are reachable from a given state.)\n",
+    "\n",
+    "Each represented by a pair $(A,(i, j))$ where:  \n",
+    "A is a $4 \\times 4$ array of numbers in $[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]$  \n",
+    "$(i, j)$ is the position of the empty space $(0)$ in the array.\n",
+    "\n",
+    "![[^1]](https://github.com/htnminh/AI-intro-project/blob/main/publication/15%20puzzle.png)\n",
+    "\n",
+    "**The initial state**: randomly generated.\n",
+    "\n",
+    "**Actions**: 4 operators of the form OPd where\n",
+    "          $d \\in \\{L, R, U, D\\}$. OPd moves the empty space in the direction $d$. \n",
+    "\n",
+    "**The goal state**: Pieces end up in the correct order \n",
+    "\n",
+    "**The path cost**: Each move costs 1, so path cost = number of steps in path, performance measure is minimizing the total moves.\n",
+    "\n",
+    "Each algorithm will has several outputs\n",
+    "\n",
+    " - Time complexity (number of nodes expanded in order to solve the puzzle)\n",
+    " - Space complexity (number of nodes kept in memory)\n",
+    " - The sequence of moves from the blank tile to solve the puzzle (solution) or, if there\n",
+    " - The sequence of moves from the blank tile to solve the puzzle (solution), or if there is no possible solution, print “Unsolvable”.\n",
+    "\n",
+    "\n",
+    "Multiple puzzles (at least $50$) will be generated and solved (or not, if they were not solvable) which will be aggregated before being analyzed in the report. This is the extended version of 8-puzzle problem so there will be comparison between $15$-puzzle and $8$-puzzle \n",
+    "\n",
+    "[^1]: <https://mediatum.ub.tum.de/doc/1283911/1283911.pdf>"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
