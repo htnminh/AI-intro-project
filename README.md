@@ -2,7 +2,7 @@
 
 <!-- ![preview](https://github.com/htnminh/python-template/blob/main/docs/preview.png)
 -->
-
+<https://youtu.be/6sBB-gRhfjE>
 
 ## Announcements
 16/10/2021:
