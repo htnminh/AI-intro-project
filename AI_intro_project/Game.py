@@ -1,6 +1,6 @@
 # TODO: write tests for this file
 '''
-A self-note:
+self-note:
 
 x and y in this project are not of normal coordinate system in
 mathematics, instead they point out the coordinate in the form
@@ -15,18 +15,18 @@ of a 2D numpy array like this:
 '''
 
 class Road():
-    '''A road instance of the game'''
+    '''a road instance of the game'''
     def __init__(self, x, y, direction):
         '''
-        A road is composed by 3 components, which are:
+        Each road is composed by 3 components, which are:
         - x and y: 2 real numbers
-        - direction: A character, which is one of the 4
+        - direction: a character, which is one of the 4
           characters 'R', 'L', 'U' or 'D'
         Properties:
-        - coordinate_start: It is (x, y)
-        - coordinate_end: The coordinate after moving
+        - coordinate_start: it is (x, y)
+        - coordinate_end: the coordinate after moving
         Methods:
-        - coordinate_end_calc: Calculate the coordinate_end
+        - coordinate_end_calc: calculate the coordinate_end
         '''
         self.x = x
         self.y = y
@@ -64,16 +64,16 @@ class Road():
             return False
 
 class State():
-    '''A state of the game'''
+    '''a state of the game'''
     def __init__(self):
         '''
-        A state is composed by 4 components, which are:
-        - board_size: A tuple (m, n)
-        - walked_road: A list of instances of the class
-        Road,  each instance is represented by (x, y, 
-        direction)
-        - current_pos: A tuple (x, y)
-        - current_tax: A real number
+        Each state is composed by 4 components, which are:
+        - board_size: a tuple (m, n)
+        - walked_road: a list of instances of the class
+          Road, each instance is represented by (x, y,
+          direction)
+        - current_pos: a tuple (x, y)
+        - current_tax: a real number
         '''
         self.board_size = None
         self.walked_road = None
