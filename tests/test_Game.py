@@ -1,12 +1,16 @@
 from AI_intro_project.Game import *
 
+# Initial variable used for testing
 # Assuming board_size is (4, 4)
-
+coord_rd = (2, 3) # a totally-not-random coord
 coord_ul = (1, 1) # Up-Left aka. North-West
 coord_dr = (3, 3) # Down-Right aka. South-East
 coord_ul_invalid = (0, 0)
 coord_dr_invalid = (4, 4)
-                     
+
+#
+# TEST FOR CLASS: AI_intro_project.Game.Road()
+#
 def test_coordinate_end_calc():
     # test for near-edge coords
     assert Road(*(coord_ul + tuple('U'))).coordinate_end == (0, 1), \
@@ -24,4 +28,8 @@ def test_coordinate_end_calc():
     # test for corner coords, these should return 'invalid'
     # TODO: impl invalid moves first in main game logic.
 
-
+def test_eq():
+    # told you that _rd is not random
+    assert Road(*(coord_dr + tuple('U'))) == \
+           Road(*(coord_rd + tuple('D'))), \
+        'Test Road(2, 3, D) == Road(3, 3, U) did not return True'
