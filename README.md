@@ -1,7 +1,7 @@
-# Capstone Project for Intro to AI course.
+# The Penniless Pilgrim Riddle
+A capstone project for Intro to AI course.
 
-<!-- ![preview](https://github.com/htnminh/python-template/blob/main/docs/preview.png)
--->
+A quick introduction about the problem: <br>
 <https://youtu.be/6sBB-gRhfjE>
 
 ## Announcements
