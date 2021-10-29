@@ -33,3 +33,7 @@ def test_eq():
     assert Road(*(coord_dr + tuple('U'))) == \
            Road(*(coord_rd + tuple('D'))), \
         'Test Road(2, 3, D) == Road(3, 3, U) did not return True'
+    
+    assert Road(*(coord_ul + tuple('D'))) != \
+           Road(*((2, 2) + tuple('L'))), \
+        'Test Road(1, 1, D) == Road(2, 2, L) did not return False'
