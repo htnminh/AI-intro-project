@@ -14,8 +14,10 @@ of a 2D numpy array like this:
 (m,0) (m,1) (m,2) ... (m,n)
 '''
 
+
 class Road():
     '''a road instance of the game'''
+
     def __init__(self, x, y, direction):
         '''
         Each road is composed by 3 components, which are:
@@ -40,13 +42,13 @@ class Road():
         coordinate after moving on the road.
         '''
         if self.direction == 'R':
-            return (self.x, self.y + 1)
+            return self.x, self.y + 1
         if self.direction == 'L':
-            return (self.x, self.y - 1)
+            return self.x, self.y - 1
         if self.direction == 'U':
-            return (self.x - 1, self.y)
+            return self.x - 1, self.y
         if self.direction == 'D':
-            return (self.x + 1, self.y)
+            return self.x + 1, self.y
 
     def __eq__(self, other) -> bool:
         '''
@@ -54,17 +56,19 @@ class Road():
         They are the same road if the 2 coordinates (start
         and end) of each road are pair-wise equal between them.
         '''
-        if (        self.coordinate_start == other.coordinate_start
-                and self.coordinate_end == other.coordinate_end):
+        if (self.coordinate_start == other.coordinate_start and
+                self.coordinate_end == other.coordinate_end):
             return True
-        elif (      self.coordinate_start == other.coordinate_end
-                and self.coordinate_end == other.coordinate_start):
+        elif (self.coordinate_start == other.coordinate_end and
+              self.coordinate_end == other.coordinate_start):
             return True
         else:
             return False
 
+
 class State():
     '''a state of the game'''
+
     def __init__(self):
         '''
         Each state is composed by 4 components, which are:
@@ -79,14 +83,14 @@ class State():
         self.walked_road = None
         self.current_pos = None
         self.current_tax = None
-    
+
     def random_initialize(self, seed):
         '''
         TODO
         Randomize the initial state, given the seed
         '''
         pass
-    
+
     def _fixed_initialize(self):
         '''
         FOR DEVELOPMENT ONLY
