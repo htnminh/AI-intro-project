@@ -15,7 +15,7 @@ of a 2D numpy array like this:
 '''
 
 class Road():
-    '''A road instant of the game'''
+    '''A road instance of the game'''
     def __init__(self, x, y, direction):
         '''
         A road is composed by 3 components, which are:
