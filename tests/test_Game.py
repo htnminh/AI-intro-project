@@ -30,6 +30,7 @@ def test_coordinate_end_calc():
     # TODO: impl invalid moves first in main game logic.
     assert 1 == 1
 
+
 def test_eq():
     # told you that _rd is not random
     assert Road(*(coord_dr + tuple('U'))) == Road(*(coord_rd + tuple('D'))), \
