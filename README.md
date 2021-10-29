@@ -5,9 +5,6 @@
 <https://youtu.be/6sBB-gRhfjE>
 
 ## Announcements
-16/10/2021:
-  - Final reminder to do topic & description for the upcoming deadline at 17/10/2021 23h59.
-  - After publishing, please also move the corresponding TO-DO in `GitHub/Projects/AI_Capstone_Project/To_do` to the column Done.
 
 
 All older announcements can be found in ANNOUNCEMENTS.md
