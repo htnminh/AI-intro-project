@@ -1,11 +1,21 @@
 # The Penniless Pilgrim Riddle
-A capstone project for Intro to AI course.
+## Introduction
+A capstone project for Introduction to Artificial Intelligence course. <br>
+A quick introduction of the problem: [Can you solve the penniless pilgrim riddle? - Daniel Finkel](https://youtu.be/6sBB-gRhfjE). <br>
+In short, we will keep the original rules of the game, but randomize the board size and the "forced moves" (aka. the initial state).
+## Collaborators
+We are K65 of Hanoi University of Science and Technology, major in Data Science and Artificial Intelligence. Under the guidance of our lecturer, Professor Muriel Visani, we will together solve this riddle.
+- Hoàng Trần Nhật Minh
+- Nguyễn Hoàng Phúc
+- Lê Thảo Anh
+- Lý Nhật Nam
+- Đỗ Xuân Phong
 
-A quick introduction about the problem: <br>
-<https://youtu.be/6sBB-gRhfjE>
 
 ## Announcements
-
+30/10/2021: Our goals:
+- End of November: Finish the pseudocode, analyze most of the algorithms that we choose and not choose. Major part of the report should be finish.
+- End of December: The deadline of the project submission. Finish code and the report, and everyone should be prepared to be asked the hardest aspects of the project.
 
 All older announcements can be found in ANNOUNCEMENTS.md
 
