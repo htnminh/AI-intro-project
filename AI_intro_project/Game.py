@@ -73,14 +73,14 @@ class State():
         '''
         Each state is composed by 4 components, which are:
         - board_size: a tuple (m, n)
-        - walked_road: a list of instances of the class
+        - walked_roads: a list of instances of the class
           Road, each instance is represented by (x, y,
           direction)
         - current_pos: a tuple (x, y)
         - current_tax: a real number
         '''
         self.board_size = None
-        self.walked_road = None
+        self.walked_roads = None
         self.current_pos = None
         self.current_tax = None
 
@@ -98,9 +98,17 @@ class State():
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
         '''
         self.board_size = (4, 4)
-        self.walked_road = [
+        self.walked_roads = [
             Road(0, 0, 'R'),
             Road(0, 1, 'R'),
         ]
         self.current_pos = (0, 2)
         self.current_tax = 4
+
+    def check_duplicate_road(self, road):
+        '''
+        Check if the road is already in walked_roads
+        of the current state
+        '''
+        for walked_road in self.walked_roads:
+            pass
