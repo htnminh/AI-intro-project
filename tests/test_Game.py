@@ -1,4 +1,8 @@
+# TODO: Test Coordinate and new methods
+# -----------------------------------------------------------------------------
+
 from AI_intro_project.Game import Road
+from AI_intro_project.Game import Coordinate
 
 # Initial variable used for testing
 # Assuming board_size is (4, 4)
@@ -14,16 +18,16 @@ coord_dr_invalid = (4, 4)
 #
 def test_coordinate_end_calc():
     # test for near-edge coords
-    assert Road(*(coord_ul + tuple('U'))).coordinate_end == (0, 1), \
+    assert Road(*(coord_ul + tuple('U'))).coordinate_end == Coordinate(0, 1), \
         'Test coordinate_end_calc for (1, 1, U) did not return (0, 1)'
 
-    assert Road(*(coord_ul + tuple('L'))).coordinate_end == (1, 0), \
+    assert Road(*(coord_ul + tuple('L'))).coordinate_end == Coordinate(1, 0), \
         'Test coordinate_end_calc for (1, 1, L) did not return (0, 1)'
 
-    assert Road(*(coord_dr + tuple('D'))).coordinate_end == (4, 3), \
+    assert Road(*(coord_dr + tuple('D'))).coordinate_end == Coordinate(4, 3), \
         'Test coordinate_end_calc for (3, 3, D) did not return (4, 3)'
 
-    assert Road(*(coord_dr + tuple('R'))).coordinate_end == (3, 4), \
+    assert Road(*(coord_dr + tuple('R'))).coordinate_end == Coordinate(3, 4), \
         'Test coordinate_end_calc for (3, 3, R) did not return (3, 4)'
 
     # test for corner coords, these should return 'invalid'
