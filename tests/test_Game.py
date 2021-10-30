@@ -1,8 +1,7 @@
 # TODO: Test Coordinate and new methods
 # -----------------------------------------------------------------------------
 
-from AI_intro_project.Game import Road
-from AI_intro_project.Game import Coordinate
+from AI_intro_project.Game import Road, Coordinate
 
 # Initial variable used for testing
 # Assuming board_size is (4, 4)
