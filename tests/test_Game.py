@@ -17,16 +17,16 @@ coord_dr_invalid = (4, 4)
 #
 def test_coordinate_end_calc():
     # test for near-edge coords
-    assert Road(*(coord_ul + tuple('U'))).coordinate_end == Coordinate(0, 1), \
+    assert Road(*coord_ul, 'U').coordinate_end == Coordinate(0, 1), \
         'Test coordinate_end_calc for (1, 1, U) did not return (0, 1)'
 
-    assert Road(*(coord_ul + tuple('L'))).coordinate_end == Coordinate(1, 0), \
+    assert Road(*coord_ul, 'L').coordinate_end == Coordinate(1, 0), \
         'Test coordinate_end_calc for (1, 1, L) did not return (0, 1)'
 
-    assert Road(*(coord_dr + tuple('D'))).coordinate_end == Coordinate(4, 3), \
+    assert Road(*coord_dr, 'D').coordinate_end == Coordinate(4, 3), \
         'Test coordinate_end_calc for (3, 3, D) did not return (4, 3)'
 
-    assert Road(*(coord_dr + tuple('R'))).coordinate_end == Coordinate(3, 4), \
+    assert Road(*coord_dr, 'R').coordinate_end == Coordinate(3, 4), \
         'Test coordinate_end_calc for (3, 3, R) did not return (3, 4)'
 
     # test for corner coords, these should return 'invalid'
@@ -36,8 +36,8 @@ def test_coordinate_end_calc():
 
 def test_eq():
     # told you that _rd is not random
-    assert Road(*(coord_dr + tuple('U'))) == Road(*(coord_rd + tuple('D'))), \
+    assert Road(*coord_dr, 'U') == Road(*(coord_rd + tuple('D'))), \
         'Test Road(2, 3, D) == Road(3, 3, U) did not return True'
 
-    assert Road(*(coord_ul + tuple('D'))) != Road(*((2, 2) + tuple('L'))), \
+    assert Road(*coord_ul, 'D') != Road(2, 2, 'L'), \
         'Test Road(1, 1, D) == Road(2, 2, L) did not return False'
