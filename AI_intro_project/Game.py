@@ -19,9 +19,7 @@ the form of a 2D numpy array like this:
 '''
 
 class Coordinate():
-    '''
-    a coordinate instance of the game
-    '''
+    '''a coordinate instance of the game'''
 
     def __init__(self, x, y):
         '''
@@ -46,6 +44,7 @@ class Coordinate():
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
 
 class Road():
     '''a road instance of the game'''
@@ -118,6 +117,7 @@ class Road():
         return (self.coordinate_start.check_inside(m, n) and
                 self.coordinate_end.check_inside(m, n))
 
+
 class State():
     '''a state of the game'''
 
@@ -186,7 +186,9 @@ class State():
 
     def available_roads_calc(self):
         '''
-        Return a list of instances of Road, which are the roads that the pilgrim can walk in the current state, by checking all 4 directions around the current_pos
+        Return a list of instances of Road, which are the roads 
+        that the pilgrim can walk in the current state, 
+        by checking all 4 directions around the current_pos.
         '''
         result = list()
         for direction in ['R', 'L', 'U', 'D']:
