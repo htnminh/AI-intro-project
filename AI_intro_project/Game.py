@@ -18,6 +18,7 @@ the form of a 2D numpy array like this:
 (m,0) (m,1) (m,2) ... (m,n)
 '''
 
+
 class Coordinate():
     '''a coordinate instance of the game'''
 
@@ -67,32 +68,32 @@ class Road():
 
     def __str__(self) -> str:
         return 'Road(%s, %s, %s)' % (
-                self.coordinate_start.x, 
-                self.coordinate_start.y,
-                self.direction
+            self.coordinate_start.x,
+            self.coordinate_start.y,
+            self.direction
         )
 
-    def coordinate_end_calc(self) -> tuple:
+    def coordinate_end_calc(self) -> Coordinate:
         '''
         Return a tuple of the form (x, y), which is the
         coordinate after moving on the road.
         '''
         if self.direction == 'R':
             return Coordinate(
-                    self.coordinate_start.x, 
-                    self.coordinate_start.y + 1)
+                self.coordinate_start.x,
+                self.coordinate_start.y + 1)
         if self.direction == 'L':
             return Coordinate(
-                    self.coordinate_start.x, 
-                    self.coordinate_start.y - 1)
+                self.coordinate_start.x,
+                self.coordinate_start.y - 1)
         if self.direction == 'U':
             return Coordinate(
-                    self.coordinate_start.x - 1, 
-                    self.coordinate_start.y)
+                self.coordinate_start.x - 1,
+                self.coordinate_start.y)
         if self.direction == 'D':
             return Coordinate(
-                    self.coordinate_start.x + 1, 
-                    self.coordinate_start.y)
+                self.coordinate_start.x + 1,
+                self.coordinate_start.y)
 
     def __eq__(self, other) -> bool:
         '''
@@ -193,7 +194,7 @@ class State():
         result = list()
         for direction in ['R', 'L', 'U', 'D']:
             road = Road(*self.current_pos, direction)
-            if (self.check_not_duplicate_road(road)  
+            if (self.check_not_duplicate_road(road)
                     and road.check_inside(*self.board_size)):
                 result.append(road)
         return result
