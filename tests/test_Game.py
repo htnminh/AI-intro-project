@@ -1,7 +1,4 @@
-# TODO: Test Coordinate and new methods
-# -----------------------------------------------------------------------------
-
-from AI_intro_project.Game import Road, Coordinate
+from AI_intro_project.Game import Road, Coordinate, State
 
 # Initial variable used for testing
 # Currently assuming board_size is (4, 4)
@@ -61,3 +58,52 @@ def test_road_eq():
 
     assert Road(*coord_ul, 'D') != Road(2, 2, 'L'), \
         'Test Road(1, 1, D) == Road(2, 2, L) did not return False'
+
+
+#
+# TEST FOR CLASS: AI_intro_project.Game.State()
+#
+# TODO: full impl
+def test_state_random_initialize():
+    assert 1 == 1
+
+
+# create fixed for-test variables for 4x4 board
+var_test_state = State()
+var_test_state.board_size = board_size
+var_test_state.walked_roads = [
+    Road(0, 0, 'R'),
+    Road(0, 1, 'R')
+]
+var_test_state.current_pos = (0, 2)
+var_test_state.current_tax = 4
+
+
+def test_state_check_not_duplicate_road():
+    assert not var_test_state\
+        .check_not_duplicate_road(Road(0, 2, 'L')), \
+        'Test State.check_not_duplicate_road failed for duped path'
+
+    assert var_test_state\
+        .check_not_duplicate_road(Road(0, 2, 'R')), \
+        'Test State.check_not_duplicate_road failed for free path'
+
+
+def test_state_available_roads_calc():
+    # order of check is R->, L<-, U^, Dv
+    assert var_test_state.available_roads_calc() \
+        == [Road(0, 2, 'R'), Road(0, 2, 'D')], \
+        'Test State.available_roads_calc failed at pos = (0, 2)'
+
+    # take Road(0, 2, D)
+    var_test_state.walked_roads.append(Road(0, 2, 'D'))
+    
+    # TODO: convert normal tuple to Coordinate in Game.State.current_pos
+    # var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
+    var_test_state.current_pos = (1, 2)
+    var_test_state.current_tax *= 2
+
+    assert var_test_state.available_roads_calc() \
+        == [Road(1, 2, 'R'), Road(1, 2, 'L'), Road(1, 2, 'D')], \
+        'Test State.available_roads_calc failed at pos = (1, 2)'
+
