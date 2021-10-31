@@ -1,5 +1,5 @@
 # TODO: write tests for this file
-# TODO: rearrange and write descriptions for methods and 
+# TODO: rearrange and write descriptions for methods and
 #       properties
 # -------------------------------------------------------------
 
@@ -13,7 +13,7 @@ the form of a 2D numpy array like this:
 (0,0) (0,1) (0,2) ... (0,n)
 (1,0) (1,1) (1,2) ... (1,n)
                    .
-                   .   
+                   .
                    .
 (m,0) (m,1) (m,2) ... (m,n)
 '''
@@ -137,9 +137,9 @@ class State():
           in the current state
         Methods:
         - random_initialize: randomize the initial state
-        - _fixed_initialize: (development only) 
-          initialize the TED-Ed's state 
-        - check_duplicate_road: check if a road is 
+        - _fixed_initialize: (development only)
+          initialize the TED-Ed's state
+        - check_duplicate_road: check if a road is
           available for later walk
         - available_roads_calc: calculate available_roads
         '''
@@ -177,7 +177,7 @@ class State():
         '''
         Check if a road is available for later walk, by
         checking if the road is already in walked_roads
-        of the current state, return False if it 
+        of the current state, return False if it
         is duplicated
         '''
         for walked_road in self.walked_roads:
@@ -187,8 +187,8 @@ class State():
 
     def available_roads_calc(self):
         '''
-        Return a list of instances of Road, which are the roads 
-        that the pilgrim can walk in the current state, 
+        Return a list of instances of Road, which are the roads
+        that the pilgrim can walk in the current state,
         by checking all 4 directions around the current_pos.
         '''
         result = list()

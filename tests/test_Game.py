@@ -97,7 +97,7 @@ def test_state_available_roads_calc():
 
     # take Road(0, 2, D)
     var_test_state.walked_roads.append(Road(0, 2, 'D'))
-    
+
     # TODO: convert normal tuple to Coordinate in Game.State.current_pos
     # var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
     var_test_state.current_pos = (1, 2)
@@ -106,4 +106,3 @@ def test_state_available_roads_calc():
     assert var_test_state.available_roads_calc() \
         == [Road(1, 2, 'R'), Road(1, 2, 'L'), Road(1, 2, 'D')], \
         'Test State.available_roads_calc failed at pos = (1, 2)'
-
