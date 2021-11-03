@@ -98,8 +98,7 @@ def test_state_available_roads_calc():
     # take Road(0, 2, D)
     var_test_state.walked_roads.append(Road(0, 2, 'D'))
 
-    # var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
-    var_test_state.current_pos = Coordinate(1, 2)
+    var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
     var_test_state.current_tax *= 2
 
     assert var_test_state.available_roads_calc() \
