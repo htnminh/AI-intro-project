@@ -129,7 +129,7 @@ class State():
         - walked_roads: a list of instances of Road,
           each instance is represented by (x, y,
           direction)
-        - current_pos: a tuple (x, y)
+        - current_pos: Coordinate(x, y)
         - current_tax: a real number
         Properties:
         - available_roads: a list of instances of Road,
@@ -170,7 +170,7 @@ class State():
             Road(0, 0, 'R'),
             Road(0, 1, 'R'),
         ]
-        self.current_pos = (0, 2)
+        self.current_pos = Coordinate(0, 2)
         self.current_tax = 4
 
     def check_not_duplicate_road(self, road):
@@ -193,7 +193,9 @@ class State():
         '''
         result = list()
         for direction in ['R', 'L', 'U', 'D']:
-            road = Road(*self.current_pos, direction)
+            road = Road(self.current_pos.x,
+                        self.current_pos.y,
+                        direction)
             if (self.check_not_duplicate_road(road)
                     and road.check_inside(*self.board_size)):
                 result.append(road)

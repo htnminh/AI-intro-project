@@ -75,7 +75,7 @@ var_test_state.walked_roads = [
     Road(0, 0, 'R'),
     Road(0, 1, 'R')
 ]
-var_test_state.current_pos = (0, 2)
+var_test_state.current_pos = Coordinate(0, 2)
 var_test_state.current_tax = 4
 
 
@@ -100,7 +100,7 @@ def test_state_available_roads_calc():
 
     # TODO: convert normal tuple to Coordinate in Game.State.current_pos
     # var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
-    var_test_state.current_pos = (1, 2)
+    var_test_state.current_pos = Coordinate(1, 2)
     var_test_state.current_tax *= 2
 
     assert var_test_state.available_roads_calc() \
