@@ -98,7 +98,6 @@ def test_state_available_roads_calc():
     # take Road(0, 2, D)
     var_test_state.walked_roads.append(Road(0, 2, 'D'))
 
-    # TODO: convert normal tuple to Coordinate in Game.State.current_pos
     # var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
     var_test_state.current_pos = Coordinate(1, 2)
     var_test_state.current_tax *= 2
