@@ -1,3 +1,4 @@
 language = "python3"
-run = "python AI_intro_project/Game.py"
+run = "python AI_intro_project/matplotlib_test.py"
+# run = "python AI_intro_project/Game.py"
 # run = "python -m pytest"

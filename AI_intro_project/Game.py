@@ -221,4 +221,3 @@ class State():
         self.current_tax = self.tax_after_move(road)
 
 
-State()
