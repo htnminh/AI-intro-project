@@ -171,9 +171,11 @@ class State():
         self.current_tax = 0
 
         # move to the right twice
-        self.move(Road(self.current_pos.x, self.current_pos.y, 'R'))
-        self.move(Road(self.current_pos.x, self.current_pos.y, 'R'))
-        print(self.walked_roads, self.current_pos, self.current_tax)
+        self.move(Road(
+                self.current_pos.x, self.current_pos.y, 'R'))
+        self.move(Road(
+                self.current_pos.x, self.current_pos.y, 'R'))
+        
 
     def check_not_duplicate_road(self, road):
         '''
