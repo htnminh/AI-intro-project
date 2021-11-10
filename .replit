@@ -1,3 +1,3 @@
 language = "python3"
-# run = "python AI_intro_project/Game.py"
-run = "python -m pytest"
+run = "python AI_intro_project/Game.py"
+# run = "python -m pytest"

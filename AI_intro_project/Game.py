@@ -166,12 +166,14 @@ class State():
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
         '''
         self.board_size = (4, 4)
-        self.walked_roads = [
-            Road(0, 0, 'R'),
-            Road(0, 1, 'R'),
-        ]
-        self.current_pos = Coordinate(0, 2)
-        self.current_tax = 4
+        self.walked_roads = list()
+        self.current_pos = Coordinate(0, 0)
+        self.current_tax = 0
+
+        # move to the right twice
+        self.move(Road(self.current_pos.x, self.current_pos.y, 'R'))
+        self.move(Road(self.current_pos.x, self.current_pos.y, 'R'))
+        print(self.walked_roads, self.current_pos, self.current_tax)
 
     def check_not_duplicate_road(self, road):
         '''
@@ -200,3 +202,21 @@ class State():
                     and road.check_inside(*self.board_size)):
                 result.append(road)
         return result
+
+    def tax_after_move(self, road):
+        if road.direction == 'R':
+            return self.current_tax + 2
+        elif road.direction == 'L':
+            return self.current_tax - 2
+        elif road.direction == 'U':
+            return self.current_tax / 2
+        elif road.direction == 'D':
+            return self.current_tax * 2
+
+    def move(self, road):
+        self.walked_roads.append(road)
+        self.current_pos = road.coordinate_end
+        self.current_tax = self.tax_after_move(road)
+
+
+State()
