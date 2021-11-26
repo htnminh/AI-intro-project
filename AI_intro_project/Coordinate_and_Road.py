@@ -1,3 +1,19 @@
+'''
+self-note:
+
+x and y in this project are not of normal coordinate system
+in mathematics, instead they point out the coordinate in
+the form of a 2D numpy array like this:
+
+(0,0) (0,1) (0,2) ... (0,n)
+(1,0) (1,1) (1,2) ... (1,n)
+                   .
+                   .
+                   .
+(m,0) (m,1) (m,2) ... (m,n)
+'''
+
+
 class Coordinate():
     '''a coordinate instance of the game'''
 

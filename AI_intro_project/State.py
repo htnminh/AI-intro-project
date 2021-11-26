@@ -1,25 +1,8 @@
-# TODO: write tests for this file
-# TODO: rearrange and write descriptions for methods and
-#       properties
 # -------------------------------------------------------------
 
-'''
-self-note:
 
-x and y in this project are not of normal coordinate system
-in mathematics, instead they point out the coordinate in
-the form of a 2D numpy array like this:
-
-(0,0) (0,1) (0,2) ... (0,n)
-(1,0) (1,1) (1,2) ... (1,n)
-                   .
-                   .
-                   .
-(m,0) (m,1) (m,2) ... (m,n)
-'''
-
-
-from AI_intro_project.Coordinate_and_Road import Coordinate, Road
+from AI_intro_project.Coordinate_and_Road \
+                import Coordinate, Road
 
 
 class State():
