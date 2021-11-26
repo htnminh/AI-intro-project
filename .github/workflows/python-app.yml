@@ -21,14 +21,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
-    - name: Install dependencies
-      run: |
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: Install AIIntroProject (the package AI_intro_project)
+    - name: Install AIIntroProject (the package AI_intro_project) and its dependencies 
       run: |
         pip install .
-
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
