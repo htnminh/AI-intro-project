@@ -1,4 +1,4 @@
-from AI_intro_project.Game import Road, Coordinate, State
+from AI_intro_project.State import Road, Coordinate, State
 
 # Initial variable used for testing
 # Currently assuming board_size is (4, 4)
