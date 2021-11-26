@@ -14,9 +14,10 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 
 ## Announcements and TODO
 Announcements can be found in [ANNOUNCEMENTS.md](https://github.com/htnminh/AI-intro-project/blob/7aabb4fdcd8c8247e2832781642c72880701f4c6/ANNOUNCEMENTS.md)
+
 TODO:
-write test for State, Coordinate_and_Road 
-rearrange and write descriptions for methods and properties
+- write test for State, Coordinate_and_Road 
+- rearrange and write descriptions for methods and properties
 
 
 ## Guide for Collaborators
