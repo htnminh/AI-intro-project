@@ -13,10 +13,6 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 
 
 ## Announcements
-30/10/2021: Our goals:
-- End of November: Finish the pseudocode, analyze most of the algorithms that we choose and not choose. Major part of the report should be finish.
-- End of December: The deadline of the project submission. Finish code and the report, and everyone should be prepared to be asked the hardest aspects of the project.
-
 All older announcements can be found in ANNOUNCEMENTS.md
 
 
