@@ -15,3 +15,8 @@
 
 
 **/.breakpoints
+
+# pip-21.3 now forces build-in-tree for local packages
+# so these should be ignored.
+AIIntroProject.egg-info/
+build/
