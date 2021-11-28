@@ -61,11 +61,13 @@ class Road():
         self.direction = direction
         self.coordinate_end = self.coordinate_end_calc()
 
-    def __str__(self) -> str:
-        return 'Road(%s, %s, %s)' % (
+    def __str__(self, show_coordinate_end=False) -> str:
+        return 'Road(%s, %s, %s)%s' % (
             self.coordinate_start.x,
             self.coordinate_start.y,
-            self.direction
+            self.direction,
+            ' -> ' + str(self.coordinate_end) \
+                if show_coordinate_end else ''
         )
 
     def coordinate_end_calc(self) -> Coordinate:
