@@ -1,4 +1,4 @@
-from AI_intro_project.State import Road, Coordinate, State
+from AI_intro_project.State import Move, Coordinate, State
 
 # Initial variable used for testing
 # Currently assuming board_size is (4, 4)
@@ -34,30 +34,30 @@ def test_coord_eq():
 
 
 #
-# TEST FOR CLASS: AI_intro_project.Game.Road()
+# TEST FOR CLASS: AI_intro_project.Game.Move()
 #
-def test_road_coordinate_end_calc():
+def test_move_coordinate_end_calc():
     # test for near-edge coords
-    assert Road(*coord_ul, 'U').coordinate_end == Coordinate(0, 1), \
-        'Test Road.coordinate_end_calc for (1, 1, U) did not return (0, 1)'
+    assert Move(*coord_ul, 'U').coordinate_end == Coordinate(0, 1), \
+        'Test Move.coordinate_end_calc for (1, 1, U) did not return (0, 1)'
 
-    assert Road(*coord_ul, 'L').coordinate_end == Coordinate(1, 0), \
-        'Test Road.coordinate_end_calc for (1, 1, L) did not return (0, 1)'
+    assert Move(*coord_ul, 'L').coordinate_end == Coordinate(1, 0), \
+        'Test Move.coordinate_end_calc for (1, 1, L) did not return (0, 1)'
 
-    assert Road(*coord_dr, 'D').coordinate_end == Coordinate(4, 3), \
-        'Test Road.coordinate_end_calc for (3, 3, D) did not return (4, 3)'
+    assert Move(*coord_dr, 'D').coordinate_end == Coordinate(4, 3), \
+        'Test Move.coordinate_end_calc for (3, 3, D) did not return (4, 3)'
 
-    assert Road(*coord_dr, 'R').coordinate_end == Coordinate(3, 4), \
-        'Test Road.coordinate_end_calc for (3, 3, R) did not return (3, 4)'
+    assert Move(*coord_dr, 'R').coordinate_end == Coordinate(3, 4), \
+        'Test Move.coordinate_end_calc for (3, 3, R) did not return (3, 4)'
 
 
-def test_road_eq():
+def test_move_eq():
     # told you that _rd is not random
-    assert Road(*coord_dr, 'U') == Road(*(coord_rd + tuple('D'))), \
-        'Test Road(2, 3, D) == Road(3, 3, U) did not return True'
+    assert Move(*coord_dr, 'U') == Move(*(coord_rd + tuple('D'))), \
+        'Test Move(2, 3, D) == Move(3, 3, U) did not return True'
 
-    assert Road(*coord_ul, 'D') != Road(2, 2, 'L'), \
-        'Test Road(1, 1, D) == Road(2, 2, L) did not return False'
+    assert Move(*coord_ul, 'D') != Move(2, 2, 'L'), \
+        'Test Move(1, 1, D) == Move(2, 2, L) did not return False'
 
 
 #
@@ -71,36 +71,36 @@ def test_state_random_initialize():
 # create fixed for-test variables for 4x4 board
 var_test_state = State()
 var_test_state.board_size = board_size
-var_test_state.walked_roads = [
-    Road(0, 0, 'R'),
-    Road(0, 1, 'R')
+var_test_state.walked_moves = [
+    Move(0, 0, 'R'),
+    Move(0, 1, 'R')
 ]
 var_test_state.current_pos = Coordinate(0, 2)
 var_test_state.current_tax = 4
 
 
-def test_state_check_not_duplicate_road():
+def test_state_check_not_duplicate_move():
     assert not var_test_state\
-        .check_not_duplicate_road(Road(0, 2, 'L')), \
-        'Test State.check_not_duplicate_road failed for duped path'
+        .check_not_duplicate_move(Move(0, 2, 'L')), \
+        'Test State.check_not_duplicate_move failed for duped path'
 
     assert var_test_state\
-        .check_not_duplicate_road(Road(0, 2, 'R')), \
-        'Test State.check_not_duplicate_road failed for free path'
+        .check_not_duplicate_move(Move(0, 2, 'R')), \
+        'Test State.check_not_duplicate_move failed for free path'
 
 
-def test_state_available_roads_calc():
+def test_state_available_moves_calc():
     # order of check is R->, L<-, U^, Dv
-    assert var_test_state.available_roads_list() \
-        == [Road(0, 2, 'R'), Road(0, 2, 'D')], \
-        'Test State.available_roads_calc failed at pos = (0, 2)'
+    assert var_test_state.available_moves_list() \
+        == [Move(0, 2, 'R'), Move(0, 2, 'D')], \
+        'Test State.available_moves_calc failed at pos = (0, 2)'
 
-    # take Road(0, 2, D)
-    var_test_state.walked_roads.append(Road(0, 2, 'D'))
+    # take Move(0, 2, D)
+    var_test_state.walked_moves.append(Move(0, 2, 'D'))
 
-    var_test_state.current_pos = Road(0, 2, 'D').coordinate_end
+    var_test_state.current_pos = Move(0, 2, 'D').coordinate_end
     var_test_state.current_tax *= 2
 
-    assert var_test_state.available_roads_list() \
-        == [Road(1, 2, 'R'), Road(1, 2, 'L'), Road(1, 2, 'D')], \
-        'Test State.available_roads_calc failed at pos = (1, 2)'
+    assert var_test_state.available_moves_list() \
+        == [Move(1, 2, 'R'), Move(1, 2, 'L'), Move(1, 2, 'D')], \
+        'Test State.available_moves_calc failed at pos = (1, 2)'

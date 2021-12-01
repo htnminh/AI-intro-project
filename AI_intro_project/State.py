@@ -1,8 +1,8 @@
 # -------------------------------------------------------------
 
 
-from AI_intro_project.Coordinate_and_Road \
-                import Coordinate, Road
+from AI_intro_project.Coordinate_and_Move \
+                import Coordinate, Move
 
 from random import choice
 
@@ -16,25 +16,25 @@ class State():
         '''
         Each state is composed by 4 components, which are:
         - board_size: a tuple (m, n)
-        - walked_roads: a list of instances of Road,
+        - walked_moves: a list of instances of Move,
           each instance is represented by (x, y,
           direction)
         - current_pos: Coordinate(x, y)
         - current_tax: a real number
         Properties:
-        - available_roads: a list of instances of Road,
-          which are the roads that the pilgrim can walk
+        - available_moves: a list of instances of Move,
+          which are the moves that the pilgrim can walk
           in the current state
         Methods:
         - random_initialize: randomize the initial state
         - _fixed_initialize: (development only)
           initialize the TED-Ed's state
-        - check_duplicate_road: check if a road is
+        - check_duplicate_move: check if a move is
           available for later walk
-        - available_roads_calc: calculate available_roads
+        - available_moves_calc: calculate available_moves
         '''
         self._fixed_initialize()
-        self.available_roads = self.available_roads_list()
+        self.available_moves = self.available_moves_list()
 
     def random_initialize(self, seed):
         '''
@@ -50,7 +50,7 @@ class State():
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
         '''
         self.board_size = (4, 4)
-        self.walked_roads = list()
+        self.walked_moves = list()
         self.current_pos = Coordinate(0, 0)
         self.current_tax = 0.0
 
@@ -87,17 +87,17 @@ class State():
             )
 
         # moves
-        for index, road in enumerate(self.walked_roads):
+        for index, move in enumerate(self.walked_moves):
             plt.plot(
-                [road.coordinate_start.y,
-                        road.coordinate_end.y],
-                [road.coordinate_start.x,
-                        road.coordinate_end.x],
+                [move.coordinate_start.y,
+                        move.coordinate_end.y],
+                [move.coordinate_start.x,
+                        move.coordinate_end.x],
                 color='red'
             )
             if show_move_numbers:
-                plt.text(road.coordinate_start.y/2 + road.coordinate_end.y/2,
-                        road.coordinate_start.x/2 + road.coordinate_end.x/2,
+                plt.text(move.coordinate_start.y/2 + move.coordinate_end.y/2,
+                        move.coordinate_start.x/2 + move.coordinate_end.x/2,
                         index,
                         ha='center',
                         va='center',
@@ -144,17 +144,17 @@ class State():
         Print the moves if silent is False
         '''
         for i in range(number_of_moves):
-            if len(self.available_roads_list()) != 0:
-                road = choice(self.available_roads_list())
-                self.move_on_road(road)
+            if len(self.available_moves_list()) != 0:
+                move = choice(self.available_moves_list())
+                self.move_on_move(move)
                 if not silent:
-                    print(f'{road.__str__(show_coordinate_end=True)}, tax after move = {s.current_tax}')
+                    print(f'{move.__str__(show_coordinate_end=True)}, tax after move = {s.current_tax}')
 
     def undo_last_move(self):
         '''Undo the last move'''
-        assert self.walked_roads, \
+        assert self.walked_moves, \
                 'NO MOVE LEFT TO UNDO'
-        last_move = self.walked_roads.pop(-1)
+        last_move = self.walked_moves.pop(-1)
         if last_move.direction == 'R':
             recover_direction = 'L'
         if last_move.direction == 'L':
@@ -164,57 +164,57 @@ class State():
         if last_move.direction == 'D':
             recover_direction = 'U'
         self.move_to_direction(recover_direction)
-        self.walked_roads.pop(-1)
+        self.walked_moves.pop(-1)
 
-    def check_not_duplicate_road(self, road):
+    def check_not_duplicate_move(self, move):
         '''
-        Check if a road is available for later walk, by
-        checking if the road is already in walked_roads
+        Check if a move is available for later walk, by
+        checking if the move is already in walked_moves
         of the current state, return False if it
         is duplicated
         '''
-        for walked_road in self.walked_roads:
-            if walked_road == road:
+        for walked_move in self.walked_moves:
+            if walked_move == move:
                 return False
         return True
 
-    def available_roads_list(self):
+    def available_moves_list(self):
         '''
-        Return a list of instances of Road, which are the
-        roads that the pilgrim can walk in the current state,
+        Return a list of instances of Move, which are the
+        moves that the pilgrim can walk in the current state,
         by checking all 4 directions around the current_pos.
         '''
         result = list()
         for direction in ['R', 'L', 'U', 'D']:
-            road = Road(self.current_pos.x,
+            move = Move(self.current_pos.x,
                         self.current_pos.y,
                         direction)
-            if (self.check_not_duplicate_road(road)
-                    and road.check_inside(*self.board_size)):
-                result.append(road)
+            if (self.check_not_duplicate_move(move)
+                    and move.check_inside(*self.board_size)):
+                result.append(move)
         return result
 
-    def tax_after_move(self, road):
-        if road.direction == 'R':
+    def tax_after_move(self, move):
+        if move.direction == 'R':
             return self.current_tax + 2
-        elif road.direction == 'L':
+        elif move.direction == 'L':
             return self.current_tax - 2
-        elif road.direction == 'U':
+        elif move.direction == 'U':
             return self.current_tax / 2
-        elif road.direction == 'D':
+        elif move.direction == 'D':
             return self.current_tax * 2
 
-    def move_on_road(self, road):
-        assert road in self.available_roads_list(), \
-                f'{road}: CANNOT MOVE THIS WAY, CANCELLED'
+    def move_on_move(self, move):
+        assert move in self.available_moves_list(), \
+                f'{move}: CANNOT MOVE THIS WAY, CANCELLED'
 
-        self.walked_roads.append(road)
-        self.current_pos = road.coordinate_end
-        self.current_tax = self.tax_after_move(road)
+        self.walked_moves.append(move)
+        self.current_pos = move.coordinate_end
+        self.current_tax = self.tax_after_move(move)
     
     def move_to_direction(self, direction):
-        self.move_on_road(
-                Road(
+        self.move_on_move(
+                Move(
                         self.current_pos.x,
                         self.current_pos.y,
                         direction

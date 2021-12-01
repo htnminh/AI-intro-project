@@ -42,12 +42,12 @@ class Coordinate():
         return self.x == other.x and self.y == other.y
 
 
-class Road():
-    '''a road instance of the game'''
+class Move():
+    '''a move instance of the game'''
 
     def __init__(self, x, y, direction):
         '''
-        Each road is composed by 3 components, which are:
+        Each move is composed by 3 components, which are:
         - x and y: 2 real numbers
         - direction: a character, which is one of the 4
           characters 'R', 'L', 'U' or 'D'
@@ -62,7 +62,7 @@ class Road():
         self.coordinate_end = self.coordinate_end_calc()
 
     def __str__(self, show_coordinate_end=False) -> str:
-        return 'Road(%s, %s, %s)%s' % (
+        return 'Move(%s, %s, %s)%s' % (
             self.coordinate_start.x,
             self.coordinate_start.y,
             self.direction,
@@ -73,7 +73,7 @@ class Road():
     def coordinate_end_calc(self) -> Coordinate:
         '''
         Return a tuple of the form (x, y), which is the
-        coordinate after moving on the road.
+        coordinate after moving on the move.
         '''
         if self.direction == 'R':
             return Coordinate(
@@ -94,9 +94,9 @@ class Road():
 
     def __eq__(self, other) -> bool:
         '''
-        Return if self and other are the same road.
-        They are the same road if the 2 coordinates (start
-        and end) of each road are pair-wise equal between them.
+        Return if self and other are the same move.
+        They are the same move if the 2 coordinates (start
+        and end) of each move are pair-wise equal between them.
         '''
         if (self.coordinate_start == other.coordinate_start and
                 self.coordinate_end == other.coordinate_end):
@@ -109,7 +109,7 @@ class Road():
 
     def check_inside(self, m, n):
         '''
-        Return True if the road is out-of-bounds of
+        Return True if the move is out-of-bounds of
         the board which has the size (m, n)
         '''
         return (self.coordinate_start.check_inside(m, n) and
