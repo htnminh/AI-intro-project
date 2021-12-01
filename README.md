@@ -4,7 +4,7 @@ A capstone project for Introduction to Artificial Intelligence course. <br>
 A quick introduction of the problem: [Can you solve the penniless pilgrim riddle? - Daniel Finkel](https://youtu.be/6sBB-gRhfjE). <br>
 In short, we will keep the original rules of the game, but randomize the board size and the "forced moves" (aka. the initial state).
 
-![game](https://user-images.githubusercontent.com/82358580/144263087-567515ac-682b-4212-9ddc-cfbbedb996ed.png)
+![image](https://user-images.githubusercontent.com/82358580/144267723-1ad95e94-b96b-499d-8b9c-c8eb7b3fe210.png)
 
 ## Collaborators
 We are K65 of Hanoi University of Science and Technology, major in Data Science and Artificial Intelligence. Under the guidance of our lecturer, Professor Muriel Visani, we will together solve this riddle.
