@@ -38,10 +38,10 @@ class Toolbar(NavigationToolbar2Tk):
 
 col1 = [
     [
-        sg.T('Initialize: '),
+        sg.T('Initialize:'),
         sg.B('4x4 (default)'),
+        sg.B('6x6 (default)'),
         sg.B('8x8 (default)'),
-        sg.B('4x4 (random)'),  # TODO: random initial moves
         sg.B('mxn (random)')],  # TODO
     [
         sg.B('Play 5 random legal moves'),
@@ -79,7 +79,7 @@ layout = [
             layout=[
                 [sg.Canvas(key='fig_cv',
                         # it's important that you set this size
-                        size=(630, 630)  # 630
+                        size=(633, 633)  # 633 633
                         )]
             ],
             background_color='#DAE0E6',
@@ -87,7 +87,10 @@ layout = [
             element_justification='center'
             )],
     [
-        sg.Canvas(key='controls_cv')],
+        sg.Column(
+            layout=[[sg.Canvas(key='controls_cv')]],
+            element_justification='center'
+        )]
 ]
 
 window = sg.Window('The Penniless Pilgrim Riddle | https://github.com/htnminh/AI-intro-project', layout)
@@ -115,6 +118,22 @@ while True:
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
 
         s = State()
+        s.initialize_4x4_default()
+        s.plt_preparation()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+
+    elif event == '6x6 (default)':
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+
+        s = State()
+        s.initialize_6x6_default()
         s.plt_preparation()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
@@ -129,7 +148,7 @@ while True:
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
 
         s = State()
-        s.board_size = (8, 8)
+        s.initialize_8x8_default()
         s.plt_preparation()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)

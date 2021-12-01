@@ -33,7 +33,7 @@ class State():
           available for later walk
         - available_moves_calc: calculate available_moves
         '''
-        self._fixed_initialize()
+        self.initialize_4x4_default()
         self.available_moves = self.available_moves_list()
 
     def random_initialize(self, seed):
@@ -43,9 +43,8 @@ class State():
         '''
         pass
 
-    def _fixed_initialize(self):
+    def initialize_4x4_default(self):
         '''
-        FOR DEVELOPMENT ONLY
         Initialize the state which is the same as the
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
         '''
@@ -55,8 +54,34 @@ class State():
         self.current_tax = 0.0
 
         # move to the right twice
-        self.move_to_direction('R')
-        self.move_to_direction('R')
+        for _ in range(2):
+            self.move_to_direction('R')
+
+    def initialize_6x6_default(self):
+        '''
+        Initialize the state which is the same as the
+        TED-Ed's video: https://youtu.be/6sBB-gRhfjE
+        '''
+        self.board_size = (6, 6)
+        self.walked_moves = list()
+        self.current_pos = Coordinate(0, 0)
+        self.current_tax = 0.0
+
+        # move to the right twice
+        for _ in range(3):
+            self.move_to_direction('R')
+
+    def initialize_8x8_default(self):
+        '''Initialize the state'''
+        self.board_size = (8, 8)
+        self.walked_moves = list()
+        self.current_pos = Coordinate(0, 0)
+        self.current_tax = 0.0
+
+        # move to the right twice
+        for _ in range(4):
+            self.move_to_direction('R')
+
         
     def plt_preparation(self, show_move_numbers=True):
         '''
