@@ -77,13 +77,13 @@ class State():
             plt.plot(
                     [i,i],
                     [0,self.board_size[0]],
-                    color='black'
+                    color='silver'
             )
         for i in range(self.board_size[0] + 1):
             plt.plot(
                     [0,self.board_size[1]],
                     [i,i],
-                    color='black'
+                    color='silver'
             )
 
         # moves
