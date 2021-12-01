@@ -49,7 +49,7 @@ class State():
         Initialize the state which is the same as the
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
         '''
-        self.board_size = (10, 7)
+        self.board_size = (4, 4)
         self.walked_roads = list()
         self.current_pos = Coordinate(0, 0)
         self.current_tax = 0.0
@@ -58,7 +58,7 @@ class State():
         self.move_to_direction('R')
         self.move_to_direction('R')
         
-    def plt_preparation(self):
+    def plt_preparation(self, show_move_numbers=True):
         '''
         Prepare matplolib.pyplot for plotting
         Used to visualize the current state in matplotlib
@@ -86,7 +86,7 @@ class State():
                     color='black'
             )
 
-        # walked_roads
+        # moves
         for index, road in enumerate(self.walked_roads):
             plt.plot(
                 [road.coordinate_start.y,
@@ -95,14 +95,15 @@ class State():
                         road.coordinate_end.x],
                 color='red'
             )
-            plt.text(road.coordinate_start.y/2 + road.coordinate_end.y/2,
-                     road.coordinate_start.x/2 + road.coordinate_end.x/2,
-                     index,
-                     ha='center',
-                     va='center',
-                     fontfamily='monospace',
-                     color='blue'
-                     )
+            if show_move_numbers:
+                plt.text(road.coordinate_start.y/2 + road.coordinate_end.y/2,
+                        road.coordinate_start.x/2 + road.coordinate_end.x/2,
+                        index,
+                        ha='center',
+                        va='center',
+                        fontfamily='monospace',
+                        color='blue'
+                        )
         # current tax text
         plt.text(
                 self.board_size[1]/2,
@@ -128,11 +129,11 @@ class State():
         # show
         plt.plot()
 
-    def visualize(self):
+    def visualize(self, show_move_numbers=True):
         '''
         Visualize the current state in matplotlib
         '''
-        self.plt_preparation()
+        self.plt_preparation(show_move_numbers=show_move_numbers)
         plt.show()
 
     def random_play(self, number_of_moves=20, silent=False):

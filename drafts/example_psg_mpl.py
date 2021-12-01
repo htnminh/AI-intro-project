@@ -1,11 +1,13 @@
+# To be honest, I have no idea how this works, here is the source code:
+# https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Matplotlib_Embedded_Toolbar.py
+
+
 import PySimpleGUI as sg
-import numpy as np
 
 from AI_intro_project.State import State
 
 """
     Embedding the Matplotlib toolbar into your application
-
 """
 
 # ------------------------------- This is to include a matplotlib figure in a Tkinter canvas
@@ -35,11 +37,12 @@ class Toolbar(NavigationToolbar2Tk):
 # ------------------------------- PySimpleGUI CODE
 
 layout = [
-    [sg.T('Graph: y=sin(x)')],
-    [sg.B('Plot'), sg.B('Exit')],
-    [sg.T('Controls:')],
+    [sg.B('Initialize'),
+        sg.B('Initialize & Play 10 moves'), sg.B('Exit')],
+    [sg.T('      '), sg.B('Up')],
+    [sg.B('Left'), sg.T('--|--'), sg.B('Right')],
+    [sg.T('    '), sg.B('Down')],
     [sg.Canvas(key='controls_cv')],
-    [sg.T('Figure:')],
     [sg.Column(
         layout=[
             [sg.Canvas(key='fig_cv',
@@ -50,19 +53,34 @@ layout = [
         background_color='#DAE0E6',
         pad=(0, 0)
     )],
-    [sg.B('Alive?')]
 
 ]
 
-window = sg.Window('Graph with controls', layout)
+window = sg.Window('The Penniless Pilgrim Riddle | https://github.com/htnminh/AI-intro-project', layout)
+
+
 
 while True:
     event, values = window.read()
-    print(event, values)
-    
+    # print(event, values)
+
     if event in (sg.WIN_CLOSED, 'Exit'):  # always,  always give a way out!
         break
-    elif event == 'Plot':
+    elif event == 'Initialize':
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+
+        s = State()
+        s.plt_preparation()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+
+    elif event == 'Initialize & Play 10 moves':
         # ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE
         plt.clf() 
 
@@ -73,11 +91,27 @@ while True:
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
 
         s = State()
-        s.board_size = (15,15)
-        s.random_play(number_of_moves=30, silent=True)
+        s.random_play(number_of_moves=10, silent=True)
         s.plt_preparation()
 
         # ------------------------------- Instead of plt.show()
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+    
+    elif event in ('Left', 'Right', 'Up', 'Down'):
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+        
+        # check if s is defined
+        assert 's' in locals(), \
+                    'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
+        s.move_to_direction(event[0])
+        s.plt_preparation()
+
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
 window.close()
