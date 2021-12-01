@@ -224,7 +224,6 @@ while True:
 
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
         
-        # check if s is defined
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.undo_last_move()
