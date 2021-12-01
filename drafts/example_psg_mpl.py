@@ -35,13 +35,26 @@ class Toolbar(NavigationToolbar2Tk):
 
 
 # ------------------------------- PySimpleGUI CODE
-
+col1 = [[
+    sg.B('Initialize 4x4'),
+    sg.B('Initialize 4x4 & Play 10 moves'),
+    sg.B('4x4 Best solution'),
+    sg.B('Exit'),
+]]
+col2 = [
+    [
+        sg.B('▲', key='U')],
+    [
+        sg.B('◄', key='L'), 
+        sg.B('⟲', key='undo'),
+        sg.B('►', key='R')],
+    [
+        sg.B('▼', key='D')],
+]
 layout = [
-    [sg.B('Initialize'),
-        sg.B('Initialize & Play 10 moves'), sg.B('Exit')],
-    [sg.T('      '), sg.B('Up')],
-    [sg.B('Left'), sg.T('--|--'), sg.B('Right')],
-    [sg.T('    '), sg.B('Down')],
+    [sg.Column(col1),
+        sg.VerticalSeparator(),
+        sg.Column(col2, element_justification='center')],
     [sg.Canvas(key='controls_cv')],
     [sg.Column(
         layout=[
@@ -66,7 +79,8 @@ while True:
 
     if event in (sg.WIN_CLOSED, 'Exit'):  # always,  always give a way out!
         break
-    elif event == 'Initialize':
+
+    elif event == 'Initialize 4x4':
         plt.clf()
 
         plt.figure(1)
@@ -79,8 +93,8 @@ while True:
         s.plt_preparation()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
-
-    elif event == 'Initialize & Play 10 moves':
+    
+    elif event == 'Initialize 4x4 & Play 10 moves':
         # ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE
         plt.clf() 
 
@@ -97,7 +111,37 @@ while True:
         # ------------------------------- Instead of plt.show()
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
     
-    elif event in ('Left', 'Right', 'Up', 'Down'):
+    elif event == '4x4 Best solution':
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+
+        s = State()
+        for _ in range(3):
+            s.move_to_direction('D')
+        for _ in range(2):
+            s.move_to_direction('R')
+        for _ in range(3):
+            s.move_to_direction('U')
+        s.move_to_direction('L')
+        s.move_to_direction('D')
+        for _ in range(3):
+            s.move_to_direction('L')
+        for _ in range(3):
+            s.move_to_direction('D')
+        for _ in range(4):
+            s.move_to_direction('R')
+        
+
+        s.plt_preparation()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+
+    elif event in ('L', 'R', 'U', 'D'):
         plt.clf()
 
         plt.figure(1)
@@ -110,6 +154,23 @@ while True:
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.move_to_direction(event[0])
+        s.plt_preparation()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+
+    elif event == 'undo':
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+        
+        # check if s is defined
+        assert 's' in locals(), \
+                    'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
+        s.undo_last_move()
         s.plt_preparation()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)

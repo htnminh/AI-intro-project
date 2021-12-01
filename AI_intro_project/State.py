@@ -150,6 +150,22 @@ class State():
                 if not silent:
                     print(f'{road.__str__(show_coordinate_end=True)}, tax after move = {s.current_tax}')
 
+    def undo_last_move(self):
+        '''Undo the last move'''
+        assert self.walked_roads, \
+                'NO MOVE LEFT TO UNDO'
+        last_move = self.walked_roads.pop(-1)
+        if last_move.direction == 'R':
+            recover_direction = 'L'
+        if last_move.direction == 'L':
+            recover_direction = 'R'
+        if last_move.direction == 'U':
+            recover_direction = 'D'
+        if last_move.direction == 'D':
+            recover_direction = 'U'
+        self.move_to_direction(recover_direction)
+        self.walked_roads.pop(-1)
+
     def check_not_duplicate_road(self, road):
         '''
         Check if a road is available for later walk, by
