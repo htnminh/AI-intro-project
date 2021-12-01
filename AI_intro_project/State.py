@@ -199,7 +199,7 @@ class State():
 
     def move_on_move(self, move):
         assert move in self.available_moves_list(), \
-                f'{move}: CANNOT MOVE THIS WAY, CANCELLED'
+                f'{move}: CANNOT MOVE THIS WAY'
 
         self.walked_moves.append(move)
         self.current_pos = move.coordinate_end

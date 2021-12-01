@@ -1,8 +1,10 @@
 # To be honest, I have no idea how this works, here is the source code:
 # https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Matplotlib_Embedded_Toolbar.py
 
+import webbrowser
 
 import PySimpleGUI as sg
+sg.change_look_and_feel('DarkAmber')
 
 from AI_intro_project.State import State
 
@@ -34,13 +36,19 @@ class Toolbar(NavigationToolbar2Tk):
         super(Toolbar, self).__init__(*args, **kwargs)
 
 
-# ------------------------------- PySimpleGUI CODE
-col1 = [[
-    sg.B('Initialize 4x4'),
-    sg.B('Initialize 4x4 & Play 10 moves'),
-    sg.B('4x4 Best solution'),
-    sg.B('Exit'),
-]]
+col1 = [
+    [
+        sg.T('Initialize: '),
+        sg.B('4x4 (default)'),
+        sg.B('8x8 (default)'),
+        sg.B('4x4 (random)'),  # TODO: random initial moves
+        sg.B('mxn (random)')],  # TODO
+    [
+        sg.B('Play 5 random legal moves'),
+        sg.B('Show 4x4 best solution'),
+        # TODO: show the best solution that algorithms found
+    ],
+]
 col2 = [
     [
         sg.B('▲', key='U')],
@@ -51,28 +59,41 @@ col2 = [
     [
         sg.B('▼', key='D')],
 ]
-layout = [
-    [sg.Column(col1),
-        sg.VerticalSeparator(),
-        sg.Column(col2, element_justification='center')],
-    [sg.Canvas(key='controls_cv')],
-    [sg.Column(
-        layout=[
-            [sg.Canvas(key='fig_cv',
-                       # it's important that you set this size
-                       size=(630, 630)
-                       )]
-        ],
-        background_color='#DAE0E6',
-        pad=(0, 0)
-    )],
+col3 = [
+    [
+        sg.B('Exit')],
+    [
+        sg.B('About')]
+]
 
+
+layout = [
+    [
+        sg.Column(col1, element_justification='center'),
+        sg.VerticalSeparator(),
+        sg.Column(col2, element_justification='center'),
+        sg.VerticalSeparator(),
+        sg.Column(col3, element_justification='center')],
+    [
+        sg.Column(
+            layout=[
+                [sg.Canvas(key='fig_cv',
+                        # it's important that you set this size
+                        size=(630, 630)  # 630
+                        )]
+            ],
+            background_color='#DAE0E6',
+            pad=(0, 0),
+            element_justification='center'
+            )],
+    [
+        sg.Canvas(key='controls_cv')],
 ]
 
 window = sg.Window('The Penniless Pilgrim Riddle | https://github.com/htnminh/AI-intro-project', layout)
 
 
-
+# EVENT LOOP --------------------------------------------------------------
 while True:
     event, values = window.read()
     # print(event, values)
@@ -80,7 +101,11 @@ while True:
     if event in (sg.WIN_CLOSED, 'Exit'):  # always,  always give a way out!
         break
 
-    elif event == 'Initialize 4x4':
+    elif event == 'About':
+        webbrowser.get('windows-default')\
+                    .open_new_tab('https://github.com/htnminh/AI-intro-project')
+
+    elif event == '4x4 (default)':
         plt.clf()
 
         plt.figure(1)
@@ -93,25 +118,23 @@ while True:
         s.plt_preparation()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
-    
-    elif event == 'Initialize 4x4 & Play 10 moves':
-        # ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE
-        plt.clf() 
+
+    elif event == '8x8 (default)':
+        plt.clf()
 
         plt.figure(1)
         fig = plt.gcf()
         DPI = fig.get_dpi()
-        # ------------------------------- you have to play with this size to reduce the movement error when the mouse hovers over the figure, it's close to canvas size
+
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
 
         s = State()
-        s.random_play(number_of_moves=10, silent=True)
+        s.board_size = (8, 8)
         s.plt_preparation()
 
-        # ------------------------------- Instead of plt.show()
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
     
-    elif event == '4x4 Best solution':
+    elif event == 'Show 4x4 best solution':
         plt.clf()
 
         plt.figure(1)
@@ -136,11 +159,27 @@ while True:
         for _ in range(4):
             s.move_to_direction('R')
         
-
         s.plt_preparation()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
+    elif event == 'Play 5 random legal moves':
+        plt.clf() 
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+
+        # check if s is defined
+        assert 's' in locals(), \
+                    'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
+        s.random_play(number_of_moves=5, silent=True)
+        s.plt_preparation()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+    
     elif event in ('L', 'R', 'U', 'D'):
         plt.clf()
 
@@ -150,7 +189,6 @@ while True:
 
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
         
-        # check if s is defined
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.move_to_direction(event[0])
