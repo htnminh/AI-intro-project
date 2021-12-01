@@ -123,10 +123,6 @@ class State():
         plt.xticks([x for x in range(self.board_size[1] + 1)])
         plt.yticks([y for y in range(self.board_size[0] + 1)])
 
-        
-
-
-
         # show
         plt.plot()
         plt.show()
