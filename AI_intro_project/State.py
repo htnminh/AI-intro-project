@@ -4,6 +4,8 @@
 from AI_intro_project.Coordinate_and_Road \
                 import Coordinate, Road
 
+from random import choice
+
 import matplotlib.pyplot as plt
 
 
@@ -56,14 +58,14 @@ class State():
         self.move_to_direction('R')
         self.move_to_direction('R')
         
-    def visualize(self):
+    def plt_preparation(self):
         '''
-        Visualize the current state in matplotlib
+        Prepare matplolib.pyplot for plotting
+        Used to visualize the current state in matplotlib
         Most of the things below are reversed in some way,
         since the x coordinate of the game is the y
         coordinate in math, etc.
         '''
-
         # move x axis to the top
         plt.rcParams['xtick.bottom'] = \
             plt.rcParams['xtick.labelbottom'] = False
@@ -93,8 +95,8 @@ class State():
                         road.coordinate_end.x],
                 color='red'
             )
-            plt.text(road.coordinate_start.y/2+road.coordinate_end.y/2,
-                     road.coordinate_start.x/2+road.coordinate_end.x/2,
+            plt.text(road.coordinate_start.y/2 + road.coordinate_end.y/2,
+                     road.coordinate_start.x/2 + road.coordinate_end.x/2,
                      index,
                      ha='center',
                      va='center',
@@ -125,7 +127,27 @@ class State():
 
         # show
         plt.plot()
+
+    def visualize(self):
+        '''
+        Visualize the current state in matplotlib
+        '''
+        self.plt_preparation()
         plt.show()
+
+    def random_play(self, number_of_moves=20, silent=False):
+        '''
+        Randomly continue playing the current state
+        for the given number of moves if the moves is
+        possible
+        Print the moves if silent is False
+        '''
+        for i in range(number_of_moves):
+            if len(self.available_roads_list()) != 0:
+                road = choice(self.available_roads_list())
+                self.move_on_road(road)
+                if not silent:
+                    print(f'{road.__str__(show_coordinate_end=True)}, tax after move = {s.current_tax}')
 
     def check_not_duplicate_road(self, road):
         '''
@@ -141,8 +163,8 @@ class State():
 
     def available_roads_list(self):
         '''
-        Return a list of instances of Road, which are the roads
-        that the pilgrim can walk in the current state,
+        Return a list of instances of Road, which are the
+        roads that the pilgrim can walk in the current state,
         by checking all 4 directions around the current_pos.
         '''
         result = list()
@@ -186,11 +208,6 @@ class State():
 # Run this file to randomly move 20 times if available,
 # print the moves, then visualize the final state
 if __name__ == '__main__':  
-    from random import choice
     s = State()
-    for i in range(20):
-        if len(s.available_roads_list()) != 0:
-            road = choice(s.available_roads_list())
-            s.move_on_road(road)
-            print(f'{road.__str__(show_coordinate_end=True)}, tax after move = {s.current_tax}')
+    s.random_play()
     s.visualize()
