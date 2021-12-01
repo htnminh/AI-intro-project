@@ -155,14 +155,7 @@ class State():
         assert self.walked_moves, \
                 'NO MOVE LEFT TO UNDO'
         last_move = self.walked_moves.pop(-1)
-        if last_move.direction == 'R':
-            recover_direction = 'L'
-        if last_move.direction == 'L':
-            recover_direction = 'R'
-        if last_move.direction == 'U':
-            recover_direction = 'D'
-        if last_move.direction == 'D':
-            recover_direction = 'U'
+        recover_direction = last_move.reverse_direction()
         self.move_to_direction(recover_direction)
         self.walked_moves.pop(-1)
 

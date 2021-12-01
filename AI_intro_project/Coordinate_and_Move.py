@@ -114,3 +114,14 @@ class Move():
         '''
         return (self.coordinate_start.check_inside(m, n) and
                 self.coordinate_end.check_inside(m, n))
+    
+    def reverse_direction(self):
+        '''Return the reversed direction, e.g. from L to R'''
+        if self.direction == 'R':
+            return 'L'
+        if self.direction == 'L':
+            return 'R'
+        if self.direction == 'U':
+            return 'D'
+        if self.direction == 'D':
+            return 'U'
