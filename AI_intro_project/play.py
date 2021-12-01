@@ -16,6 +16,10 @@ from AI_intro_project.State import State
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
+# dark mode because eyes first
+# TODO: adjust colors accordingly
+plt.style.use('dark_background')
+
 
 def draw_figure_w_toolbar(canvas, fig, canvas_toolbar):
     if canvas.children:
