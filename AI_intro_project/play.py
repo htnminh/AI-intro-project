@@ -18,7 +18,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 
 # dark mode because eyes first
 # TODO: adjust colors accordingly
-plt.style.use('dark_background')
+# plt.style.use('dark_background')
 
 
 def draw_figure_w_toolbar(canvas, fig, canvas_toolbar):

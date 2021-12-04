@@ -8,7 +8,6 @@ from random import choice
 
 import matplotlib.pyplot as plt
 
-
 class State():
     '''a state of the game'''
 
@@ -22,9 +21,9 @@ class State():
         - current_pos: Coordinate(x, y)
         - current_tax: a real number
         Properties:
-        - available_moves: a list of instances of Move,
-          which are the moves that the pilgrim can walk
-          in the current state
+        - (DEPRECATED) available_moves: a list of instances
+          of Move, which are the moves that the pilgrim can
+          walk in the current state (DEPRECATED)
         Methods:
         - random_initialize: randomize the initial state
         - _fixed_initialize: (development only)
@@ -34,7 +33,6 @@ class State():
         - available_moves_calc: calculate available_moves
         '''
         self.initialize_4x4_default()
-        self.available_moves = self.available_moves_list()
 
     def random_initialize(self, seed):
         '''
@@ -43,29 +41,27 @@ class State():
         '''
         pass
 
+    def initialize_mxn_blank(self, size=(4,4)):
+        '''Initialize the state without moves'''
+        self.board_size = size
+        self.walked_moves = list()
+        self.current_pos = Coordinate(0, 0)
+        self.current_tax = 0.0
+
     def initialize_4x4_default(self):
         '''
         Initialize the state which is the same as the
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
         '''
-        self.board_size = (4, 4)
-        self.walked_moves = list()
-        self.current_pos = Coordinate(0, 0)
-        self.current_tax = 0.0
+        self.initialize_mxn_blank()
 
         # move to the right twice
         for _ in range(2):
             self.move_to_direction('R')
 
     def initialize_6x6_default(self):
-        '''
-        Initialize the state which is the same as the
-        TED-Ed's video: https://youtu.be/6sBB-gRhfjE
-        '''
-        self.board_size = (6, 6)
-        self.walked_moves = list()
-        self.current_pos = Coordinate(0, 0)
-        self.current_tax = 0.0
+        '''Initialize the state'''
+        self.initialize_mxn_blank((6, 6))
 
         # move to the right twice
         for _ in range(3):
@@ -73,15 +69,11 @@ class State():
 
     def initialize_8x8_default(self):
         '''Initialize the state'''
-        self.board_size = (8, 8)
-        self.walked_moves = list()
-        self.current_pos = Coordinate(0, 0)
-        self.current_tax = 0.0
+        self.initialize_mxn_blank((8, 8))
 
         # move to the right twice
         for _ in range(4):
             self.move_to_direction('R')
-
         
     def plt_preparation(self, show_move_numbers=True):
         '''
@@ -173,7 +165,7 @@ class State():
                 move = choice(self.available_moves_list())
                 self.move_on_move(move)
                 if not silent:
-                    print(f'{move.__str__(show_coordinate_end=True)}, tax after move = {s.current_tax}')
+                    print(f'{move.__str__(show_coordinate_end=True)}, tax after move = {self.current_tax}')
 
     def undo_last_move(self):
         '''Undo the last move'''
