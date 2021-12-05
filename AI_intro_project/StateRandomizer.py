@@ -24,11 +24,11 @@ Below the classes are the guides  # TODO
 '''
 
 import random
-
 from pathlib import Path
 
 from AI_intro_project.State import State
 from AI_intro_project._Utilities import _Utilities
+
 
 class StateRandomizer():
     def __init__(
@@ -69,15 +69,21 @@ class StateRandomizer():
                 break
 
         if save:
-            _Utilities(state=s, directory=self.directory,
-                            suffix_index=suffix_index, extension=self.extension).save()
+            m, n = s.board_size
+            file_name = f'{m}x{n}_{suffix_index}.{self.extension}'
+            file_path = f'{directory}/{file_name}'
+
+            _Utilities().save(
+                state=s,
+                file_path = file_path
+            )
             
         return s
             
     def randomize_all(self, save=False):
         for size in self.sizes:
             number_of_moves_0, number_of_moves_1 = \
-                    _Utilities(m=size[0], n=size[1]).numbers_of_moves_calc()
+                    _Utilities().numbers_of_moves_calc(size=size)
             s0 = self.randomize_one(size, number_of_moves_0, save, '0')
 
             while True:
@@ -101,8 +107,9 @@ if __name__ == '__main__':
     # _StateUtilities(file_path=r'AI_intro_project\randomized_states\4x6_0.state').load_and_visualize()
     
     # see all states - ctrl-C to stop
-    _Utilities(
-        directory=directory,
-        extension='state',
-        sizes=[(i,j) for i in range(4,9) for j in range(4,9)]).visualize_all()
+    u = _Utilities().visualize_all(
+        sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+        directory='AI_intro_project/randomized_states',
+        extension='state'
+    )
     

@@ -1,5 +1,3 @@
-from AI_intro_project.State import State
-
 from math import floor, ceil, sqrt
 import pickle as pkl
 import random
@@ -8,126 +6,79 @@ class _Utilities():
     '''
     only used to do certain things,
     given some input specified
-
-    How to use:
-        1. see the method you need to use
-        2. see the GIVEN requirements
-        3. create an _Utilities instance, pass the required parameters
-        4. use it
     '''
-    def __init__(                   # dependencies
-                self,
-                state=None,
-                m=None,             # state
-                n=None,             # state
-                file_name=None,     # m, n, suffix_index, directory, extension
-                file_path=None,     # m, n, suffix_index, directory, extension
-                directory=None,
-                suffix_index=None,
-                extension=None,
-                sizes=None
-        ):
-        self.state = state
-        self.m, self.n = m, n
-        self.file_name = file_name
-        self.file_path = file_path
-        self.directory = directory
-        self.suffix_index = suffix_index
-        self.extension = extension
-        self.sizes = sizes
+    def __init__(self):
+        pass
 
-        if self.state is not None:
-            self._set_m_n()
-        
-        if self.m is not None and self.n is not None \
-                    and self.suffix_index is not None and self.directory is not None \
-                    and self.extension is not None:
-                self._set_file_name_file_path()
-
-    def _set_m_n(self):
+    def numbers_of_moves_calc(self, size):
         '''
-        GIVEN: state
-        Set m, n
-        '''
-        self.m, self.n = self.state.board_size
-    
-    def _set_file_name_file_path(self):
-        '''
-        GIVEN: m, n, suffix_index, directory, extension
-        Set file_name, file_path
-        '''
-        self.file_name = f'{self.m}x{self.n}_{self.suffix_index}.{self.extension}'
-        self.file_path = f'{self.directory}/{self.file_name}'
-
-    def numbers_of_moves_calc(self):
-        '''
-        GIVEN: m, n
+        GIVEN: size
         Calculate the number of forced moves
         '''
-        return floor(sqrt(self.m*self.n)/2), \
-                ceil(sqrt(self.m*self.n)/2)
+        m, n = size
+        return floor(sqrt(m*n)/2), \
+                ceil(sqrt(m*n)/2)
 
-    def save(self):
+    def save(self, state, file_path):
         '''
         GIVEN: file_path
-        or
-        GIVEN: m, n, suffix_index, directory, extension
-        save
+        save it
         '''
-        with open(self.file_path, 'wb') as f:
-            pkl.dump(self.state, f)
+        with open(file_path, 'wb') as f:
+            pkl.dump(state, f)
 
-    def load(self):
+    def load(self, file_path):
         '''
         GIVEN: file_path
         load state in file_path, assign m, n to
         self, return the state
         '''
-        with open(self.file_path, 'rb') as f:
-            self.state = pkl.load(f)
-            self._set_m_n()
-        return self.state
+        with open(file_path, 'rb') as f:
+            s = pkl.load(f)
+        return s
     
-    def load_randomly(self):
+    def load_randomly(self, sizes, directory, extension):
         '''
         GIVEN: sizes, directory, extension
         return any state randomly in the directory
         '''
-        self.m, self.n = random.choice(self.sizes)
-        self.suffix_index = random.choice([0, 1])
-        self._set_file_name_file_path()
-        self.load()
-        return self.state
+        m, n = random.choice(sizes)
+        suffix_index = random.choice([0, 1])
+        
+        file_name = f'{m}x{n}_{suffix_index}.{extension}'
+        file_path = f'{directory}/{file_name}'
+
+        s = self.load(file_path=file_path)
+        return s
     
-    def load_and_visualize(self):
+    def load_and_visualize(self, file_path):
         '''
         GIVEN: file_path
         load it, then visualize it
         '''
-        self.load()
-        self.state.visualize()
+        s = self.load(file_path)
+        s.visualize()
     
-    def visualize_all(self):
+    def visualize_all(self, sizes, directory, extension):
         '''
         GIVEN: sizes, directory, extension
         visualize all states in the directory
         '''
         print('CTRL-C TO EXIT, OR SEE ALL THE 50 STATES IF YOU WANT')
 
-        for m, n in self.sizes:
-            self.m, self.n = m, n
-
+        for m, n in sizes:
             for suffix_index in [0, 1]:
-                self.suffix_index = suffix_index
-                self._set_file_name_file_path()
-                self.load_and_visualize()
+                file_name = f'{m}x{n}_{suffix_index}.{extension}'
+                file_path = f'{directory}/{file_name}'
+
+                self.load_and_visualize(file_path=file_path)
 
 
 if __name__ == '__main__':
+    from AI_intro_project.State import State
     # an example with method visualize_all()
-    u = _Utilities(
+    u = _Utilities().visualize_all(
         sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
         directory='AI_intro_project/randomized_states',
         extension='state'
     )
-    u.visualize_all()
