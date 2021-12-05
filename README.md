@@ -20,11 +20,11 @@ I WILL MAKE A WHOLE WEBSITE ONLY FOR THIS, PLEASE READ IT CAREFULLY BEFORE ASKIN
 # Guide for Collaborators
 This is a guide for everything, you MUST read it carefully.
 
-## End-to-end rules to work in this project
-[Rules](docs/rules.md)
-
 ## Guide to GitHub
-[Guide to GitHub](docs/guide_to_GitHub.md)
+[Guide to GitHub](docs/guide_to_GitHub.md). If you are new, please, read it, practice on GitHub. I have no time to read your commits and revert them.
+
+## End-to-end rules to work in this project
+[Rules](docs/rules.md). If you have worked with me for a while, you should know those. 
 
 ## Guide to publication
 We should use Notion page for now, because it is easy to use.
