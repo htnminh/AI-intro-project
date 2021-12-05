@@ -15,11 +15,6 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 - Đỗ Xuân Phong
 
 
-##  TODO
-- write test for State, Coordinate_and_Road 
-- rearrange and write descriptions for methods and properties
-
-
 ## Guide for Collaborators
 This is a guide for everything, you MUST read it carefully.
 
