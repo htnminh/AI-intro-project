@@ -10,6 +10,8 @@ Table of Contents _(Update using VSCode)_
 - [Docs](#docs)
 
 # The Penniless Pilgrim Riddle: Introduction
+The website of the project: <https://htnminh.github.io/AI-intro-project/>
+
 A capstone project for Introduction to Artificial Intelligence course. <br>
 A quick introduction of the problem: [Can you solve the penniless pilgrim riddle? - Daniel Finkel](https://youtu.be/6sBB-gRhfjE).
 
