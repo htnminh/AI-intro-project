@@ -1,12 +1,3 @@
-Table of contents *(updated using VSCode extension)*
-- [The Penniless Pilgrim Riddle: An Introduction](#the-penniless-pilgrim-riddle-an-introduction)
-- [Collaborators](#collaborators)
-- [CALL REFERENCES: A GUIDE TO START CODING](#call-references-a-guide-to-start-coding)
-- [Guide for Collaborators](#guide-for-collaborators)
-  - [Guide to GitHub](#guide-to-github)
-  - [End-to-end rules to work in this project](#end-to-end-rules-to-work-in-this-project)
-  - [Guide to publication](#guide-to-publication)
-
 # The Penniless Pilgrim Riddle: An Introduction
 A capstone project for Introduction to Artificial Intelligence course. <br>
 A quick introduction of the problem: [Can you solve the penniless pilgrim riddle? - Daniel Finkel](https://youtu.be/6sBB-gRhfjE).
