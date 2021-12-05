@@ -1,7 +1,7 @@
 from math import floor, ceil, sqrt
 import pickle as pkl
 
-class Utilities():
+class _Utilities():
     '''
     only used to do certain things,
     given some input specified
@@ -44,7 +44,7 @@ class Utilities():
     
     def set_file_name_file_path(self):
         '''
-        GIVEN: m, n, suffix_index, directory, file_name
+        GIVEN: m, n, suffix_index, directory, file_name, extension
         Set file_name, file_path
         '''
         self.file_name = f'{self.m}x{self.n}_{self.suffix_index}'
@@ -69,7 +69,7 @@ class Utilities():
     def load(self):
         '''
         GIVEN: file_path
-        load state in file_path, assign some properties to
+        load state in file_path, assign m, n to
         self, return the state
         '''
         with open(self.file_path, 'rb') as f:
