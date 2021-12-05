@@ -17,18 +17,18 @@ the form of a 2D numpy array like this:
 class Coordinate():
     '''a coordinate instance of the game'''
 
-    def __init__(self, x, y):
+    def __init__(self, x, y) -> None:
         '''
         Each coordinate is composed by 2 components, x and y
         '''
         self.x = x
         self.y = y
 
-    def __str__(self):
+    def __str__(self) -> str:
         '''String represent: Coordinate(x, y)'''
         return 'Coordinate(%s, %s)' % (self.x, self.y)
 
-    def check_inside(self, m, n):
+    def check_inside(self, m, n) -> bool:
         '''
         Return False if the coordinate is out-of-bounds of
         the board which has the size (m, n), or return True
@@ -38,14 +38,14 @@ class Coordinate():
             return True
         return False
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return self.x == other.x and self.y == other.y
 
 
 class Move():
     '''a move instance of the game'''
 
-    def __init__(self, x, y, direction):
+    def __init__(self, x, y, direction) -> None:
         '''
         Each move is composed by 3 components, which are:
         - x and y: 2 real numbers
@@ -107,7 +107,7 @@ class Move():
         else:
             return False
 
-    def check_inside(self, m, n):
+    def check_inside(self, m, n) -> bool:
         '''
         Return True if the move is out-of-bounds of
         the board which has the size (m, n)
@@ -115,7 +115,7 @@ class Move():
         return (self.coordinate_start.check_inside(m, n) and
                 self.coordinate_end.check_inside(m, n))
     
-    def reverse_direction(self):
+    def reverse_direction(self) -> str:
         '''Return the reversed direction, e.g. from L to R'''
         if self.direction == 'R':
             return 'L'

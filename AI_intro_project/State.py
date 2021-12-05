@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 class State():
     '''a state of the game'''
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Each state is composed by 4 components, which are:
         - board_size: a tuple (m, n)
@@ -34,21 +34,21 @@ class State():
         '''
         self.initialize_4x4_default()
 
-    def random_initialize(self, seed):
+    def random_initialize(self, seed) -> None:
         '''
         TODO
         Randomize the initial state, given the seed
         '''
         pass
 
-    def initialize_mxn_blank(self, size=(4,4)):
+    def initialize_mxn_blank(self, size=(4,4)) -> None:
         '''Initialize the state without moves'''
         self.board_size = size
         self.walked_moves = list()
         self.current_pos = Coordinate(0, 0)
         self.current_tax = 0.0
 
-    def initialize_4x4_default(self):
+    def initialize_4x4_default(self) -> None:
         '''
         Initialize the state which is the same as the
         TED-Ed's video: https://youtu.be/6sBB-gRhfjE
@@ -59,7 +59,7 @@ class State():
         for _ in range(2):
             self.move_to_direction('R')
 
-    def initialize_6x6_default(self):
+    def initialize_6x6_default(self) -> None:
         '''Initialize the state'''
         self.initialize_mxn_blank((6, 6))
 
@@ -67,7 +67,7 @@ class State():
         for _ in range(3):
             self.move_to_direction('R')
 
-    def initialize_8x8_default(self):
+    def initialize_8x8_default(self) -> None:
         '''Initialize the state'''
         self.initialize_mxn_blank((8, 8))
 
@@ -75,7 +75,7 @@ class State():
         for _ in range(4):
             self.move_to_direction('R')
 
-    def initialize_mxn_random(self):
+    def initialize_mxn_random(self) -> None:
         '''Initialize the state by a randomized state'''
         from AI_intro_project._Utilities import _Utilities
         s = _Utilities().load_randomly(
@@ -89,7 +89,7 @@ class State():
         self.current_pos = s.current_pos
         self.current_tax = s.current_tax
 
-    def _plt_prepare(self, show_move_numbers=True):
+    def _plt_prepare(self, show_move_numbers=True) -> None:
         '''
         Prepare matplolib.pyplot for plotting
         Used to visualize the current state in matplotlib
@@ -160,14 +160,14 @@ class State():
         # show
         plt.plot()
 
-    def visualize(self, show_move_numbers=True):
+    def visualize(self, show_move_numbers=True) -> None:
         '''
         Visualize the current state in matplotlib
         '''
         self._plt_prepare(show_move_numbers=show_move_numbers)
         plt.show()
 
-    def random_play(self, number_of_moves=20, silent=False):
+    def random_play(self, number_of_moves=20, silent=False) -> None:
         '''
         Randomly continue playing the current state
         for the given number of moves if the moves is
@@ -181,7 +181,7 @@ class State():
                 if not silent:
                     print(f'{move.__str__(show_coordinate_end=True)}, tax after move = {self.current_tax}')
 
-    def undo_last_move(self):
+    def undo_last_move(self) -> None:
         '''Undo the last move'''
         assert self.walked_moves, \
                 'NO MOVE LEFT TO UNDO'
@@ -190,7 +190,7 @@ class State():
         self.move_to_direction(recover_direction)
         self.walked_moves.pop(-1)
 
-    def check_not_duplicate_move(self, move):
+    def check_not_duplicate_move(self, move) -> bool:
         '''
         Check if a move is available for later walk, by
         checking if the move is already in walked_moves
@@ -202,7 +202,7 @@ class State():
                 return False
         return True
 
-    def available_moves_list(self):
+    def available_moves_list(self) -> list():
         '''
         Return a list of instances of Move, which are the
         moves that the pilgrim can walk in the current state,
@@ -218,7 +218,7 @@ class State():
                 result.append(move)
         return result
 
-    def tax_after_move(self, move):
+    def tax_after_move(self, move) -> None:
         if move.direction == 'R':
             return self.current_tax + 2
         elif move.direction == 'L':
@@ -228,7 +228,7 @@ class State():
         elif move.direction == 'D':
             return self.current_tax * 2
 
-    def move_on_move(self, move):
+    def move_on_move(self, move) -> None:
         assert move in self.available_moves_list(), \
                 f'{move}: CANNOT MOVE THIS WAY'
 
@@ -236,7 +236,7 @@ class State():
         self.current_pos = move.coordinate_end
         self.current_tax = self.tax_after_move(move)
     
-    def move_to_direction(self, direction):
+    def move_to_direction(self, direction) -> None:
         self.move_on_move(
                 Move(
                         self.current_pos.x,

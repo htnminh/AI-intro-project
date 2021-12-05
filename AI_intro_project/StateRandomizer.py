@@ -36,7 +36,7 @@ class StateRandomizer():
             SEED = 50,  
             directory='AI_intro_project/randomized_states',
             extension='state',
-        ):
+        ) -> None:
         '''
         To prevent randomizing accidentally, you must call
         the randomize method manually to start the process
@@ -51,7 +51,7 @@ class StateRandomizer():
                             for j in range(4,9)]
 
     def randomize_one(self, size, number_of_moves,
-                      save=False, suffix_index='0'):
+                      save=False, suffix_index='0') -> State:
         '''
         Randomize a state, save it if required, then return it
         This make sure that player can go to the goal point...
@@ -80,7 +80,7 @@ class StateRandomizer():
             
         return s
             
-    def randomize_all(self, save=False):
+    def randomize_all(self, save=False) -> None:
         for size in self.sizes:
             number_of_moves_0, number_of_moves_1 = \
                     _Utilities().numbers_of_moves_calc(size=size)
@@ -100,7 +100,7 @@ if __name__ == '__main__':
     Path(directory).mkdir(parents=True, exist_ok=True)  
 
     # run the below line if you want to randomize with the seed 50, then save all 
-    StateRandomizer().randomize_all(save=True)
+    # StateRandomizer().randomize_all(save=True)
 
 
     # see a state
