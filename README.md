@@ -17,22 +17,20 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 ## Guide for Collaborators
 This is a guide for everything, you MUST read it carefully.
 
+### CALL REFERENCES
+\# todo
+
+### End-to-end rules to work in this project
+[Rules](docs/rules.md)
+
 ### Guide to publication
 We should use Notion page for now, because it is easy to use.
-
 
 ### Guide to GitHub
 [Guide to GitHub](docs/guide_to_GitHub.md)
    
 
-### Introduction to directories in this project
-The directory...
-- `AI_intro_project`: all the files used to run the project.
-- `tests`: scripts used to test Python files in `AI_intro_project`.
-- `publication`: all `.ipynb` and `.pdf` files for publication.
 
-### End-to-end rules to work in this project
-[Rules](docs/rules.md)
 
 <!--
 ### Start working
