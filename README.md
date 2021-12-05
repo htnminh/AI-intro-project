@@ -14,6 +14,8 @@ Five easy steps to play the game:
 4. Run <br>`pip install .`
 5. Run <br>`python AI_intro_project\play.py`<br> to open the UI above
 
+If you want to completely remove the game, just delete the zip file and the directory specified above.
+
 # Collaborators
 We are K65 of Hanoi University of Science and Technology, major in Data Science and Artificial Intelligence. Under the guidance of our lecturer, Professor Muriel Visani, we will together solve this riddle.
 - Hoàng Trần Nhật Minh
