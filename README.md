@@ -6,6 +6,14 @@ In short, we will keep the original rules of the game, but randomize the board s
 
 ![image](https://user-images.githubusercontent.com/82358580/144267723-1ad95e94-b96b-499d-8b9c-c8eb7b3fe210.png)
 
+# Play the game!
+Five easy steps to play the game:
+1. Make sure that Python and pip are installed on your local machine
+2. Download this repository, unzip it
+3. Open cmd, change the directory to the folder above (`AI-intro-project-main` by default)
+4. Run <br>`pip install .`
+5. Run <br>`python AI_intro_project\play.py`<br> to open the UI above
+
 # Collaborators
 We are K65 of Hanoi University of Science and Technology, major in Data Science and Artificial Intelligence. Under the guidance of our lecturer, Professor Muriel Visani, we will together solve this riddle.
 - Hoàng Trần Nhật Minh
