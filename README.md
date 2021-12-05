@@ -24,7 +24,7 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 - Đỗ Xuân Phong
 
 # CALL REFERENCES: A GUIDE TO START CODING
-> I WILL MAKE A WHOLE WEBSITE ONLY FOR THIS, PLEASE READ IT CAREFULLY BEFORE ASKING ME ANYTHING.
+> I WILL MAKE A WHOLE SITE ONLY FOR THIS, PLEASE READ IT CAREFULLY BEFORE ASKING ME ANYTHING.
 
 # Guide for Collaborators
 This is a guide for everything, you MUST read it carefully.
@@ -57,10 +57,8 @@ Start working only if you understand and accept to follow the rules above. It wi
 5. Start doing your things. Remember to follow the rules, since you are not working alone.
 -->
 
-<!--
 # Docs
-- [LICENSE]()
-- [Code of Conduct]()
-- [Contributing]()
-- [Issue templates]()
--->
+- [LICENSE](LICENSE)
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+- [Contributing](docs/CONTRIBUTING.md)
+- [Issue templates](https://github.com/htnminh/AI-intro-project/tree/main/.github/ISSUE_TEMPLATE)
