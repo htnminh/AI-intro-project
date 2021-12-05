@@ -18,7 +18,7 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 This is a guide for everything, you MUST read it carefully.
 
 ### CALL REFERENCES
-\# todo
+I WILL MAKE A WHOLE WEBSITE ONLY FOR THIS, PLEASE READ IT CAREFULLY BEFORE ASKING ME ANYTHING.
 
 ### End-to-end rules to work in this project
 [Rules](docs/rules.md)
