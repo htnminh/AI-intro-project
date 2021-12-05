@@ -1,3 +1,4 @@
+Table of Contents _(Update using VSCode)_
 - [The Penniless Pilgrim Riddle: Introduction](#the-penniless-pilgrim-riddle-introduction)
 - [CALL REFERENCES: CODING](#call-references-coding)
 - [Play the game!](#play-the-game)
