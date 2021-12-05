@@ -20,7 +20,8 @@ In short, we will keep the original rules of the game, but randomize the board s
 ![image](https://user-images.githubusercontent.com/82358580/144267723-1ad95e94-b96b-499d-8b9c-c8eb7b3fe210.png)
 
 # CALL REFERENCES: CODING
-> DEAR COLLABORATORS, I WILL MAKE A WHOLE SITE ONLY FOR THIS, YOU BETTER NOT ASK ME ANYTHING THAT EXIST HERE.
+> DEAR COLLABORATORS, I MADE A WHOLE SITE ONLY FOR THIS, YOU BETTER NOT ASK ME ANYTHING THAT EXIST HERE.
+<https://htnminh.github.io/AI-intro-project-call-ref/>
 
 # Play the game!
 Five easy steps to play the game:
