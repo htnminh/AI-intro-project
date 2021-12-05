@@ -3,7 +3,7 @@
 
 from AI_intro_project.Coordinate_and_Move \
                 import Coordinate, Move
-from Utilities import Utilities
+from AI_intro_project._Utilities import _Utilities
 
 from random import choice
 
@@ -78,7 +78,7 @@ class State():
 
     def initialize_mxn_random(self):
         '''Initialize the state by a randomized state'''
-        s = Utilities(
+        s = _Utilities(
             sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
             directory='AI_intro_project/randomized_states',
             extension='state',
