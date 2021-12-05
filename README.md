@@ -22,6 +22,8 @@ In short, we will keep the original rules of the game, but randomize the board s
 # CALL REFERENCES: CODING
 > DEAR COLLABORATORS, I WILL MAKE A WHOLE SITE ONLY FOR THIS, YOU BETTER NOT ASK ME ANYTHING THAT EXIST HERE.
 
+[Call references](https://htnminh.notion.site/Introduction-to-AI-Call-references-25f01068a48249dc9a0263cc1fcf41c5)
+
 # Play the game!
 Five easy steps to play the game:
 1. Make sure that Python and pip are installed on your local machine
