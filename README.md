@@ -1,6 +1,5 @@
 Table of Contents _(Update using VSCode)_
 - [The Penniless Pilgrim Riddle: Introduction](#the-penniless-pilgrim-riddle-introduction)
-- [CALL REFERENCES: CODING](#call-references-coding)
 - [Play the game!](#play-the-game)
 - [Collaborators](#collaborators)
 - [Guide for Collaborators: A guide for everything](#guide-for-collaborators-a-guide-for-everything)
@@ -40,7 +39,7 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 # Guide for Collaborators: A guide for everything
 
 ## End-to-end rules to work in this project
-[Rules](docs/rules.md). If you have worked with me for a while, you should know those. 
+[Rules](docs/rules.md). If you have worked with me for a while, you should know those.
 
 ## Guide to GitHub
 [Guide to GitHub](docs/guide_to_GitHub.md). If you are new to GitHub or Git, please, read it, practice on GitHub.
