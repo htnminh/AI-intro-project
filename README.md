@@ -51,11 +51,12 @@ Moreover, I have no time to read your commits and revert them if you make a mist
 Practice working on GitHub until you feel confident, and you will be fine.
 
 ## Guide to start coding
-You have 4 super simple things to do:
+You have 5 simple things to do:
 1. Read the rules, please. I have no time to fix your code.
-2. Play the game.
-3. Create a directory named after your algorithm's name in `AI_intro_project`.
-4. Start coding there.
+2. CLONE the repository, NOT DOWNLOAD it.
+3. Play the game there.
+4. Create a directory named after your algorithm's name in `AI_intro_project`.
+5. Start coding there.
 
 ## Guide to publication
 We should use Notion page for now, because it is easy to use.
