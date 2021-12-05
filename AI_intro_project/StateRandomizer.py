@@ -28,7 +28,7 @@ import random
 from pathlib import Path
 
 from AI_intro_project.State import State
-from AI_intro_project._Utilities import _Utilities
+from AI_intro_project.Utilities import Utilities
 
 class StateRandomizer():
     def __init__(
@@ -69,7 +69,7 @@ class StateRandomizer():
                 break
 
         if save:
-            _Utilities(state=s, directory=self.directory,
+            Utilities(state=s, directory=self.directory,
                             suffix_index=suffix_index, extension=self.extension).save()
             
         return s
@@ -77,7 +77,7 @@ class StateRandomizer():
     def randomize_all(self, save=False):
         for size in self.sizes:
             number_of_moves_0, number_of_moves_1 = \
-                    _Utilities(m=size[0], n=size[1]).numbers_of_moves_calc()
+                    Utilities(m=size[0], n=size[1]).numbers_of_moves_calc()
             s0 = self.randomize_one(size, number_of_moves_0, save, '0')
 
             while True:
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # _StateUtilities(file_path=r'AI_intro_project\randomized_states\4x6_0.state').load_and_visualize()
     
     # see all states - ctrl-C to stop
-    _Utilities(
+    Utilities(
         directory=directory,
         extension='state',
         sizes=[(i,j) for i in range(4,9) for j in range(4,9)]).visualize_all()
