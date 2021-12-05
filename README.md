@@ -27,8 +27,7 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 # CALL REFERENCES: A GUIDE TO START CODING
 > I WILL MAKE A WHOLE SITE ONLY FOR THIS, PLEASE READ IT CAREFULLY BEFORE ASKING ME ANYTHING.
 
-# Guide for Collaborators
-This is a guide for everything, you MUST read it carefully.
+# Guide for Collaborators: A guide for everything
 
 ## End-to-end rules to work in this project
 [Rules](docs/rules.md). If you have worked with me for a while, you should know those. 
