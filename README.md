@@ -14,14 +14,11 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 - Lý Nhật Nam
 - Đỗ Xuân Phong
 
-
 ## Guide for Collaborators
 This is a guide for everything, you MUST read it carefully.
 
 ### Guide to publication
 We should use Notion page for now, because it is easy to use.
-
-[DEPRECATED guide to publication](docs/DEPRECATED_guide_to_publication.md)
 
 
 ### Guide to GitHub
