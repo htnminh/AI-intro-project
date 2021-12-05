@@ -2,7 +2,7 @@ from math import floor, ceil, sqrt
 import pickle as pkl
 import random
 
-class _Utilities():
+class Utilities():
     '''
     only used to do certain things,
     given some input specified
