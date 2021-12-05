@@ -21,11 +21,7 @@ class State():
         - current_pos: Coordinate(x, y)
         - current_tax: a real number
         Properties:
-        - (DEPRECATED) available_moves: a list of instances
-          of Move, which are the moves that the pilgrim can
-          walk in the current state (DEPRECATED)
         Methods:
-        - random_initialize: randomize the initial state
         - _fixed_initialize: (development only)
           initialize the TED-Ed's state
         - check_duplicate_move: check if a move is
@@ -33,13 +29,6 @@ class State():
         - available_moves_calc: calculate available_moves
         '''
         self.initialize_4x4_default()
-
-    def random_initialize(self, seed) -> None:
-        '''
-        TODO
-        Randomize the initial state, given the seed
-        '''
-        pass
 
     def initialize_mxn_blank(self, size=(4,4)) -> None:
         '''Initialize the state without moves'''
@@ -219,6 +208,7 @@ class State():
         return result
 
     def tax_after_move(self, move) -> None:
+        '''Return the tax after a move'''
         if move.direction == 'R':
             return self.current_tax + 2
         elif move.direction == 'L':
@@ -229,6 +219,7 @@ class State():
             return self.current_tax * 2
 
     def move_on_move(self, move) -> None:
+        '''perform the move on a Move instance'''
         assert move in self.available_moves_list(), \
                 f'{move}: CANNOT MOVE THIS WAY'
 
@@ -237,6 +228,10 @@ class State():
         self.current_tax = self.tax_after_move(move)
     
     def move_to_direction(self, direction) -> None:
+        '''
+        perform the move from the current position 
+        to a direction
+        '''
         self.move_on_move(
                 Move(
                         self.current_pos.x,

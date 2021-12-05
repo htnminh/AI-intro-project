@@ -39,6 +39,7 @@ class Coordinate():
         return False
 
     def __eq__(self, other) -> bool:
+        '''Return True if the two Coordinates are equal'''
         return self.x == other.x and self.y == other.y
 
 
@@ -62,6 +63,10 @@ class Move():
         self.coordinate_end = self.coordinate_end_calc()
 
     def __str__(self, show_coordinate_end=False) -> str:
+        '''
+        String represent, for example: 
+        Move(1, 2, R) -> Coordinate(1, 3)
+        '''
         return 'Move(%s, %s, %s)%s' % (
             self.coordinate_start.x,
             self.coordinate_start.y,
