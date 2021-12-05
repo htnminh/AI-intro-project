@@ -8,7 +8,7 @@
   1. (Code conventions) Every single Python line in this project should follows [PEP 8](https://www.python.org/dev/peps/pep-0008/).
   2. (Comment conventions) You must comment for every object and every method, please follow [PEP 257](https://www.python.org/dev/peps/pep-0257/).
   3. (OOP) You must use Object Oriented Programming, and try to avoid writing too much code in the main program without putting them in an object.
-  4. (Absolute import) Most of the time, if you want to use an object from another file, you should use [absolute import](https://www.geeksforgeeks.org/absolute-and-relative-imports-in-python/).
+  4. (Absolute import) If you want to use an object from another file, you should use [absolute import](https://www.geeksforgeeks.org/absolute-and-relative-imports-in-python/). For example, `from AI_intro_project.Coordinate_and_Move import Coordinate`.
   5. (Tests) There are some automated tests (in Actions tab) after your push. My tests will check for code conventions, and test your classes in every file. If any of the test fails, you must rewrite or undo (or `revert` if you know it) until all the tests are passed. (If the tests are wrong, please tell me). If there is a file that the tests show too many warnings (>10) about your code conventions, you must adjust it to reduce the convention warnings.
   6. (No Jupyter) Avoid using Jupyter notebook to code, but there will be some for reporting.
 - Writing rules
