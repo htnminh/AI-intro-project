@@ -30,6 +30,9 @@ We are K65 of Hanoi University of Science and Technology, major in Data Science 
 # Guide for Collaborators
 This is a guide for everything, you MUST read it carefully.
 
+## End-to-end rules to work in this project
+[Rules](docs/rules.md). If you have worked with me for a while, you should know those. 
+
 ## Guide to GitHub
 [Guide to GitHub](docs/guide_to_GitHub.md). If you are new to GitHub or Git, please, read it, practice on GitHub.
 
@@ -37,9 +40,6 @@ This is a guide for everything, you MUST read it carefully.
 Moreover, I have no time to read your commits and revert them if you make a mistake.
 
 Practice working on GitHub until you feel confident, and you will be fine.
-
-## End-to-end rules to work in this project
-[Rules](docs/rules.md). If you have worked with me for a while, you should know those. 
 
 ## Guide to publication
 We should use Notion page for now, because it is easy to use.
