@@ -1,5 +1,6 @@
 from math import floor, ceil, sqrt
 import pickle as pkl
+import random
 
 class _Utilities():
     '''
@@ -7,14 +8,14 @@ class _Utilities():
     given some input specified
     NOT AN INHERITANCE OF THE State CLASS
     '''
-    def __init__(        # dependencies
+    def __init__(                   # dependencies
                 self,
                 state=None,
-                m=None,  # state
-                n=None,  # state
-                file_name=None,  # m, n, suffix_index, directory
-                file_path=None,  # m, n, suffix_index, directory
-                directory=None,  
+                m=None,             # state
+                n=None,             # state
+                file_name=None,     # m, n, suffix_index, directory, extension
+                file_path=None,     # m, n, suffix_index, directory, extension
+                directory=None,
                 suffix_index=None,
                 extension=None,
                 sizes=None
@@ -44,11 +45,11 @@ class _Utilities():
     
     def set_file_name_file_path(self):
         '''
-        GIVEN: m, n, suffix_index, directory, file_name, extension
+        GIVEN: m, n, suffix_index, directory, extension
         Set file_name, file_path
         '''
-        self.file_name = f'{self.m}x{self.n}_{self.suffix_index}'
-        self.file_path = f'{self.directory}/{self.file_name}.{self.extension}'
+        self.file_name = f'{self.m}x{self.n}_{self.suffix_index}.{self.extension}'
+        self.file_path = f'{self.directory}/{self.file_name}'
 
     def numbers_of_moves_calc(self):
         '''
@@ -77,6 +78,17 @@ class _Utilities():
             self.set_m_n()
         return self.state
     
+    def load_randomly(self):
+        '''
+        GIVEN: sizes, directory, extension
+        return the loaded state
+        '''
+        self.m, self.n = random.choice(self.sizes)
+        self.suffix_index = random.choice([0, 1])
+        self.set_file_name_file_path()
+        self.load()
+        return self.state
+    
     def load_and_visualize(self):
         '''
         GIVEN: file_path
@@ -97,3 +109,7 @@ class _Utilities():
                 self.suffix_index = suffix_index
                 self.set_file_name_file_path()
                 self.load_and_visualize()
+
+
+if __name__ == '__main__':
+    pass

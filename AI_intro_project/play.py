@@ -1,4 +1,4 @@
-# To be honest, I have no idea how this works, here is the source code:
+# Source code of some of the setup below
 # https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Matplotlib_Embedded_Toolbar.py
 
 import webbrowser
@@ -16,8 +16,6 @@ from AI_intro_project.State import State
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
-# dark mode because eyes first
-# TODO: adjust colors accordingly
 # plt.style.use('dark_background')
 
 
@@ -123,7 +121,7 @@ while True:
 
         s = State()
         s.initialize_4x4_default()
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
@@ -138,7 +136,7 @@ while True:
 
         s = State()
         s.initialize_6x6_default()
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
@@ -153,10 +151,25 @@ while True:
 
         s = State()
         s.initialize_8x8_default()
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
     
+    elif event == 'mxn (random)':
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+
+        s = State()
+        s.initialize_mxn_random()
+        s._plt_prepare()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+
     elif event == 'Show 4x4 best solution':
         plt.clf()
 
@@ -182,7 +195,7 @@ while True:
         for _ in range(4):
             s.move_to_direction('R')
         
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
@@ -199,7 +212,7 @@ while True:
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.random_play(number_of_moves=5, silent=True)
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
     
@@ -215,7 +228,7 @@ while True:
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.move_to_direction(event[0])
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
@@ -231,7 +244,7 @@ while True:
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.undo_last_move()
-        s.plt_preparation()
+        s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 

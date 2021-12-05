@@ -3,6 +3,7 @@
 
 from AI_intro_project.Coordinate_and_Move \
                 import Coordinate, Move
+from _Utilities import _Utilities
 
 from random import choice
 
@@ -74,8 +75,21 @@ class State():
         # move to the right twice
         for _ in range(4):
             self.move_to_direction('R')
-        
-    def plt_preparation(self, show_move_numbers=True):
+
+    def initialize_mxn_random(self):
+        '''Initialize the state by a randomized state'''
+        s = _Utilities(
+            sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+            directory='AI_intro_project/randomized_states',
+            extension='state',
+        ).load_randomly()
+
+        self.board_size = s.board_size
+        self.walked_moves = s.walked_moves
+        self.current_pos = s.current_pos
+        self.current_tax = s.current_tax
+
+    def _plt_prepare(self, show_move_numbers=True):
         '''
         Prepare matplolib.pyplot for plotting
         Used to visualize the current state in matplotlib
@@ -150,7 +164,7 @@ class State():
         '''
         Visualize the current state in matplotlib
         '''
-        self.plt_preparation(show_move_numbers=show_move_numbers)
+        self._plt_prepare(show_move_numbers=show_move_numbers)
         plt.show()
 
     def random_play(self, number_of_moves=20, silent=False):
