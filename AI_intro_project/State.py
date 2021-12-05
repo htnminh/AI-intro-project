@@ -3,7 +3,7 @@
 
 from AI_intro_project.Coordinate_and_Move \
                 import Coordinate, Move
-from _Utilities import _Utilities
+from Utilities import Utilities
 
 from random import choice
 
