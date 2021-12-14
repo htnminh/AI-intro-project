@@ -44,7 +44,7 @@ col1 = [
         sg.B('4x4 (default)'),
         sg.B('6x6 (default)'),
         sg.B('8x8 (default)'),
-        sg.B('mxn (random)')],  # TODO
+        sg.B('mxn (random)')],
     [
         sg.B('Play 5 random legal moves'),
         sg.B('Show 4x4 best solution'),

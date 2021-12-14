@@ -16,7 +16,7 @@ class _Utilities():
     def numbers_of_moves_calc(self, size) -> tuple[int, int]:
         '''
         GIVEN: size
-        Calculate the number of forced moves of the 2 boards
+        calculate the number of forced moves of the 2 boards
         '''
         m, n = size
         return floor(sqrt(m*n)/2), \
@@ -92,9 +92,8 @@ class _Utilities():
 
 if __name__ == '__main__':
     # an example with method load_all()
-    u = _Utilities().load_all(
+    _Utilities().visualize_all(
         sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
         directory='AI_intro_project/randomized_states',
         extension='state'
     )
-    print(u)

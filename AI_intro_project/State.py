@@ -22,11 +22,25 @@ class State():
         - current_tax: a real number
         Properties:
         Methods:
-        - _fixed_initialize: (development only)
-          initialize the TED-Ed's state
-        - check_duplicate_move: check if a move is
-          available for later walk
-        - available_moves_calc: calculate available_moves
+        - initialize_4x4_default
+        - initialize_6x6_default
+        - initialize_8x8_default
+        - initialize_mxn_default: pick a random state in the state
+          directory
+        - _plt_prepare: prepare matplotlib.pyplot for the game 
+          visualizer
+        - visualize: plot the board using matplotlib.pyplot (no
+          subplot involved)
+        - random_play: legally play several random moves
+        - undo_last_move: undo last move
+        - check_duplicate_move: check if a move is available
+          for later walk
+        - available_moves_list: a list of avalable moves
+        - tax_after_move: the tax after a specified move
+        - move_on_move: (wtf name) move the pilgrim on a
+          move specified
+        - move_to_direction: move the pilgrim to a specified
+          direction (R, L, U, D)
         '''
         self.initialize_4x4_default()
 

@@ -3,7 +3,7 @@ self-note:
 
 x and y in this project are not of normal coordinate system
 in mathematics, instead they point out the coordinate in
-the form of a 2D numpy array like this:
+the form of a 2D array like this:
 
 (0,0) (0,1) (0,2) ... (0,n)
 (1,0) (1,1) (1,2) ... (1,n)
@@ -19,7 +19,8 @@ class Coordinate():
 
     def __init__(self, x, y) -> None:
         '''
-        Each coordinate is composed by 2 components, x and y
+        Each coordinate is composed by 2 components, x and y,
+        indicate an intersection of the game board.
         '''
         self.x = x
         self.y = y
@@ -36,7 +37,8 @@ class Coordinate():
         '''
         if 0 <= self.x <= m and 0 <= self.y <= n:
             return True
-        return False
+        else:
+            return False
 
     def __eq__(self, other) -> bool:
         '''Return True if the two Coordinates are equal'''
@@ -114,7 +116,7 @@ class Move():
 
     def check_inside(self, m, n) -> bool:
         '''
-        Return True if the move is out-of-bounds of
+        Return True if the move is out-of-bound of
         the board which has the size (m, n)
         '''
         return (self.coordinate_start.check_inside(m, n) and

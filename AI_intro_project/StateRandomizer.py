@@ -30,7 +30,7 @@ from AI_intro_project.State import State
 from AI_intro_project._Utilities import _Utilities
 
 
-class StateRandomizer():
+class _StateRandomizer():
     def __init__(
             self,
             SEED = 50,  
@@ -81,6 +81,9 @@ class StateRandomizer():
         return s
             
     def randomize_all(self, save=False) -> None:
+        '''
+        Randomize multiple states, save if required.
+        '''
         for size in self.sizes:
             number_of_moves_0, number_of_moves_1 = \
                     _Utilities().numbers_of_moves_calc(size=size)
