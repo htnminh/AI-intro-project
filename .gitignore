@@ -20,3 +20,6 @@
 # so these should be ignored.
 AIIntroProject.egg-info/
 build/
+
+# ignore VSC CodeRunner temp
+tempCodeRunnerFile.*
