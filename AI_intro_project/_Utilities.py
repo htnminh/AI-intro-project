@@ -92,8 +92,8 @@ class _Utilities():
 
 if __name__ == '__main__':
     # an example with method load_all()
-    _Utilities().visualize_all(
+    print(_Utilities().load_all(
         sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
         directory='AI_intro_project/randomized_states',
         extension='state'
-    )
+    ))
