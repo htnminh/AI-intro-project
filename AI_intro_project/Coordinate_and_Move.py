@@ -29,6 +29,9 @@ class Coordinate():
         '''String represent: Coordinate(x, y)'''
         return 'Coordinate(%s, %s)' % (self.x, self.y)
 
+    def __repr__(self) -> str:
+        return self.__str__()
+
     def check_inside(self, m, n) -> bool:
         '''
         Return False if the coordinate is out-of-bounds of
@@ -76,6 +79,17 @@ class Move():
             ' -> ' + str(self.coordinate_end) \
                 if show_coordinate_end else ''
         )
+
+    def __repr__(self, show_coordinate_end=False) -> str:
+        '''
+        Represent, for example: 
+        Move(1, 2, 'R')
+        '''
+        return "Move(%s, %s, '%s')" % (
+            self.coordinate_start.x,
+            self.coordinate_start.y,
+            self.direction)
+
 
     def coordinate_end_calc(self) -> Coordinate:
         '''
