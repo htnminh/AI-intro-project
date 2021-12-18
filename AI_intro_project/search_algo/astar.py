@@ -1,6 +1,7 @@
 from numpy import empty
-from AI_intro_project import State
-from Coordinate_and_Move import Coordinate, Move
+from AI_intro_project.State import State
+from AI_intro_project.Coordinate_and_Move import Coordinate, Move
+from copy import deepcopy
 
 '''
         _
@@ -8,10 +9,18 @@ from Coordinate_and_Move import Coordinate, Move
      \___)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 '''
-def _astar_heuristic(cur_pos: Coordinate):
-    # TODO: this evening: implement that what the cat heuristic
-    return
+def _astar_heuristic(cur: State, _goal):
+    if 0:
+        m = _goal[0] - cur.current_pos.x
+        n = _goal[1] - cur.current_pos.y
 
+        if m % 2 == 0:
+            cur.h = 2**n - m * (2**n - 8) / 2
+        else:
+            cur.h = (((((2*(m-1)/2))*(2**(n-1))+2*(m+1)/2))/(2**(n-1)))-((m-1)/2-1)*2*2 - (((m-1)/2)+1)*2*(2**(n-1)) + 2*m 
+        return cur.h
+
+    return 0
 
 '''
 A* search
@@ -44,52 +53,63 @@ def astar(start: State):
     start.parent = None
 
     # opening nodes
-    _open = []
+    _open = list()
     _open.append(start)
 
     # closed nodes
     _closed = []
 
     # goal node
-    _goal = (start.board_size[0]-1, start.board_size[1]-1)
+    _goal = start.board_size
+
+    # Save state for good path
+    _min_cost = 1
+    _min_path = State()
 
     # run A* until break;
     while _open:
         # get node with minimum f
-        _min_f = min([node.f for node in _open])
+        _f_node_open = [node.f for node in _open]
+        _min_f = min(_f_node_open)
 
         # pop the node with min f for expansion
-        _current = _open.pop(_open.index(_min_f))
+        _current = deepcopy(_open.pop(_f_node_open.index(_min_f)))
 
         # add that node to _closed
         _closed.append(_current)
 
         # stop if popped goal node
-        if _current.current_pos == Coordinate(_goal):
-            break
-
+        if _current.current_pos == Coordinate(*_goal):
+            if _current.current_tax <= 0:
+                if 0 and _current.current_tax < _min_cost:
+                    print("found better path")
+                    _min_cost = _current.current_tax
+                    _min_path = deepcopy(_current)
+                    print("tax:", _min_cost)
+                    if _min_cost == -4: break
+                if 0: continue 
+                _min_path = _current
+                break
+    
         # get available moves, continue if none is found
         if _current.available_moves_list() is empty:
             continue
 
-        for _dir in _current.available_moves_list():
+        for _move in _current.available_moves_list():
             # temporary node
-            temp = _current
-            temp_move = Move(
-                temp.current_pos.x,
-                temp.current_pos.y,
-                _dir
-            )
-            temp.move_to_direction(temp_move)
+            temp = deepcopy(_current)
             
             # current tax as g
-            temp.g = temp.tax_after_move(temp_move) #TODO: need to convert to current_tax later
-            
+            temp.g = temp.tax_after_move(_move) #NO need to convert to current_tax later
+
             # heuristic func as h
             #--> blame Nam for weird heuristic
             temp.h = _astar_heuristic(
-                temp.current_pos
+                temp,
+                _goal
             )
+            #DEBUG: all movable tiles
+            #print("at:", _current.current_pos, ", move:", _move)
 
             # A* function
             temp.f = temp.g + temp.h
@@ -102,27 +122,34 @@ def astar(start: State):
                     break
 
             # ignore temp and expand this t_node instead
-            if t_do_continue:
-                continue
+            #if t_do_continue:
+            #    continue
 
-            # temp has great f, so add that to _open
-            _open.append(temp)
+    
+            # temp has great f, so add that to _open.
+            # and move it
+            temp.move_on_move(_move)
 
             # attach parent node & moved dir to temp
             #-- like a linked list, hrmf..
             temp.parent = _current
-            temp._dir = _dir
+            temp._move = _move
 
             # that TODO up there-----------------------^
-            temp.current_tax = temp.g
+            #print("move to", temp.current_pos, "tax:", temp.current_tax)
+
+            # finally, add it to _open
+            _open.append(temp)
+
         
     path = []
-    while _current.parent is not None:
-        path.append(_current._dir)
-        _current = _current.parent
+    while _min_path.parent is not None:
+        path.append(_min_path._move)
+        _min_path = _min_path.parent
 
     return path[::-1]    
 
 if __name__ == "__main__":
     _internalVar = State()
-    astar(_internalVar)
+    _internalVar.initialize_4x4_default()
+    print(*astar(_internalVar), sep = '\n')
