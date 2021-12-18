@@ -81,15 +81,15 @@ def astar(start: State):
         # stop if popped goal node
         if _current.current_pos == Coordinate(*_goal):
             if _current.current_tax <= 0:
-                if 0 and _current.current_tax < _min_cost:
+                print("ping! ->", _current.current_tax)
+                if _current.current_tax < _min_cost:
                     print("found better path")
                     _min_cost = _current.current_tax
                     _min_path = deepcopy(_current)
                     print("tax:", _min_cost)
-                    if _min_cost == -4: break
-                if 0: continue 
-                _min_path = _current
-                break
+                    if _min_cost < -2: break
+
+                continue
     
         # get available moves, continue if none is found
         if _current.available_moves_list() is empty:
