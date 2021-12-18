@@ -44,6 +44,7 @@ col1 = [
         sg.B('4x4 (default)'),
         sg.B('6x6 (default)'),
         sg.B('8x8 (default)'),
+        sg.B('12x12 (dev)'),
         sg.B('mxn (random)')],
     [
         sg.B('Play 5 random legal moves'),
@@ -155,6 +156,21 @@ while True:
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
     
+    elif event == '12x12 (dev)':
+        plt.clf()
+
+        plt.figure(1)
+        fig = plt.gcf()
+        DPI = fig.get_dpi()
+
+        fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
+
+        s = State()
+        s.board_size = (12,12)
+        s._plt_prepare()
+
+        draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
+
     elif event == 'mxn (random)':
         plt.clf()
 
