@@ -15,9 +15,6 @@ class Node:
     #Past_cost
     self.g = g
 
-    #Node mục tiêu
-    self.goal = goal
-
     #giá trị heuristic
     self.h = 0
 
