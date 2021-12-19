@@ -201,8 +201,11 @@ while True:
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
 
         s = State()
-        for _ in range(3):
+        for _ in range(2):
             s.move_to_direction('D')
+        s.move_to_direction('L')
+        s.move_to_direction('D')
+        s.move_to_direction('R')
         for _ in range(2):
             s.move_to_direction('R')
         for _ in range(3):
