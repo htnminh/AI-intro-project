@@ -56,7 +56,7 @@ col2 = [
     [
         sg.B('▲', key='U')],
     [
-        sg.B('◄', key='L'), 
+        sg.B('◄', key='L'),
         sg.B('⟲', key='undo'),
         sg.B('►', key='R')],
     [
@@ -96,7 +96,12 @@ layout = [
         )]
 ]
 
-window = sg.Window('The Penniless Pilgrim Riddle | https://github.com/htnminh/AI-intro-project', layout)
+window = sg.Window('The Penniless Pilgrim Riddle | https://github.com/htnminh/AI-intro-project', layout, resizable = True, finalize = True)
+window.bind('<Up>', 'U')
+window.bind('<Down>', 'D')
+window.bind('<Left>', 'L')
+window.bind('<Right>', 'R')
+
 
 
 # EVENT LOOP --------------------------------------------------------------
@@ -155,7 +160,7 @@ while True:
         s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
-    
+
     elif event == '12x12 (dev)':
         plt.clf()
 
@@ -210,13 +215,13 @@ while True:
             s.move_to_direction('D')
         for _ in range(4):
             s.move_to_direction('R')
-        
+
         s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
 
     elif event == 'Play 5 random legal moves':
-        plt.clf() 
+        plt.clf()
 
         plt.figure(1)
         fig = plt.gcf()
@@ -231,7 +236,7 @@ while True:
         s._plt_prepare()
 
         draw_figure_w_toolbar(window['fig_cv'].TKCanvas, fig, window['controls_cv'].TKCanvas)
-    
+
     elif event in ('L', 'R', 'U', 'D'):
         plt.clf()
 
@@ -240,7 +245,7 @@ while True:
         DPI = fig.get_dpi()
 
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
-        
+
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.move_to_direction(event[0])
@@ -256,7 +261,7 @@ while True:
         DPI = fig.get_dpi()
 
         fig.set_size_inches(808 * 2 / float(DPI), 808 / float(DPI))
-        
+
         assert 's' in locals(), \
                     'THE GAME DOES NOT EXIST, INITIALIZE FIRST'
         s.undo_last_move()
