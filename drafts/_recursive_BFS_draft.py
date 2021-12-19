@@ -50,18 +50,6 @@ class Node:
 
    def heuristic(self):
     '''hàm heuristic'''
-    if self.origin.direction == 'L':
-        #ưu tiên đi lên(/2) -> trái(-2) -> xuống(+2)
-        self.h = self.child_node_list
-    elif self.origin.direction == 'R':
-        #ưu tiên đi xuống
-        self.g = self.parent.g + 2
-    elif self.origin.direction == 'U':
-        #ưu tiên sang trái
-        self.g = self.parent.g /2
-    elif self.origin.direction == 'D':
-        #ưu tiên sang phải
-        self.g = self.parent.g * 2
     self.h = 0
     return self.h
 
