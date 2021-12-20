@@ -212,7 +212,7 @@ class State():
         by checking all 4 directions around the current_pos.
         '''
         result = list()
-        for direction in ['R', 'L', 'U', 'D']:
+        for direction in ['L', 'U', 'R', 'D']:
             move = Move(self.current_pos.x,
                         self.current_pos.y,
                         direction)
