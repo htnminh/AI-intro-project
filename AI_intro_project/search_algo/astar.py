@@ -1,5 +1,6 @@
 from AI_intro_project.State import State
 from AI_intro_project.Coordinate_and_Move import Coordinate, Move
+from AI_intro_project._Utilities import _Utilities
 from copy import deepcopy
 import time
 MODE_DBG = False
@@ -31,10 +32,10 @@ MODE_DBG = False
 '''
 heuristic variables:
 
-cur: current node
+cur:       current node
 mid_point: self-explanatory
-x, y: Coordinate of START (for Manhattan distance)
-b: a binary variable to detect that a counter-clockwise loop is formed
+x, y:      Coordinate of START (for Manhattan distance)
+b:         a binary variable to detect that cost is changing sign
 '''
 def _astar_heuristic(cur, mid_point, x, y, b):
 
@@ -42,14 +43,21 @@ def _astar_heuristic(cur, mid_point, x, y, b):
     mht_to_midpoint = abs(cur.current_pos.x - mid_point[0]) + abs(cur.current_pos.y - mid_point[1])
     mht_to_START = abs(cur.current_pos.x - x) + abs(cur.current_pos.y - y)
 
-    # inflated heuristic
+    # inflated/highly-biased heuristic
     #   yes, this heuristic function is definitely NOT admissible
     #   it cannot be anyways, in this problem
-    if cur.current_pos.x == mid_point[0] * 2 and cur.current_pos.y == mid_point[1] - 1:
+    if cur.current_pos.x == 0 and cur.current_pos.y == 1:
         b = 1
 
     #h = 2 * (- mht_to_midpoint - mht_to_START + mht_start_to_midpoint)
-    h =  mht_to_midpoint * b + mht_to_START * (1 - b)
+    if b == 0:
+        h = 2 * ((mid_point[0]*2 - cur.current_pos.x) * 4 + mid_point[1]*2 - cur.current_pos.y)  
+        #   ^ random    ^ board_size[0]                           ^ board_size[1]
+        # heavily favors all-L, then all-U
+    else:
+        h = 16 * abs(x - cur.current_pos.x)
+
+
     return h
 
 '''
@@ -69,7 +77,7 @@ exposed func:
   State.tax_after_move            ->  State.current_tax
 
 '''
-def astar(START, OBJECTIVE = 'FEASIBLE'):
+def astar(START, OBJECTIVE = 'FEASIBLE', ):
 
     ''' init basic vars '''
     #############################################
@@ -88,7 +96,7 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
     GOAL.current_pos = Coordinate(*GOAL.board_size)
     GOAL.current_tax = 0
     GOAL.walked_moves = START.walked_moves
-    print("GOAL:", GOAL.current_pos, ',', GOAL.current_tax)
+    #print("GOAL:", GOAL.current_pos, ',', GOAL.current_tax, file = filename)
 
     # starting with f = 0 and mht = 0
     #-- Doesn't matter if is calculated properly.
@@ -103,7 +111,7 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
     #############################################
     # START: where we are finding path to
     #DBG!: print its stats
-    print("START:", _START_point, ',', _START_tax)
+    #print("START:", _START_point, ',', _START_tax)
 
     # OBJECTIVE: set objective:
     #   > OPTIMAL
@@ -180,7 +188,8 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
         # [ Promising node, move there and calculate node.f ]
         for _move in _current.available_moves_list():
             #DBG!: move where?
-            #print("poking:", _move)
+            #if _move == Move(1, 0, 'R'):
+            #    print("poking:", _move)
 
             # temporary node
             temp = deepcopy(_current)
@@ -238,15 +247,31 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
     #    return ["NOT FOUND!"]
 
 if __name__ == "__main__":
-    timer = time.time()
+    with open("AI_intro_project/search_algo/load_all_output/output.txt", "w") as f:
+        # init
+        print('ALL HAIL THE LORD AND SAVIOR:')
+        print('''
+        _
+    .__(.)<   (MEOW)
+     \___)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+''')
+        for _internalVar in _Utilities().load_all(
+            sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+            directory='AI_intro_project/randomized_states',
+            extension='state'
+        ):
+            timer = time.time()
 
-    # init
-    _internalVar = State()
-    _internalVar.initialize_mxn_random()
+            # print basic info
+            print("\nboard size:",_internalVar.board_size, file = f)
+            print(
+                f"start at: ({_internalVar.current_pos.x}, {_internalVar.current_pos.y})",
+                file = f
+            )
+            print("tax:", _internalVar.current_tax, file = f)
+            # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
+            print(*astar(_internalVar, OBJECTIVE = "FEASIBLE"), sep = '\n', file=f)
 
-    # print
-    # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
-    print(*astar(_internalVar, OBJECTIVE = "FEASIBLE"), sep = '\n')
-
-    timer -= time.time()
-    print(f"time: {-timer}")
+            timer -= time.time()
+            print(f"time: {-timer}", file = f)
