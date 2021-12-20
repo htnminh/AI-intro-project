@@ -29,6 +29,9 @@ class Coordinate():
         '''String represent: Coordinate(x, y)'''
         return 'Coordinate(%s, %s)' % (self.x, self.y)
 
+    def __repr__(self) -> str:
+        return self.__str__()
+
     def check_inside(self, m, n) -> bool:
         '''
         Return False if the coordinate is out-of-bounds of
@@ -42,7 +45,7 @@ class Coordinate():
 
     def __eq__(self, other) -> bool:
         '''Return True if the two Coordinates are equal'''
-        return self.x == other.x and self.y == other.y
+        return self.__class__ == other.__class__ and self.x == other.x and self.y == other.y
 
 
 class Move():
@@ -64,9 +67,9 @@ class Move():
         self.direction = direction
         self.coordinate_end = self.coordinate_end_calc()
 
-    def __str__(self, show_coordinate_end=False) -> str:
+    def __repr__(self, show_coordinate_end=False) -> str:
         '''
-        String represent, for example: 
+        String represent, for example:
         Move(1, 2, R) -> Coordinate(1, 3)
         '''
         return 'Move(%s, %s, %s)%s' % (
@@ -76,6 +79,17 @@ class Move():
             ' -> ' + str(self.coordinate_end) \
                 if show_coordinate_end else ''
         )
+
+    def __repr__(self, show_coordinate_end=False) -> str:
+        '''
+        Represent, for example: 
+        Move(1, 2, 'R')
+        '''
+        return "Move(%s, %s, '%s')" % (
+            self.coordinate_start.x,
+            self.coordinate_start.y,
+            self.direction)
+
 
     def coordinate_end_calc(self) -> Coordinate:
         '''
@@ -121,7 +135,7 @@ class Move():
         '''
         return (self.coordinate_start.check_inside(m, n) and
                 self.coordinate_end.check_inside(m, n))
-    
+
     def reverse_direction(self) -> str:
         '''Return the reversed direction, e.g. from L to R'''
         if self.direction == 'R':

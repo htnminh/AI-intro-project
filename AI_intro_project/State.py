@@ -44,6 +44,10 @@ class State():
         '''
         self.initialize_4x4_default()
 
+    def __repr__(self) -> str:
+        return f'State: (size={self.board_size}, #moved={len(self.walked_moves)}, \
+curr-pos={self.current_pos}, curr-tax={self.current_tax})'
+
     def initialize_mxn_blank(self, size=(4,4)) -> None:
         '''Initialize the state without moves'''
         self.board_size = size
@@ -260,4 +264,5 @@ class State():
 if __name__ == '__main__':  
     s = State()
     s.random_play()
+    print(repr(s))
     s.visualize()
