@@ -88,7 +88,7 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
    global z, m
    #điều kiện dừng của recursive
    if node == goalnode:
-    z.append((node.g, node, node.pathway()))
+    z.append((node.g, node))
 
     if node.g <= 0:
         return[node, None]
@@ -100,7 +100,7 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
         return[min(z)[1], None]
     else:
         print('Các idol cứu em với, nó ko duyệt qua được hết tất cả các trường hợp ý')
-        return [Node(0,0) ,None]
+        return [Node(Move(0,0,'None')) ,None]
 
 
    #list lưu lại khi expand 1 node
