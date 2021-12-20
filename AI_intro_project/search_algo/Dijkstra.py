@@ -81,17 +81,15 @@ def astar(start: State):
 
         # stop if popped goal node
         if _current.current_pos == Coordinate(*_goal):
+            # FEASIBLE: tax must be the same as,
+            # or slightly bigger than START tax. 
+            # If found, break immediately.
             if _current.current_tax <= 0:
-                print("ping! ->", _current.current_tax)
-                if _current.current_tax < _min_cost:
-                    print("found better path")
-                    _min_cost = _current.current_tax
-                    _min_path = deepcopy(_current)
-                    print("tax:", _min_cost)
-                    if start.board_size == (4, 4):
-                        if _min_cost < -2: break
-                    if start.board_size == (6, 6):
-                        if _min_cost < -104: break # -194, -206 
+                print("found path!")
+
+                # borrow _max_path for easier print
+                _min_path = _current
+                break
 
                 continue
     
