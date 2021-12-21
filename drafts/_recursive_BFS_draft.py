@@ -123,7 +123,7 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
    #vòng recursive, chọn node có f nhỏ nhất trong node con, nếu node.f mới lớn hơn f_limit, cập nhật f_limit
    while True:
       if len(successors) == 0:
-        return [None, node.f]
+        return [None, math.inf]
       heapify(successors)
       best = heappop(successors)
       state.current_pos = best[1].origin.coordinate_end
