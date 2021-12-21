@@ -141,20 +141,19 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
     while True:
         if len(successors) == 0:
             return [None, math.inf]
-    heapify(successors)
-    best = heappop(successors)
-    state.current_pos = best[1].origin.coordinate_end
-    if best[1].f > f_limit:
-        return [None, best[1].f]
-    if len(successors) != 0:
-        alternative = nsmallest(1, successors)[0][0]
-    else:
-        alternative = math.inf
+        heapify(successors)
+        best = heappop(successors)
+        state.current_pos = best[1].origin.coordinate_end
+        if best[1].f > f_limit:
+            return [None, best[1].f]
+        if len(successors) != 0:
+            alternative = nsmallest(1, successors)[0][0]
+        else:
+            alternative = math.inf
 
-    [result,best[1].f] = RBFS(state, best[1], goalnode, min(f_limit, alternative))
-
-    if result != None:
-        return [result, None]
+        [result,best[1].f] = RBFS(state, best[1], goalnode, min(f_limit, alternative))
+        if result != None:
+            return [result, None]
 
 
 if __name__ == '__main__':
