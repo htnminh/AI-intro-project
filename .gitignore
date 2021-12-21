@@ -3,6 +3,7 @@
 *.log
 *.gz
 *.toc
+
 # cache
 **/__pycache__
 **/.pytest_cache
@@ -23,3 +24,6 @@ build/
 
 # ignore VSC CodeRunner temp
 tempCodeRunnerFile.*
+
+# ignore my testing stuff
+*_test.py
