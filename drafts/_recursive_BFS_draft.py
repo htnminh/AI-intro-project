@@ -1,4 +1,3 @@
-
 from AI_intro_project.State import State
 from AI_intro_project.Coordinate_and_Move \
                 import Coordinate, Move
@@ -49,7 +48,7 @@ class Node:
    def heuristic(self,state: State):
     '''hàm heuristic'''
     #h =  g *( distance from node to goal)  (idol nào cứu giúp e)
-    self.h = self.g * ((abs(self.origin.coordinate_end.x - state.board_size[0]) + abs(self.origin.coordinate_end.y -state.board_size[1])))
+    self.h = self.g*((abs(self.origin.coordinate_end.x - state.board_size[0]) + abs(self.origin.coordinate_end.y -state.board_size[1])))
     #phần này e ko bt làm ntn
     #m = state.board_size[0] - self.origin.coordinate_end.x
     #n = state.board_size[1] - self.origin.coordinate_end.y
@@ -86,6 +85,7 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
    '''thuật toán trả lại 2 giá trị là [node , f_limit mới]'''
    print("\nIn RBFS Function with node ", node, " with node's f value = ", node.f , " and f-limit = ", f_limit)
    global z, m
+   m += 1
    #điều kiện dừng của recursive
    if node == goalnode:
     z.append((node.g, node))
@@ -134,8 +134,6 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
       else:
         alternative = math.inf
       [result,best[1].f] = RBFS(state, best[1], goalnode, min(f_limit, alternative))
-
-      m +=1
       if result != None:
         return [result, None]
 
@@ -146,13 +144,14 @@ if __name__ == '__main__':
         directory='AI_intro_project/randomized_states',
         extension='state'
     )
+    t = []
     #ko giải được 41?
-    for i in range(41):
+    for i in range(50):
       z = []
       m = 0
       s = u[i]
       #s =State()
-      #s.initialize_8x8_default()
+      #s.initialize_4x4_default()
 
       startnode = Node(s.walked_moves[-1], s.current_tax)
       #goalnode = Node(Move(s.board_size[0], s.board_size[1]-1, 'R') , 0)
@@ -165,9 +164,15 @@ if __name__ == '__main__':
             s.walked_moves.append(k)
         s.current_tax = solution[0].g
       else:
-        print('Help')
+        for k in min(z)[1].pathway():
+            s.walked_moves.append(k)
+        s.current_tax = min(z)[0]
 
 
-      print(len(z))
-      print(m)
-      s.visualize()
+      print('Số lần đến đích: ', len(z))
+      print('Số vòng recursive thực hiện', m)
+      t.append((m, len(z), len(s.walked_moves), s.current_tax))
+
+      #s.visualize()
+
+    print(t)
