@@ -6,17 +6,40 @@ import time
 MODE_DBG = False
 
 '''
-        _
-    .__(.)<   (MEOW)
-     \___)
-~~~~~~~~~~~~~~~~~~~~~~~~~                                                        
+	
+                        /|/|/|\\|\|                                       
+                      |  | | | | | |\                                   
+                    | | |  | || || | |\                                  
+                   /  | | |  || || ||||                                
+                   || | | |  | | |  | |\                                
+                 |  | | |  || ||  | | | \                                
+                /  |  | |  ||  | || | ||\                               
+                | | | | | || |  ||   | | |                              
+                | | |    | | || |  | | |||\                             
+               || |  | | | |  | || | | ||| \                           
+              ||  |    |   | | ||| |     | |                            
+              ||| | | |  | | |  || | | ||  |\                           
+              | | | | |  |   | || |||| ||| |\                           
+             /|  |  | | |  |  | | | || | ||  |                            
+             |||| | |__ |__| |__|   || | || ||\                         
+            |_| _ --,   ,.. ,   ,.... _|_|_ || |\                       
+            /,   ,..,    ,.,    ,.. ,   ,..-|_\| |                       
+         _ /.,    ,.,    ,,     ,...   ,...,   .\\                        
+      _ /  ,..,    ,     ,      ,.,    ,.,    _ ...\\\\                 
+    _/       ',,   ,     ,       ,     .       \  .   .\\\\             
+  /     .       _--                       -\    \  .   ..  \\\\\           
+ /    O .   __ /    _/                 ____|    \       .       \\\\\\\  
+ /      |---  /    /---__________------    |    |---____            |  \  
+/    ,; /     |    |                       |nn  |       ---____     |  |  
+|,,,','/      /nn  |                                            ---|   |   
+ ;,,;/                                                     _______/   /   
+                                                   --------_________/                                                        
 '''
 def dfs_prep(START: State):
     ''' init basic vars '''
     #############################################
     # Auxiliary vars for reduced querying need
     global _START_point, _board_size, _START_tax, GOAL
-
 
     _board_size = START.board_size
     _START_point = START.current_pos
@@ -39,16 +62,19 @@ def dfs_prep(START: State):
     #DBG!: print its stats
     print("START:", _START_point, ',', _START_tax)
 
-    
     dfs(GOAL)
     return GOAL.path[::-1]
 
+#################################################
+# DFS magics
 def dfs(cur):
+    # ABORT signal var
     global exiting
     if not exiting and cur.available_moves_list() is not None:        
-        #DBG!: move where?
         for _move in cur.available_moves_list():
-            print(_move)
+            # ABORT signal
+            if exiting: break
+
             # temporary node
             temp = deepcopy(cur)
 
@@ -78,11 +104,12 @@ if __name__ == "__main__":
     # init
     _internalVar = State()
     _internalVar.initialize_6x6_default()
+
+    # signal DFS to ABORT: found solution
     global exiting
     exiting = False
 
     # print
-    # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "MORALITY")
     print(*dfs_prep(_internalVar), sep = '\n')
 
     timer -= time.time()
