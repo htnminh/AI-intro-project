@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from AI_intro_project.State import State
 from AI_intro_project.Coordinate_and_Move import Coordinate, Move
 from AI_intro_project._Utilities import _Utilities
@@ -86,13 +88,13 @@ def _astar_heuristic_FEASIBLE(cur, mid_point, x, y, b):
 
     #h = 2 * (- mht_to_midpoint - mht_to_START + mht_start_to_midpoint)
     if b == 0:
-        h = 2 * ((mid_point[0]*2 - cur.current_pos.x) * 4 + mid_point[1]*2 - cur.current_pos.y)  
+        h = 2 * ((mid_point[0]*2 - cur.current_pos.x) + 4 *(mid_point[1]*2 - cur.current_pos.y))  
         #   ^ random    ^ board_size[0]                           ^ board_size[1]
         # heavily favors all-L, then all-U
     else:
         h = 8 * (mid_point[0] * mid_point[1] *4 - abs(x - cur.current_pos.x) - abs(y - cur.current_pos.y))
         #   ^ random   ^ bsize[0]  *  ^ bsize[1]      | START.x - cur.x |            | START.y - cur.y |
-        # heavily favors going as quick as possible to START
+        # heavily favors going as far as possible to START
 
     return h
 
@@ -128,13 +130,14 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
 
     ''' init basic vars '''
     #############################################
-    # Auxiliary vars for reduced querying need
+    # Auxiliary vars
 
     _board_size = START.board_size
     _mid_point = (_board_size[0]/2, _board_size[1]/2)
     _START_point = START.current_pos
     _START_tax = START.current_tax
     _max_path = None
+    ite = 0
 
     #############################################
     # GOAL: where we start our path-finding:
@@ -235,6 +238,9 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
         ###############################################
         # [ Promising node, move there and calculate node.f ]
         for _move in _current.available_moves_list():
+            #DBG!: iteration counter
+            ite += 1
+
             #DBG!: move where?
             #if _move == Move(1, 0, 'R'):
             #    print("poking:", _move)
@@ -289,13 +295,15 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
             path.append(_max_path._move)
             _max_path = _max_path.parent
 
+        #DBG!: print iteration counter
+        print(_board_size, ite)
         return path
 
-    except NameError:
+    except:
         return ["NOT FOUND!"]
 
 if __name__ == "__main__":
-    with open("AI_intro_project/search_algo/load_all_output/output.txt", "w") as f:
+    with open("AI_intro_project/search_algo/load_all_output/output.txt", "a") as f:
         # init
         print('ALL HAIL THE LORD AND SAVIOR:')
         print(
@@ -310,11 +318,14 @@ if __name__ == "__main__":
   ///  ///   --
 '''
     )
-        for _internalVar in _Utilities().load_all(
+        #for _internalVar in _Utilities().load_all(
+        _internalVar = _Utilities().load_randomly(
             sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
             directory='AI_intro_project/randomized_states',
             extension='state'
-        ):
+        #):
+        )
+        if 1:
             timer = time.time()
 
             # print basic info
