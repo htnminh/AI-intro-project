@@ -13,7 +13,7 @@ class _Utilities():
     def __init__(self) -> None:
         pass
 
-    def numbers_of_moves_calc(self, size) -> tuple[int, int]:
+    def numbers_of_moves_calc(self, size):
         '''
         GIVEN: size
         calculate the number of forced moves of the 2 boards
@@ -39,7 +39,7 @@ class _Utilities():
             s = pkl.load(f)
         return s
     
-    def load_randomly(self, sizes, directory, extension) -> State:
+    def load_randomly(self, sizes, directory, extension):
         '''
         GIVEN: sizes, directory, extension
         return any state in the directory, randomly
@@ -75,7 +75,7 @@ class _Utilities():
 
                 self.load_and_visualize(file_path=file_path)
 
-    def load_all(self, sizes, directory, extension) -> list[State]:
+    def load_all(self, sizes, directory, extension):
         '''
         GIVEN: sizes, directory, extension
         return a list of all states in the directory
