@@ -20,7 +20,7 @@ MODE_DBG = False
 #   [ SUMMARY ]
 # Starting point: GOAL, with cost = 0
 #
-# Objective: find path to Start, with either moed:
+# Objective: find path to Start, with either mode:
 #   > OPTIMAL: Cost at START-point is highest possible.
 #              (which corresponds to that cost at GOAL is lowest)
 #   > FEASIBLE: Cost at START-point is the same as, or slightly higher.
