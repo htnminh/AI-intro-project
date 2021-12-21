@@ -6,29 +6,52 @@ import time
 MODE_DBG = False
 
 '''
-        _
-    .__(.)<   (MEOW)
-     \___)
-~~~~~~~~~~~~~~~~~~~~~~~~~                                                        
+@@@@@@@@@@@@@@@@@@@@@**^^""~~~"^@@^*@*@@**@@@@@@@@@
+@@@@@@@@@@@@@*^^'"~   , - ' '; ,@@b. '  -e@@@@@@@@@
+@@@@@@@@*^"~      . '     . ' ,@@@@(  e@*@@@@@@@@@@
+@@@@@^~         .       .   ' @@@@@@, ~^@@@@@@@@@@@
+@@@~ ,e**@@*e,  ,e**e, .    ' '@@@@@@e,  "*@@@@@'^@
+@',e@@@@@@@@@@ e@@@@@@       ' '*@@@@@@    @@@'   0
+@@@@@@@@@@@@@@@@@@@@@',e,     ;  ~^*^'    ;^~   ' 0
+@@@@@@@@@@@@@@@^""^@@e@@@   .'           ,'   .'  @
+@@@@@@@@@@@@@@'    '@@@@@ '         ,  ,e'  .    ;@
+@@@@@@@@@@@@@' ,&&,  ^@*'     ,  .  i^"@e, ,e@e  @@
+@@@@@@@@@@@@' ,@@@@,          ;  ,& !,,@@@e@@@@ e@@
+@@@@@,~*@@*' ,@@@@@@e,   ',   e^~^@,   ~'@@@@@@,@@@
+@@@@@@, ~" ,e@@@@@@@@@*e*@*  ,@e  @@""@e,,@@@@@@@@@
+@@@@@@@@ee@@@@@@@@@@@@@@@" ,e@' ,e@' e@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@" ,@" ,e@@e,,@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@~ ,@@@,,0@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@,,@@@@@@@@@@@@@@@@@@@@@@@@@                                                     
 '''
 ##########################
 #   [ SUMMARY ]
 # Starting point: GOAL, with cost = 0
-# Objective: find path to Start, with either:
-#   > OPTIMAL: Cost at START-point is highest possible.
-#              (which corresponds to that cost at GOAL is lowest)
+# Objective: find path to Start, with:
 #   > FEASIBLE: Cost at START-point is the same as, or slightly higher.
 #               (which corresponds to that cost at GOAL is approaching 0)
 # How:
 #   > Start from GOAL node. Find path to START node with either obj above.
-#   > A*: f = g + h, where:
+#   > A*: f_limit >= f = g + h, where:
 #       f: A* function.
 #       g: cost accumulated at current node.
-#       h: Manhattan distance from Node to the "middle" of the board.
-#          --> aim: favors path that distances itself from the middle point.
-#          ? > why: a counter-clockwise loop is the only way to "cheat" tax.
+#       h(FEASIBLE): a function that heavily bias the biggest outer-loop possible
+#          --> aim: speed up finding possible path
+#          --> char: + still struggles with big board where it should be quick to find.
+#                    + takes MUCH longer than OPTIMAL (or Dijkstra) and as
+#                      much space for NOT_FOUND scenario.
+#                    + is not very space efficient, considering this is 
+#                      pretty much cheating the way thru.
+#       f_limit: Start at 8, iterate by 8.
 #
-##########################
+#     NOTE: IDA* does not support OPTIMAL mode.
+#
+###################################
+'     !FYI: IT IS VERY SLOW.'
+'           YOU HAVE BEEN WARNED'
+
+
+
 '''
 heuristic variables:
 
@@ -55,8 +78,9 @@ def _astar_heuristic(cur, mid_point, x, y, b):
         #   ^ random    ^ board_size[0]                           ^ board_size[1]
         # heavily favors all-L, then all-U
     else:
-        h = 16 * abs(x - cur.current_pos.x)
-
+        h = 8 * (mid_point[0] * mid_point[1] *4 - abs(x - cur.current_pos.x) - abs(y - cur.current_pos.y))
+        #   ^ random   ^ bsize[0]  *  ^ bsize[1]      | START.x - cur.x |            | START.y - cur.y |
+        # heavily favors going as quick as possible to START
 
     return h
 
@@ -77,7 +101,7 @@ exposed func:
   State.tax_after_move            ->  State.current_tax
 
 '''
-def astar(START, OBJECTIVE = 'FEASIBLE', ):
+def astar(START):
 
     ''' init basic vars '''
     #############################################
@@ -112,12 +136,6 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
     #DBG!: print its stats
     #print("START:", _START_point, ',', _START_tax)
 
-    # OBJECTIVE: set objective:
-    #   > OPTIMAL
-    #   > FEASIBLE
-    # (set it in main)
-    _OBJECTIVE = OBJECTIVE
-
     #############################################
     # variables supporting A* function
 
@@ -131,13 +149,19 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
     # _moral_cost/FEASIBLE only: reduce querying START.current_tax
     _moral_cost = _START_tax
 
-    # IDA* exclusive: f limiting
-    f_limit = 32
+    # IDA* exclusive: 
+    # f limiting
+    f_limit = 8
 
+    # path checking: 
+    #   ABORT immediately if f_limit > max(all_of f)
+    #   and no path was found
+    f_max = 0
+    
     ''' run IDA* until f_limit reached '''
     # path is not found yet, increment f_limit
     while _max_path is None:
-
+        print(f_limit)
         # there is node in _open
         while _open:
             ##################################################
@@ -157,33 +181,15 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
             
             # stop if popped START node --> we found a path to it
             if _current.current_pos == _START_point:
-                if _OBJECTIVE == "OPTIMAL":
-                    # OPTIMAL: tax must be highest by our path-finding way
-                    if _current.current_tax >= _START_tax:
-                    
-                        # found a feasible solution, ping it~!
-                        print("ping! ->", _current.current_tax)
-                        if _current.current_tax >= _max_cost:
-                            # found better path, save it
-                            print("found better path, ", end = '')
-                            _max_cost = _current.current_tax
-                            _max_path = deepcopy(_current)
-                            print("tax:", -_max_cost)
-                            print(_max_path.parent)
-                            #if _min_cost <= -4: break
-                    
-                    continue
-                
-                elif _OBJECTIVE == "FEASIBLE":
-                    # FEASIBLE: tax must be the same as,
-                    # or slightly bigger than START tax. 
-                    # If found, break immediately.
-                    if _current.current_tax >= _moral_cost:
-                        print("found path!")
+                # FEASIBLE: tax must be the same as,
+                # or slightly bigger than START tax. 
+                # If found, break immediately.
+                if _current.current_tax >= _moral_cost:
+                    print("found path!")
 
-                        # borrow _max_path for easier print
-                        _max_path = _current
-                        break
+                    # borrow _max_path for easier print
+                    _max_path = _current
+                    break
 
             # get available moves, skip this node if none is found
             if _current.available_moves_list() is None:
@@ -226,6 +232,9 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
                 # f: A* function
                 temp.f = temp.g + temp.h
 
+                # save ABORT condition f_max
+                if temp.f > f_max: f_max = temp.f
+
                 # STOP exploring if exceeding f_limit
                 if temp.f > f_limit:
                     continue
@@ -243,21 +252,30 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
                 # so, append it to _open.
                 _open.append(temp)
 
+        #################################################
         # while: f_limit reached, open empty, but no path found.
-        # iterate by +16
+
+        # ABORT: not found solution in regular A*.
+        #   oh sweet sweet Alabama the wait.
+        if f_limit > f_max: break
+
+        # re-run the whole thing,
+        # iterate by +8
         _open.append(GOAL)
-        f_limit += 16
+        f_limit += 8
 
+    # return-inator
     path = []
-    while _max_path.parent is not None:
-        path.append(_max_path._move)
-        _max_path = _max_path.parent
+    try:
+        while _max_path.parent is not None:
+            path.append(_max_path._move)
+            _max_path = _max_path.parent
 
-    return path
+        return path
 
+    except NameError:
+        return ["NOT FOUND!"]
 
-    #except:
-    #    return ["NOT FOUND!"]
 
 if __name__ == "__main__":
     if 0:
@@ -276,14 +294,13 @@ if __name__ == "__main__":
     timer = time.time()
 
     # print basic info
-    print("board size:",_internalVar.board_size, file = f)
+    print("board size:",_internalVar.board_size)
     print(
-        f"start at: {_internalVar.current_pos.x}, {_internalVar.current_pos.y}",
-        file = f
+        f"start at: {_internalVar.current_pos.x}, {_internalVar.current_pos.y}"
     )
-    print("tax:", _internalVar.current_tax, file = f)
+    print("tax:", _internalVar.current_tax)
     # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
-    print(*astar(_internalVar, OBJECTIVE = "FEASIBLE"), sep = '\n', file=f)
+    print(*astar(_internalVar, OBJECTIVE = "FEASIBLE"), sep = '\n')
 
     timer -= time.time()
-    print(f"time: {-timer}", file = f)
+    print(f"time: {-timer}")
