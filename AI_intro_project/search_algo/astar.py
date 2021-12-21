@@ -318,14 +318,12 @@ if __name__ == "__main__":
   ///  ///   --
 '''
     )
-        #for _internalVar in _Utilities().load_all(
-        _internalVar = _Utilities().load_randomly(
-            sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
-            directory='AI_intro_project/randomized_states',
-            extension='state'
-        #):
-        )
-        if 1:
+
+        for _internalVar in _Utilities().load_all(
+                sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+                directory='AI_intro_project/randomized_states',
+                extension='state'):
+
             timer = time.time()
 
             # print basic info
@@ -336,7 +334,15 @@ if __name__ == "__main__":
             )
             print("tax:", _internalVar.current_tax, file = f)
             # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
-            print(*astar(_internalVar, OBJECTIVE = "FEASIBLE"), sep = '\n', file=f)
+            print(*(moves:=astar(_internalVar, OBJECTIVE = "FEASIBLE")), sep = '\n', file=f)
+
+
+            for move in moves:
+                _internalVar.move_on_move(move)
+            
+            _internalVar.visualize()
 
             timer -= time.time()
             print(f"time: {-timer}", file = f)
+
+            

@@ -103,7 +103,8 @@ if __name__ == "__main__":
 
     # init
     _internalVar = State()
-    _internalVar.initialize_6x6_default()
+    # _internalVar.initialize_6x6_default()
+    _internalVar.initialize_4x4_default()
 
     # signal DFS to ABORT: found solution
     global exiting
