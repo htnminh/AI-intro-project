@@ -70,14 +70,7 @@ def test_state_random_initialize():
 
 # create fixed for-test variables for 4x4 board
 var_test_state = State()
-var_test_state.board_size = board_size
-var_test_state.walked_moves = [
-    Move(0, 0, 'R'),
-    Move(0, 1, 'R')
-]
-var_test_state.current_pos = Coordinate(0, 2)
-var_test_state.current_tax = 4
-
+var_test_state.initialize_4x4_default()
 
 def test_state_check_not_duplicate_move():
     assert not var_test_state\
@@ -96,11 +89,8 @@ def test_state_available_moves_calc():
         'Test State.available_moves_calc failed at pos = (0, 2)'
 
     # take Move(0, 2, D)
-    var_test_state.walked_moves.append(Move(0, 2, 'D'))
-
-    var_test_state.current_pos = Move(0, 2, 'D').coordinate_end
-    var_test_state.current_tax *= 2
+    var_test_state.move_to_direction('D')
 
     assert var_test_state.available_moves_list() \
-        == [Move(1, 2, 'R'), Move(1, 2, 'L'), Move(1, 2, 'D')], \
+        == [Move(1, 2, 'L'), Move(1, 2, 'R'), Move(1, 2, 'D')], \
         'Test State.available_moves_calc failed at pos = (1, 2)'
