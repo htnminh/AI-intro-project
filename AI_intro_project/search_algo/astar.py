@@ -6,40 +6,75 @@ import time
 MODE_DBG = False
 
 '''
-        _
-    .__(.)<   (MEOW)
-     \___)
-~~~~~~~~~~~~~~~~~~~~~~~~~                                                        
+  /\ ___ /\ 
+ (  o   o  )
+  \  >#<  /
+  /       \ 
+ /         \       ^
+|           |     //
+ \         /    //
+  ///  ///   --
 '''
+
 ##########################
 #   [ SUMMARY ]
 # Starting point: GOAL, with cost = 0
-# Objective: find path to Start, with either:
+#
+# Objective: find path to Start, with either moed:
 #   > OPTIMAL: Cost at START-point is highest possible.
 #              (which corresponds to that cost at GOAL is lowest)
 #   > FEASIBLE: Cost at START-point is the same as, or slightly higher.
 #               (which corresponds to that cost at GOAL is approaching 0)
+#
 # How:
 #   > Start from GOAL node. Find path to START node with either obj above.
+#     (Basically finding backwardly)
 #   > A*: f = g + h, where:
 #       f: A* function.
 #       g: cost accumulated at current node.
-#       h: Manhattan distance from Node to the "middle" of the board.
+#       h(OPTIMAL): Manhattan distance from Node to the "middle" of the board.
 #          --> aim: favors path that distances itself from the middle point.
 #          ? > why: a counter-clockwise loop is the only way to "cheat" tax.
+#          --> char: + is very slow and space-inefficient (need to expand most nodes).
+#               ^    + should find the actual optimal, or slightly suboptimal 
+#               |      path very quickly, however the algo does not know it.
+#               |      -> by brute-forcing, OPTIMAL is a path that covers most of
+#               |         the board and loops counter-clockwise from inside out.
+#               |
+#               | <--- cannot calculate the minimum (OPTIMAL) cost mathematically
+#                      due to time constraint (only know about best 4x4 & 6x6 2wks prior).
 #
+#       h(FEASIBLE): a function that heavily bias the biggest outer-loop possible
+#          --> aim: speed up finding possible path
+#          --> char: + is faster than OPTIMAL, however still struggles with big board 
+#                      where it should be quick to find.
+#                    + takes as long as OPTIMAL (or Dijkstra) and as much space for
+#                      NOT_FOUND scenario.
+#                    + is not very space efficient considering this is 
+#                      pretty much cheating the way thru.
+#          --> illustration on 4x4:
+#
+#            ------> S   D   L
+#            D   L  D/L  L   U   
+#            D   .   D   .   U 
+#            D   .   R   R   U
+#            R   R   R   R   G
+#
+# 
+# 
 ##########################
 '''
-heuristic variables:
+FEASIBLE heuristic 
 
-cur:       current node
-mid_point: self-explanatory
-x, y:      Coordinate of START (for Manhattan distance)
-b:         a binary variable to detect that cost is changing sign
+variables:
+    cur       || current node
+    mid_point || (of the board)
+    x, y      || Coordinate of START (for Manhattan distance)
+    b         || a binary variable to detect that cost is changing sign
 '''
-def _astar_heuristic(cur, mid_point, x, y, b):
+def _astar_heuristic_FEASIBLE(cur, mid_point, x, y, b):
 
-    # manhattan of current node
+    # manhattan of current node, no need here (yet/maybe?)
     mht_to_midpoint = abs(cur.current_pos.x - mid_point[0]) + abs(cur.current_pos.y - mid_point[1])
     mht_to_START = abs(cur.current_pos.x - x) + abs(cur.current_pos.y - y)
 
@@ -55,10 +90,22 @@ def _astar_heuristic(cur, mid_point, x, y, b):
         #   ^ random    ^ board_size[0]                           ^ board_size[1]
         # heavily favors all-L, then all-U
     else:
-        h = 16 * abs(x - cur.current_pos.x)
-
+        h = 8 * (mid_point[0] * mid_point[1] *4 - abs(x - cur.current_pos.x) - abs(y - cur.current_pos.y))
+        #   ^ random   ^ bsize[0]  *  ^ bsize[1]      | START.x - cur.x |            | START.y - cur.y |
+        # heavily favors going as quick as possible to START
 
     return h
+
+'''
+OPTIMAL heuristic:
+
+variables:
+    cur
+    r
+    s
+'''
+def _astar_heuristic_OPTIMAL(cur):
+    pass
 
 '''
 A* search
@@ -77,7 +124,7 @@ exposed func:
   State.tax_after_move            ->  State.current_tax
 
 '''
-def astar(START, OBJECTIVE = 'FEASIBLE', ):
+def astar(START, OBJECTIVE = 'FEASIBLE'):
 
     ''' init basic vars '''
     #############################################
@@ -117,6 +164,10 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
     #   > OPTIMAL
     #   > FEASIBLE
     # (set it in main)
+    if OBJECTIVE not in ['FEASIBLE', 'OPTIMAL']:
+        print('ABORT: please check OBJECTIVE typo')
+        pass
+    
     _OBJECTIVE = OBJECTIVE
 
     #############################################
@@ -154,8 +205,7 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
         if _current.current_pos == _START_point:
             if _OBJECTIVE == "OPTIMAL":
                 # OPTIMAL: tax must be highest by our path-finding way
-                if _current.current_tax >= _START_tax:
-                
+                if _current.current_tax >= _START_tax:                
                     # found a feasible solution, ping it~!
                     print("ping! ->", _current.current_tax)
                     if _current.current_tax >= _max_cost:
@@ -165,8 +215,6 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
                         _max_path = deepcopy(_current)
                         print("tax:", -_max_cost)
                         print(_max_path.parent)
-                        #if _min_cost <= -4: break
-                
                 continue
             
             elif _OBJECTIVE == "FEASIBLE":
@@ -210,7 +258,8 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
             temp.g = temp.tax_after_move(_move) 
 
             # h: heuristic function, explanation above
-            temp.h = _astar_heuristic(
+            h_func = "_astar_heuristic_" + OBJECTIVE
+            temp.h = globals()[h_func](
                 temp,
                 _mid_point,
                 _START_point.x,
@@ -234,28 +283,33 @@ def astar(START, OBJECTIVE = 'FEASIBLE', ):
             # so, append it to _open.
             _open.append(temp)
 
+    try:
+        path = []
+        while _max_path.parent is not None:
+            path.append(_max_path._move)
+            _max_path = _max_path.parent
 
-    path = []
-    while _max_path.parent is not None:
-        path.append(_max_path._move)
-        _max_path = _max_path.parent
+        return path
 
-    return path
-
-
-    #except:
-    #    return ["NOT FOUND!"]
+    except NameError:
+        return ["NOT FOUND!"]
 
 if __name__ == "__main__":
     with open("AI_intro_project/search_algo/load_all_output/output.txt", "w") as f:
         # init
         print('ALL HAIL THE LORD AND SAVIOR:')
-        print('''
-        _
-    .__(.)<   (MEOW)
-     \___)
-~~~~~~~~~~~~~~~~~~~~~~~~~
-''')
+        print(
+'''
+  /\ ___ /\ 
+ (  o   o  )
+  \  >#<  /
+  /       \ 
+ /         \       ^
+|           |     //
+ \         /    //
+  ///  ///   --
+'''
+    )
         for _internalVar in _Utilities().load_all(
             sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
             directory='AI_intro_project/randomized_states',
