@@ -173,6 +173,6 @@ if __name__ == '__main__':
       print('Số vòng recursive thực hiện', m)
       t.append((m, len(z), len(s.walked_moves), s.current_tax))
 
-    #   s.visualize()
+      s.visualize()
 
     print(t)

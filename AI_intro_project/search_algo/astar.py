@@ -334,7 +334,7 @@ if __name__ == "__main__":
             )
             print("tax:", _internalVar.current_tax, file = f)
             # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
-            print(*(moves:=astar(_internalVar, OBJECTIVE = "FEASIBLE")), sep = '\n', file=f)
+            print(*(moves:=astar(_internalVar, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
 
 
             for move in moves:
@@ -344,5 +344,3 @@ if __name__ == "__main__":
 
             timer -= time.time()
             print(f"time: {-timer}", file = f)
-
-            
