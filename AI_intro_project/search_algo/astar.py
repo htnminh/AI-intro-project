@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import matplotlib.pyplot as plt
 from AI_intro_project.State import State
 from AI_intro_project.Coordinate_and_Move import Coordinate, Move
 from AI_intro_project._Utilities import _Utilities
@@ -323,15 +323,22 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         return []
 
 if __name__ == "__main__":
-    t_limit = 30
+    # TIME LIMIT
+    t_limit = 60
 
+    # PATH
+    path = 'AI_intro_project/_s_astar_solved_state_images/'
+
+    # _Utils.load_all()
     with open("AI_intro_project/search_algo/load_all_output/output-astar.txt", "w") as f:
-        for _internalVar in _Utilities().load_all(
+        _var_utils_loadall = _Utilities().load_all(
             sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
             directory='AI_intro_project/randomized_states',
             extension='state'
-        ):
-            
+        )
+
+        for idx, _internalVar in enumerate(_var_utils_loadall):
+            # start timer
             timer = time.time()
 
             # print basic info
@@ -348,10 +355,12 @@ if __name__ == "__main__":
             print(*(moves:=astar(_internalVar, ofile = f, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
 
 
-            #for move in moves:
-            #    _internalVar.move_on_move(move)
+            for move in moves:
+                _internalVar.move_on_move(move)
             
-            #_internalVar.visualize()
-
+            _internalVar._plt_prepare()
+            plt.savefig(path + str(idx).zfill(2))
+            plt.clf()
+            
             timer -= time.time()
             print(f"time: {-timer}", file = f)
