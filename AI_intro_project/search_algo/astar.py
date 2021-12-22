@@ -74,25 +74,24 @@ variables:
     x, y      || Coordinate of START (for Manhattan distance)
     b         || a binary variable to detect that cost is changing sign
 '''
-def _astar_heuristic_FEASIBLE(cur, mid_point, x, y, b):
+def _astar_heuristic_FEASIBLE(cur, mid_point, x, y):
 
     # manhattan of current node, no need here (yet/maybe?)
-    mht_to_midpoint = abs(cur.current_pos.x - mid_point[0]) + abs(cur.current_pos.y - mid_point[1])
-    mht_to_START = abs(cur.current_pos.x - x) + abs(cur.current_pos.y - y)
+    #mht_to_midpoint = abs(cur.current_pos.x - mid_point[0]) + abs(cur.current_pos.y - mid_point[1])
+    #mht_to_START = abs(cur.current_pos.x - x) + abs(cur.current_pos.y - y)
 
     # inflated/highly-biased heuristic
     #   yes, this heuristic function is definitely NOT admissible
     #   it cannot be anyways, in this problem
-    if cur.current_pos.x == 0 and cur.current_pos.y == 1:
-        b = 1
+    if cur.current_pos.x <= mid_point[0] and cur.current_pos.y <= mid_point[1]:
+        cur.b = 1
 
     #h = 2 * (- mht_to_midpoint - mht_to_START + mht_start_to_midpoint)
-    if b == 0:
-        h = 2 * ((mid_point[0]*2 - cur.current_pos.x) + 4 *(mid_point[1]*2 - cur.current_pos.y))  
-        #   ^ random    ^ board_size[0]                           ^ board_size[1]
+    if cur.b == 0:
+        h = mid_point[0]*mid_point[1]*4 + 4 * cur.current_pos.x - (mid_point[0]*2 - cur.current_pos.x) - (mid_point[1]*2 - cur.current_pos.y)  
         # heavily favors all-L, then all-U
     else:
-        h = 8 * (mid_point[0] * mid_point[1] *4 - abs(x - cur.current_pos.x) - abs(y - cur.current_pos.y))
+        h = 9 * (mid_point[0]*2 + mid_point[1]*2) - 2 * abs(x - cur.current_pos.x) - 2 ** abs(y - cur.current_pos.y)
         #   ^ random   ^ bsize[0]  *  ^ bsize[1]      | START.x - cur.x |            | START.y - cur.y |
         # heavily favors going as far as possible to START
 
@@ -126,7 +125,7 @@ exposed func:
   State.tax_after_move            ->  State.current_tax
 
 '''
-def astar(START, OBJECTIVE = 'FEASIBLE'):
+def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
 
     ''' init basic vars '''
     #############################################
@@ -138,6 +137,7 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
     _START_tax = START.current_tax
     _max_path = None
     ite = 0
+    t_limit_r = False
 
     #############################################
     # GOAL: where we start our path-finding:
@@ -180,6 +180,9 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
     _open = list()
     _open.append(GOAL)
 
+    # all path found up to breakpoint
+    _all_path_tax = list()
+
     # _max_cost/OPTIMAL only: the highest possible COST found, following objective 
     _max_cost = _START_tax
 
@@ -188,6 +191,12 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
 
     ''' run A* until break, expanding all nodes '''
     while _open:
+        # ABORT: out of time
+        if time.time() - t_start > t_limit: 
+            print(f"reached time limit: {t_limit}", file = ofile)
+            print(f"reached time limit: {t_limit}")
+            t_limit_r = True
+            break
 
         ##################################################
         # [ pick & pop node with lowest node.f for expansion ]
@@ -214,10 +223,15 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
                     if _current.current_tax >= _max_cost:
                         # found better path, save it
                         print("found better path, ", end = '')
-                        _max_cost = _current.current_tax
-                        _max_path = deepcopy(_current)
                         print("tax:", -_max_cost)
                         print(_max_path.parent)
+                        _max_cost = _current.current_tax
+                        _max_path = deepcopy(_current)
+                    
+                    _last_cost = _current.current_tax
+                    _all_path_tax.append(_last_cost)
+                    if _last_cost == min(_all_path_tax):
+                        _last_path = deepcopy(_current)
                 continue
             
             elif _OBJECTIVE == "FEASIBLE":
@@ -230,6 +244,11 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
                     # borrow _max_path for easier print
                     _max_path = _current
                     break
+                
+                _last_cost = _current.current_tax
+                _all_path_tax.append(_last_cost)
+                if _last_cost == min(_all_path_tax):
+                    _last_path = deepcopy(_current)
 
         # get available moves, skip this node if none is found
         if _current.available_moves_list() is None:
@@ -269,8 +288,7 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
                 temp,
                 _mid_point,
                 _START_point.x,
-                _START_point.y,
-                temp.b
+                _START_point.y
             )
 
             # f: A* function
@@ -290,6 +308,8 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
             _open.append(temp)
 
     try:
+        if t_limit_r: _max_path = _last_path
+
         path = []
         while _max_path.parent is not None:
             path.append(_max_path._move)
@@ -300,30 +320,18 @@ def astar(START, OBJECTIVE = 'FEASIBLE'):
         return path
 
     except:
-        return ["NOT FOUND!"]
+        return []
 
 if __name__ == "__main__":
-    with open("AI_intro_project/search_algo/load_all_output/output.txt", "a") as f:
-        # init
-        print('ALL HAIL THE LORD AND SAVIOR:')
-        print(
-'''
-  /\ ___ /\ 
- (  o   o  )
-  \  >#<  /
-  /       \ 
- /         \       ^
-|           |     //
- \         /    //
-  ///  ///   --
-'''
-    )
+    t_limit = 30
 
+    with open("AI_intro_project/search_algo/load_all_output/output-astar.txt", "w") as f:
         for _internalVar in _Utilities().load_all(
-                sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
-                directory='AI_intro_project/randomized_states',
-                extension='state'):
-
+            sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+            directory='AI_intro_project/randomized_states',
+            extension='state'
+        ):
+            
             timer = time.time()
 
             # print basic info
@@ -333,14 +341,17 @@ if __name__ == "__main__":
                 file = f
             )
             print("tax:", _internalVar.current_tax, file = f)
-            # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
-            print(*(moves:=astar(_internalVar, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
-
-
-            for move in moves:
-                _internalVar.move_on_move(move)
             
-            _internalVar.visualize()
+            # A*
+            # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
+            t_start = time.time()
+            print(*(moves:=astar(_internalVar, ofile = f, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
+
+
+            #for move in moves:
+            #    _internalVar.move_on_move(move)
+            
+            #_internalVar.visualize()
 
             timer -= time.time()
             print(f"time: {-timer}", file = f)
