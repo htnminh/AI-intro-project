@@ -12,6 +12,10 @@ Table of Contents _(Updated using VSCode)_
 # The Penniless Pilgrim Riddle: Introduction
 The website of the project: <https://htnminh.github.io/AI-intro-project/>
 
+REPORT: https://htnminh.notion.site/The-Penniless-Pilgrim-Riddle-e3bbfaf5d7b949fdadf5a898df1f8883
+
+JOBS & DEADLINES: https://gist.github.com/htnminh/1f11ef194bd3d7ec90ed0204d41e2fe1
+
 A capstone project for Introduction to Artificial Intelligence course. <br>
 A quick introduction of the problem: [Can you solve the penniless pilgrim riddle? - Daniel Finkel](https://youtu.be/6sBB-gRhfjE).
 
