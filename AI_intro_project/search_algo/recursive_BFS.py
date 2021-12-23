@@ -143,7 +143,6 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
             return [None, math.inf]
         heapify(successors)
         best = heappop(successors)
-        state.current_pos = best[1].origin.coordinate_end
         if best[1].f > f_limit:
             return [None, best[1].f]
         if len(successors) != 0:
