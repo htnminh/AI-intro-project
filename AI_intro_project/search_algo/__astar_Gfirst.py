@@ -4,6 +4,7 @@ from AI_intro_project.State import State
 from AI_intro_project.Coordinate_and_Move import Coordinate, Move
 from AI_intro_project._Utilities import _Utilities
 from copy import deepcopy
+from functools import reduce
 import time
 MODE_DBG = False
 
@@ -74,7 +75,9 @@ variables:
     x, y      || Coordinate of START (for Manhattan distance)
     b         || a binary variable to detect that cost is changing sign
 '''
-def _astar_heuristic_FEASIBLE(cur, mid_point, x, y):
+fac = lambda x: 1 if x <= 1 else x * fac(x-1)
+is_zero = lambda y: 0 if y == 0 else 1
+def _astar_heuristic_FEASIBLE(cur, mid_point, x, y, _moves):
 
     # manhattan of current node, no need here (yet/maybe?)
     #mht_to_midpoint = abs(cur.current_pos.x - mid_point[0]) + abs(cur.current_pos.y - mid_point[1])
@@ -83,6 +86,7 @@ def _astar_heuristic_FEASIBLE(cur, mid_point, x, y):
     # inflated/highly-biased heuristic
     #   yes, this heuristic function is definitely NOT admissible
     #   it cannot be anyways, in this problem
+    '''
     if cur.current_pos.x <= mid_point[0] and cur.current_pos.y <= mid_point[1]:
         cur.b = 1
 
@@ -94,19 +98,12 @@ def _astar_heuristic_FEASIBLE(cur, mid_point, x, y):
         h = 9 * (mid_point[0]*2 + mid_point[1]*2) - 2 * abs(x - cur.current_pos.x) - 2 ** abs(y - cur.current_pos.y)
         #   ^ random   ^ bsize[0]  *  ^ bsize[1]      | START.x - cur.x |            | START.y - cur.y |
         # heavily favors going as far as possible to START
-
+    '''
+    cur_x = cur.current_pos.x
+    cur_y = cur.current_pos.y
+    #h = (2**mid_point[1]) * (mid_point[1]*2 - cur_y) * y
+    h = (mid_point[0]*2 * mid_point[1]*2 - (cur_y - y) - (cur_x - x))
     return h
-
-'''
-OPTIMAL heuristic:
-
-variables:
-    cur
-    r
-    s
-'''
-def _astar_heuristic_OPTIMAL(cur):
-    pass
 
 '''
 A* search
@@ -151,8 +148,6 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     # starting with f = 0 and mht = 0
     #-- Doesn't matter if is calculated properly.
     GOAL.f = 0
-    GOAL.mht = 0
-    GOAL.b = 0
 
     # attach a parent node
     #-- Linked List intensifies_
@@ -210,9 +205,6 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         # pop the node with minimum f for expansion
         _current = deepcopy(_open.pop(_f_node_in_open.index(_max_f_node_in_open)))
 
-        #?!: add that node to _closed
-        #_closed.add(_current)
-        
         # stop if popped START node --> we found a path to it
         if _current.current_pos == _START_point:
             if _OBJECTIVE == "OPTIMAL":
@@ -251,12 +243,13 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
                     _last_path = deepcopy(_current)
 
         # get available moves, skip this node if none is found
-        if _current.available_moves_list() is None:
+        _moves = _current.available_moves_list()
+        if _moves is None:
             continue
 
         ###############################################
         # [ Promising node, move there and calculate node.f ]
-        for _move in _current.available_moves_list():
+        for _move in _moves:
             #DBG!: iteration counter
             ite += 1
 
@@ -269,7 +262,9 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     
             # and move to that node
             temp.move_on_move(_move)
-    
+            temp.g = temp.current_tax
+            #print(temp.g)
+            
             if temp.available_moves_list() is None: continue
 
             #DBG!: data:
@@ -278,9 +273,6 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
             # attach parent node to temp
             #-- like a linked list, hrmf...
             temp.parent = _current
-        
-            # g: if-moved current_tax as g
-            temp.g = temp.tax_after_move(_move) 
 
             # h: heuristic function, explanation above
             h_func = "_astar_heuristic_" + OBJECTIVE
@@ -288,12 +280,15 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
                 temp,
                 _mid_point,
                 _START_point.x,
-                _START_point.y
+                _START_point.y,
+                _moves
             )
 
             # f: A* function
             temp.f = temp.g + temp.h
-
+            #DBG!: info of A*
+            #print(temp, ':', temp.f, '=', temp.g, '+', temp.h)
+            
             # attach moved dir to temp, will need for printing later.
             # reverse because we are finding from GOAL to START.
             _c = _move.coordinate_end_calc()
@@ -358,9 +353,10 @@ if __name__ == "__main__":
             for move in moves:
                 _internalVar.move_on_move(move)
             
-            _internalVar._plt_prepare()
-            plt.savefig(path + str(idx).zfill(2))
-            plt.clf()
+            _internalVar.visualize()
+            #_internalVar._plt_prepare()
+            #plt.savefig(path + str(idx).zfill(2))
+            #plt.clf()
             
             timer -= time.time()
             print(f"time: {-timer}", file = f)
