@@ -42,11 +42,12 @@ class Node:
         if self.__class__ == other.__class__:
             return self.origin.coordinate_end == other.origin.coordinate_end
 
-    def child_node_list(self,state: State):
+    def child_node_list(self,state: State, pos):
         '''child list of the node
            -- parameter
            state: game state
            -- return list'''
+        state.current_pos = pos
         return [Node(child, parent = self)
                 for child in state.available_moves_list()]
 
@@ -57,9 +58,8 @@ class Node:
            state: game state
            --return float'''
         #h =  past_cost *( distance from node to goal)
-        self.h = self.g*(
-                    (abs(self.origin.coordinate_end.x - state.board_size[0])
-                    + abs(self.origin.coordinate_end.y -state.board_size[1])))
+        self.h = ((abs(self.origin.coordinate_end.x - state.board_size[0])
+                   + abs(self.origin.coordinate_end.y -state.board_size[1])))
         return self.h
 
     def pathway(self):
@@ -121,7 +121,7 @@ def RBFS(state: State, node: Node, goalnode: Node, f_limit: float):
 
     #expand node in its child list
     successors = []
-    for child in node.child_node_list(state):
+    for child in node.child_node_list(state, node.origin.coordinate_end):
         if child.origin in node.pathway():
             continue
         else:
