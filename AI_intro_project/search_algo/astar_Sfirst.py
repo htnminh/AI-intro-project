@@ -6,9 +6,13 @@ from AI_intro_project._Utilities import _Utilities
 from copy import deepcopy
 from functools import reduce
 import time
+
+# GLOBAL DEBUG MODE: print debug info of algorithm
 MODE_DBG = False
 
 '''
+                MEOW
+
   /\ ___ /\ 
  (  o   o  )
   \  >#<  /
@@ -21,84 +25,71 @@ MODE_DBG = False
 
 ##########################
 #   [ SUMMARY ]
-# Starting point: GOAL, with cost = 0
+# Starting point: START, with cost = START.current_tax
 #
-# Objective: find path to Start, with either mode:
-#   > OPTIMAL: Cost at START-point is highest possible.
-#              (which corresponds to that cost at GOAL is lowest)
-#   > FEASIBLE: Cost at START-point is the same as, or slightly higher.
-#               (which corresponds to that cost at GOAL is approaching 0)
+# Objective: find path to GOAL, with either mode:
+#   > OPTIMAL: Cost at GOAL-point is LOWEST possible.
+#   > FEASIBLE: Cost at GOAL-point is NO HIGHER than 0.
 #
 # How:
-#   > Start from GOAL node. Find path to START node with either obj above.
-#     (Basically finding backwardly)
+#   > Start from START node. Find path to GOAL node with either obj above.
+#
 #   > A*: f = g + h, where:
 #       f: A* function.
 #       g: cost accumulated at current node.
+#
+#       @[ABANDONED; REASON: too slow and space-inefficient]
 #       h(OPTIMAL): Manhattan distance from Node to the "middle" of the board.
 #          --> aim: favors path that distances itself from the middle point.
 #          ? > why: a counter-clockwise loop is the only way to "cheat" tax.
 #          --> char: + is very slow and space-inefficient (need to expand most nodes).
 #               ^    + should find the actual optimal, or slightly suboptimal 
-#               |      path very quickly, however the algo does not know it.
+#               |      path quickly, however the algo does not know it.
 #               |      -> by brute-forcing, OPTIMAL is a path that covers most of
-#               |         the board and loops counter-clockwise from inside out.
+#               |         the board (usually leaving 1 node) and loops counter-clockwise 
+#               |         from inside out.
 #               |
-#               | <--- cannot calculate the minimum (OPTIMAL) cost mathematically
-#                      due to time constraint (only know about best 4x4 & 6x6 2wks prior).
+#               | <--- Due to cost wildly fluctuating (by rule),
+#               | <--> cannot calculate/prove the minimum (OPTIMAL) cost mathematically.
 #
-#       h(FEASIBLE): a function that heavily bias the biggest outer-loop possible
-#          --> aim: speed up finding possible path
-#          --> char: + is faster than OPTIMAL, however still struggles with big board 
-#                      where it should be quick to find.
-#                    + takes as long as OPTIMAL (or Dijkstra) and as much space for
-#                      NOT_FOUND scenario.
-#                    + is not very space efficient considering this is 
-#                      pretty much cheating the way thru.
-#          --> illustration on 4x4:
+#          --> illustration of OPTIMAL on 4x4:
 #
 #            ------> S   D   L
 #            D   L  D/L  L   U   
-#            D   .   D   .   U 
-#            D   .   R   R   U
+#            D   D   L   .   U 
+#            D   R   R   R   U
 #            R   R   R   R   G
 #
-# 
+#       @[DEFAULT]
+#       h(FEASIBLE): a function that prioritizes making counter-clockwise loop(s)
+#          --> aim: speed up finding possible path(s)
+#          --> char: + struggle with START point (x, y), where both x and y is no 
+#                      smaller than 1. However searching path for big board is
+#                      fairly quickly (< 30sec/board, if found).
+#                    + fairly efficient space-wise, iterating less than 2000 times
+#                      for all boards with found path and slightly over for unsolved 
+#                      boards (under time limit 60).
+#                    + Solved 47/50 boards with time limit 60 seconds.
+#                    --- 
+#                    + disregarded admissibility/consistency: 
+#                      impossible that 0 <= h(N) <= h'(N) if h'(N) <= 0
 # 
 ##########################
 '''
 FEASIBLE heuristic 
 
 variables:
-    cur       || current node
-    mid_point || (of the board)
-    x, y      || Coordinate of START (for Manhattan distance)
-    b         || a binary variable to detect that cost is changing sign
+    cur            || current node
+    cur_x, cur_y   || Coordinate of current node
+    mid_point      || (of the board)
 '''
-def _astar_heuristic_FEASIBLE(cur, mid_point, x, y, _moves):
-
-    # manhattan of current node, no need here (yet/maybe?)
-    #mht_to_midpoint = abs(cur.current_pos.x - mid_point[0]) + abs(cur.current_pos.y - mid_point[1])
-    #mht_to_START = abs(cur.current_pos.x - x) + abs(cur.current_pos.y - y)
-
-    # inflated/highly-biased heuristic
-    #   yes, this heuristic function is definitely NOT admissible
-    #   it cannot be anyways, in this problem
-    '''
-    if cur.current_pos.x <= mid_point[0] and cur.current_pos.y <= mid_point[1]:
-        cur.b = 1
-
-    #h = 2 * (- mht_to_midpoint - mht_to_START + mht_start_to_midpoint)
-    if cur.b == 0:
-        h = mid_point[0]*mid_point[1]*4 + 4 * cur.current_pos.x - (mid_point[0]*2 - cur.current_pos.x) - (mid_point[1]*2 - cur.current_pos.y)  
-        # heavily favors all-L, then all-U
-    else:
-        h = 9 * (mid_point[0]*2 + mid_point[1]*2) - 2 * abs(x - cur.current_pos.x) - 2 ** abs(y - cur.current_pos.y)
-        #   ^ random   ^ bsize[0]  *  ^ bsize[1]      | START.x - cur.x |            | START.y - cur.y |
-        # heavily favors going as far as possible to START
-    '''
+def _astar_heuristic_FEASIBLE(cur, mid_point):
     cur_x = cur.current_pos.x
     cur_y = cur.current_pos.y
+
+    # board = (m, n)
+    # formula = n/2 * y * (n - y) + x
+    # _insert "but why" meme here_
     h = mid_point[1] * cur_y * (mid_point[1]*2 - cur_y) + cur_x
     return h
 
@@ -120,7 +111,6 @@ exposed func:
 
 '''
 def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
-
     ''' init basic vars '''
     #############################################
     # Auxiliary vars
@@ -130,21 +120,25 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     _START_point = START.current_pos
     _START_tax = START.current_tax
     _min_path = None
-    ite = 0
     t_limit_r = False
+    
+    #DBG!: counting iterations
+    if MODE_DBG: ite = 0
 
     #############################################
     # GOAL: where we end our path-finding:
     #       inherit properties from START.
     GOAL = deepcopy(START)
     GOAL.current_pos = Coordinate(*GOAL.board_size)
-    print("GOAL:", GOAL.current_pos)
+
+    #DBG!: print GOAL info
+    if MODE_DBG: print("GOAL:", GOAL.current_pos)
 
 
     #############################################
     # START: where we are finding path to
     #DBG!: print its stats
-    print("START:", _START_point, ',', _START_tax)
+    if MODE_DBG: print("START:", _START_point, ',', _START_tax)
 
     # attach a parent node
     #-- Linked List intensifies_
@@ -153,6 +147,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     # first f
     START.f = 0
 
+    # [REGRESSED]
     # OBJECTIVE: set objective:
     #   > OPTIMAL
     #   > FEASIBLE
@@ -165,20 +160,20 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
 
     #############################################
     # variables supporting A* function
-
     # _open: list of node(s) we want to expand
     _open = list()
     _open.append(START)
 
-    # all path found up to breakpoint
+    # list that save taxes of found-but-unsastified paths
     _all_path_tax = list()
+
 
     ''' run A* until break, expanding all nodes '''
     while _open:
         # ABORT: out of time
         if time.time() - t_start > t_limit: 
             print(f"reached time limit: {t_limit}", file = ofile)
-            print(f"reached time limit: {t_limit}")
+            if MODE_DBG: print(f"reached time limit: {t_limit}")
             t_limit_r = True
             break
 
@@ -194,23 +189,27 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         # pop the node with minimum f for expansion
         _current = deepcopy(_open.pop(_f_node_in_open.index(_min_f_node_in_open)))
 
-        # stop if popped START node --> we found a path to it
+        # stop if popped GOAL node --> we found a path to it
         if _current.current_pos == GOAL.current_pos:            
             if _OBJECTIVE == "FEASIBLE":
                 # FEASIBLE: tax must be the same as,
                 # or slightly bigger than START tax. 
                 # If found, break immediately.
                 if _current.current_tax <= 0:
-                    print("found path!")
+                    if MODE_DBG: print("found path!")
 
                     # borrow _min_path for easier print
                     _min_path = _current
                     break
                 
+                # if not sastified, save the best path we've found
+                # it helped in the making of that weird heuristic
+                # owo~
                 _last_cost = _current.current_tax
                 _all_path_tax.append(_last_cost)
-                if _last_cost == max(_all_path_tax):
+                if _last_cost == min(_all_path_tax):
                     _last_path = deepcopy(_current)
+
 
         # get available moves, skip this node if none is found
         _moves = _current.available_moves_list()
@@ -221,7 +220,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         # [ Promising node, move there and calculate node.f ]
         for _move in _moves:
             #DBG!: iteration counter
-            ite += 1
+            if MODE_DBG: ite += 1
 
             #DBG!: move where?
             # print("poking:", _move)
@@ -247,44 +246,47 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
             h_func = "_astar_heuristic_" + OBJECTIVE
             temp.h = globals()[h_func](
                 temp,
-                _mid_point,
-                _START_point.x,
-                _START_point.y,
-                _moves
+                _mid_point
             )
 
             # f: A* function
             temp.f = temp.g + temp.h
+
             #DBG!: info of A*
-            #print(temp, ':', temp.f, '=', temp.g, '+', temp.h)
+            # if MODE_DBG: print(temp, ':', temp.f, '=', temp.g, '+', temp.h)
             
             # attach moved dir to temp, will need for printing later.
             temp._move = _move
 
-            # this node _might_ lead to optimal path .
+            # this node _might_ lead to a FEASIBLE path.
             # so, append it to _open.
             _open.append(temp)
 
     try:
+        # has the time limit reached?
+        # if yes, get the last path A* found
         if t_limit_r: _min_path = _last_path
 
+        # using "linked" node to find path
         path = []
         while _min_path.parent is not None:
             path.append(_min_path._move)
             _min_path = _min_path.parent
 
         #DBG!: print iteration counter
-        print(_board_size, ite)
+        if MODE_DBG: print(_board_size, ite)
         return path[::-1]
 
     except:
+        # time limit reached, but A* didn't find any path
+        # return nothing ~> visualize nothing
         return []
 
 if __name__ == "__main__":
     # TIME LIMIT
     t_limit = 60
 
-    # PATH
+    # Figure of (un-)solved paths
     path = 'AI_intro_project/_s_astar-Sf_solved_state_images/'
 
     # _Utils.load_all()
@@ -299,7 +301,7 @@ if __name__ == "__main__":
             # start timer
             timer = time.time()
 
-            # print basic info
+            # print basic info to output file
             print("\nboard size:",_internalVar.board_size, file = f)
             print(
                 f"start at: ({_internalVar.current_pos.x}, {_internalVar.current_pos.y})",
@@ -307,12 +309,12 @@ if __name__ == "__main__":
             )
             print("tax:", _internalVar.current_tax, file = f)
             
-            # A*
-            # note: astar has another argument: OBJECTIVE = one_of("OPTIMAL", "FEASIBLE")
+            # A*, return list()
+            #-- start timer
             t_start = time.time()
             print(*(moves:=astar(_internalVar, ofile = f, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
 
-
+            # save figure at $path
             for move in moves:
                 _internalVar.move_on_move(move)
             
@@ -321,5 +323,11 @@ if __name__ == "__main__":
             plt.savefig(path + str(idx).zfill(2))
             plt.clf()
             
+            # end counter and print
             timer -= time.time()
             print(f"time: {-timer}", file = f)
+
+# c
+#   a     >owo<
+#     t
+# 3 number 3s. Ayyy
