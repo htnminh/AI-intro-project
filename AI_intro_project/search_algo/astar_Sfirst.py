@@ -8,7 +8,8 @@ from functools import reduce
 import time
 
 # GLOBAL DEBUG MODE: print debug info of algorithm
-MODE_DBG = False
+MODE_DBG = True
+if MODE_DBG: print("===\n!DBG: Debug Mode is on\n===")
 
 '''
                 MEOW
@@ -51,6 +52,7 @@ MODE_DBG = False
 #               |
 #               | <--- Due to cost wildly fluctuating (by rule),
 #               | <--> cannot calculate/prove the minimum (OPTIMAL) cost mathematically.
+#                      (example: 4x4, (0,2): -4 || 6x6, (0,3): -248 || 8x8, (0,4): -2012
 #
 #          --> illustration of OPTIMAL on 4x4:
 #
