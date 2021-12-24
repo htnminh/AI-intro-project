@@ -49,9 +49,10 @@ def dfs_prep(START):
     #############################################
     # Auxiliary vars for reduced querying need
     #DBG!: number of recursive DFS iterations
-    global _START_point, _board_size, _START_tax, GOAL
+    global _START_point, _board_size, _START_tax, GOAL, __t
     if MODE_DBG: global ite; ite = 0
     
+    __t = 1
     _board_size = START.board_size
     _START_point = START.current_pos
     _START_tax = START.current_tax
@@ -89,7 +90,7 @@ def dfs(cur):
     if t_limit_r: pass
     elif time.time() - t_start > t_limit:
         print(f"ABORT: time limit reached: {t_limit}", file = f)
-        t_limit_r = True
+        t_limit_r = 1
         pass
     else:
         # ABORT: exiting
@@ -120,6 +121,7 @@ def dfs(cur):
                     if temp.current_tax >= _START_tax:
                         # found solution
                         GOAL.path = temp.path
+                        __t = GOAL.current_tax
                         exiting = True
                         break
                     
@@ -135,43 +137,54 @@ if __name__ == "__main__":
 
     # Figure of (un-)solved paths
     path = 'AI_intro_project/_s_dfs_solved_state_images/'
-
-    with open(f"AI_intro_project/search_algo/load_all_output/output-dfs-L{t_limit}.txt", "w") as f:
-        _var_utils_loadall = _Utilities().load_all(
-            sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
-            directory='AI_intro_project/randomized_states',
-            extension='state'
-        )
-
-        for idx, _internalVar in enumerate(_var_utils_loadall):
-            # start timer
-            timer = time.time()
-
-            # print basic info to output file
-            print("\nboard size:",_internalVar.board_size, file = f)
-            print(
-                f"start at: ({_internalVar.current_pos.x}, {_internalVar.current_pos.y})",
-                file = f
+    
+    #CSV!: open CSV file
+    with open("AI_intro_project/search_algo/load_all_output/output-dfs.csv", "w") as f_csv:
+        print('m,n,n_moves,tax,time,time_limit_reached', file = f_csv)
+    
+        with open(f"AI_intro_project/search_algo/load_all_output/output-dfs-L{t_limit}.txt", "w") as f:
+            _var_utils_loadall = _Utilities().load_all(
+                sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+                directory='AI_intro_project/randomized_states',
+                extension='state'
             )
-            print("tax:", _internalVar.current_tax, file = f)
-            
-            # signal DFS to ABORT: found solution
-            exiting = False
 
-            # time limit
-            t_start = time.time()
-            t_limit_r = False
+            for idx, _internalVar in enumerate(_var_utils_loadall):
+                # start timer
+                timer = time.time()
 
-            # print
-            print(*(moves:=dfs_prep(_internalVar)), sep = '\n', file = f)
-            if t_limit_r: print(f"reached time limit: {t_limit}", file = f) 
-            for mv in moves:
-                _internalVar.move_on_move(mv)
-            
-            #_internalVar.visualize()
-            _internalVar._plt_prepare()
-            plt.savefig(path + str(idx).zfill(2))
-            plt.clf()
+                # print basic info to output file
+                print("\nboard size:",_internalVar.board_size, file = f)
+                print(
+                    f"start at: ({_internalVar.current_pos.x}, {_internalVar.current_pos.y})",
+                    file = f
+                )
+                print("tax:", _internalVar.current_tax, file = f)
+                
+                # signal DFS to ABORT: found solution
+                exiting = False
 
-            timer -= time.time()
-            print(f"time: {-timer}", file = f)
+                # time limit
+                t_start = time.time()
+                t_limit_r = 0
+
+                # print
+                print(*(moves:=dfs_prep(_internalVar)), sep = '\n', file = f)
+                if t_limit_r: print(f"reached time limit: {t_limit}", file = f) 
+                for mv in moves:
+                    _internalVar.move_on_move(mv)
+                
+                #_internalVar.visualize()
+                _internalVar._plt_prepare()
+                plt.savefig(path + str(idx).zfill(2))
+                plt.clf()
+                
+                timer -= time.time()
+                print(f"time: {-timer}", file = f)
+
+                ###############
+                #CSV!
+                # in order: boardSize(m, n), #OfMoves, finalTax, isTimeLimitReached?
+                print(f'{_internalVar.board_size[0]},{_internalVar.board_size[1]},{len(moves)},{__t},{-timer},{t_limit_r}', \
+                    file = f_csv)
+                    
