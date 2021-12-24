@@ -52,7 +52,7 @@ def dfs_prep(START):
     global _START_point, _board_size, _START_tax, GOAL, __t
     if MODE_DBG: global ite; ite = 0
     
-    __t = 1
+    __t = -1
     _board_size = START.board_size
     _START_point = START.current_pos
     _START_tax = START.current_tax
@@ -86,7 +86,7 @@ def dfs_prep(START):
 # DFS magics
 def dfs(cur):
     # ABORT: out of time
-    global t_limit_r
+    global t_limit_r, __t
     if t_limit_r: pass
     elif time.time() - t_start > t_limit:
         print(f"ABORT: time limit reached: {t_limit}", file = f)
@@ -121,7 +121,7 @@ def dfs(cur):
                     if temp.current_tax >= _START_tax:
                         # found solution
                         GOAL.path = temp.path
-                        __t = GOAL.current_tax
+                        __t = temp.current_tax
                         exiting = True
                         break
                     
@@ -185,6 +185,6 @@ if __name__ == "__main__":
                 ###############
                 #CSV!
                 # in order: boardSize(m, n), #OfMoves, finalTax, isTimeLimitReached?
-                print(f'{_internalVar.board_size[0]},{_internalVar.board_size[1]},{len(moves)},{__t},{-timer},{t_limit_r}', \
+                print(f'{_internalVar.board_size[0]},{_internalVar.board_size[1]},{len(moves)},{-__t},{-timer},{t_limit_r}', \
                     file = f_csv)
                     
