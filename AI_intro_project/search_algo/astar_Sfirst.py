@@ -116,13 +116,13 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     ''' init basic vars '''
     #############################################
     # Auxiliary vars
-
+    global __last_cost
+    __last_cost = 1
     _board_size = START.board_size
     _mid_point = (_board_size[0]/2, _board_size[1]/2)
     _START_point = START.current_pos
     _START_tax = START.current_tax
     _min_path = None
-    t_limit_r = False
     
     #DBG!: counting iterations
     if MODE_DBG: ite = 0
@@ -176,7 +176,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         if time.time() - t_start > t_limit: 
             print(f"reached time limit: {t_limit}", file = ofile)
             if MODE_DBG: print(f"reached time limit: {t_limit}")
-            t_limit_r = True
+            t_limit_r = 1
             break
 
         ##################################################
@@ -202,6 +202,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
 
                     # borrow _min_path for easier print
                     _min_path = _current
+                    __last_cost = _current.current_tax 
                     break
                 
                 # if not sastified, save the best path we've found
@@ -210,6 +211,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
                 _last_cost = _current.current_tax
                 _all_path_tax.append(_last_cost)
                 if _last_cost == min(_all_path_tax):
+                    __last_cost = _last_cost
                     _last_path = deepcopy(_current)
 
 
@@ -291,43 +293,54 @@ if __name__ == "__main__":
     # Figure of (un-)solved paths
     path = 'AI_intro_project/_s_astar-Sf_solved_state_images/'
 
-    # _Utils.load_all()
-    with open("AI_intro_project/search_algo/load_all_output/output-astar.txt", "w") as f:
-        _var_utils_loadall = _Utilities().load_all(
-            sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
-            directory='AI_intro_project/randomized_states',
-            extension='state'
-        )
-
-        for idx, _internalVar in enumerate(_var_utils_loadall):
-            # start timer
-            timer = time.time()
-
-            # print basic info to output file
-            print("\nboard size:",_internalVar.board_size, file = f)
-            print(
-                f"start at: ({_internalVar.current_pos.x}, {_internalVar.current_pos.y})",
-                file = f
+    #CSV!: open CSV file
+    with open("AI_intro_project/search_algo/load_all_output/output-astar.csv", "w") as f_csv:
+        print('m,n,n_moves,tax,time,time_limit_reached', file = f_csv)
+    
+        # _Utils.load_all()
+        with open("AI_intro_project/search_algo/load_all_output/output-astar.txt", "w") as f:
+            _var_utils_loadall = _Utilities().load_all(
+                sizes=[(i,j) for i in range(4,9) for j in range(4,9)],
+                directory='AI_intro_project/randomized_states',
+                extension='state'
             )
-            print("tax:", _internalVar.current_tax, file = f)
-            
-            # A*, return list()
-            #-- start timer
-            t_start = time.time()
-            print(*(moves:=astar(_internalVar, ofile = f, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
 
-            # save figure at $path
-            for move in moves:
-                _internalVar.move_on_move(move)
-            
-            #_internalVar.visualize()
-            _internalVar._plt_prepare()
-            plt.savefig(path + str(idx).zfill(2))
-            plt.clf()
-            
-            # end counter and print
-            timer -= time.time()
-            print(f"time: {-timer}", file = f)
+            for idx, _internalVar in enumerate(_var_utils_loadall):
+                # timer
+                timer = time.time()
+                t_limit_r = 0
+
+                # print basic info to output file
+                print("\nboard size:",_internalVar.board_size, file = f)
+                print(
+                    f"start at: ({_internalVar.current_pos.x}, {_internalVar.current_pos.y})",
+                    file = f
+                )
+                print("tax:", _internalVar.current_tax, file = f)
+                
+                # A*, return list()
+                #-- start timer
+                t_start = time.time()
+                print(*(moves:=astar(_internalVar, ofile = f, OBJECTIVE="FEASIBLE")), sep='\n', file=f)
+
+                # save figure at $path
+                for move in moves:
+                    _internalVar.move_on_move(move)
+                
+                #_internalVar.visualize()
+                _internalVar._plt_prepare()
+                plt.savefig(path + str(idx).zfill(2))
+                plt.clf()
+                
+                # end counter and print
+                timer -= time.time()
+                print(f"time: {-timer}", file = f)
+
+                ###############
+                #CSV!
+                # in order: boardSize(m, n), #OfMoves, finalTax, isTimeLimitReached?
+                print(f'{_internalVar.board_size[0]},{_internalVar.board_size[1]},{len(moves)},{__last_cost},{-timer},{t_limit_r}', \
+                    file = f_csv)
 
 # c
 #   a     >owo<
