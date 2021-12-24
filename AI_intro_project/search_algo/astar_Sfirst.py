@@ -116,7 +116,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     ''' init basic vars '''
     #############################################
     # Auxiliary vars
-    global __last_cost
+    global __last_cost, t_limit_r
     __last_cost = 1
     _board_size = START.board_size
     _mid_point = (_board_size[0]/2, _board_size[1]/2)
@@ -217,7 +217,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
 
         # get available moves, skip this node if none is found
         _moves = _current.available_moves_list()
-        if _moves is None:
+        if _moves == []:
             continue
 
         ###############################################
