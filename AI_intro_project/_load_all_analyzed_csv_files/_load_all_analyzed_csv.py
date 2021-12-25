@@ -1,8 +1,8 @@
+from numpy import true_divide
 import pandas as pd
 import matplotlib.pyplot as plt
 
 pd.reset_option("all")
-plt.style.use('dark_background')
 
 
 length_count = 81
@@ -41,11 +41,31 @@ df_merge = df_dfs.copy()
 df_astar_t = df_astar.copy()
 
 df_astar_t.columns = ['idx', *[i + "_astar" for i in df_astar_t if i != 'idx']]
-print(df_astar_t.columns)
-#df_merge = df_merge.merge(df_rbfs, how='inner', on='idx', suffixes=['_dfs', '_rbfs'])
-#df_merge = df_merge.merge(df_astar_t, how='inner', on='idx', suffixes=['', '_astar'])
 df_merge = df_merge.join(df_rbfs, lsuffix='_dfs', rsuffix='_rbfs', on='idx')
 df_merge = df_merge.join(df_astar_t)
 
+###############
+df_merge.plot(x='idx', y=['ram_usage_dfs', 'ram_usage_rbfs', 'ram_usage_astar'])
+plt.title('RAM Usage per board')
+plt.savefig(rf'{output_dir}\analysis\S3-RAM-light')
+
+df_merge.plot(x='idx', y=['time_dfs', 'time_rbfs', 'time_astar'])
+plt.title('Running time per board')
+plt.savefig(rf'{output_dir}\analysis\S3-TIME-light')
+
 df_merge.plot(x='idx', y=['iteration_dfs', 'iteration_rbfs', 'iteration_astar'])
-plt.savefig(rf'{output_dir}\analysis\S3-ITER')
+plt.title('Total Number of Iterations per board')
+plt.savefig(rf'{output_dir}\analysis\S3-ITER-light')
+
+###############
+df_dfs.plot(x='idx', y=['time', 'iteration'], subplots=True)
+plt.title('Relation between Iteration and Time - DFS')
+plt.savefig(rf'{output_dir}\analysis\DFS-Time-light')
+
+df_rbfs.plot(x='idx', y=['time', 'iteration'], subplots=True)
+plt.title('Relation between Iteration and Time - RBFS')
+plt.savefig(rf'{output_dir}\analysis\RBFS-Time-light')
+
+df_astar.plot(x='idx', y=['time', 'iteration'], subplots=True)
+plt.title('Relation between Iteration and Time - A*')
+plt.savefig(rf'{output_dir}\analysis\A-Time-light')
