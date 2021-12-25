@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from copy import deepcopy
 
 pd.reset_option("all")
 plt.style.use('dark_background')
@@ -38,8 +37,8 @@ df_rbfs.sort_values(by='idx', inplace=True)
 df_dfs.sort_values(by='idx', inplace=True)
 df_astar.sort_values(by='idx', inplace=True)
 
-df_merge = deepcopy(df_dfs)
-df_astar_t = deepcopy(df_astar)
+df_merge = df_dfs.copy()
+df_astar_t = df_astar.copy()
 
 df_astar_t.columns = ['idx', *[i + "_astar" for i in df_astar_t if i != 'idx']]
 print(df_astar_t.columns)
