@@ -20,7 +20,7 @@ Move(4, 0, 'R')
 Move(4, 1, 'R')
 Move(4, 2, 'R')
 Move(4, 3, 'R')
-time: 0.24353671073913574
+time: 0.3182554244995117
 
 board size: (4, 4)
 start at: (1, 1)
@@ -41,7 +41,7 @@ Move(4, 0, 'R')
 Move(4, 1, 'R')
 Move(4, 2, 'R')
 Move(4, 3, 'R')
-time: 0.0960843563079834
+time: 0.07963323593139648
 
 board size: (4, 5)
 start at: (2, 0)
@@ -67,7 +67,7 @@ Move(4, 1, 'R')
 Move(4, 2, 'R')
 Move(4, 3, 'R')
 Move(4, 4, 'R')
-time: 0.11364483833312988
+time: 0.09207487106323242
 
 board size: (4, 5)
 start at: (1, 2)
@@ -92,7 +92,7 @@ Move(4, 1, 'R')
 Move(4, 2, 'R')
 Move(4, 3, 'R')
 Move(4, 4, 'R')
-time: 0.09973502159118652
+time: 0.08458542823791504
 
 board size: (4, 6)
 start at: (0, 2)
@@ -125,7 +125,7 @@ Move(4, 2, 'R')
 Move(4, 3, 'R')
 Move(4, 4, 'R')
 Move(4, 5, 'R')
-time: 0.12438011169433594
+time: 0.09960198402404785
 
 board size: (4, 6)
 start at: (0, 1)
@@ -145,7 +145,7 @@ Move(4, 3, 'R')
 Move(4, 4, 'R')
 Move(4, 5, 'R')
 reached time limit: 10
-time: 10.086393594741821
+time: 10.080344915390015
 
 board size: (4, 7)
 start at: (1, 1)
@@ -175,7 +175,7 @@ Move(4, 3, 'R')
 Move(4, 4, 'R')
 Move(4, 5, 'R')
 Move(4, 6, 'R')
-time: 0.0942690372467041
+time: 0.07815814018249512
 
 board size: (4, 7)
 start at: (1, 2)
@@ -210,7 +210,7 @@ Move(4, 3, 'R')
 Move(4, 4, 'R')
 Move(4, 5, 'R')
 Move(4, 6, 'R')
-time: 0.13647770881652832
+time: 0.09371376037597656
 
 board size: (4, 8)
 start at: (1, 1)
@@ -243,7 +243,7 @@ Move(4, 4, 'R')
 Move(4, 5, 'R')
 Move(4, 6, 'R')
 Move(4, 7, 'R')
-time: 0.13437747955322266
+time: 0.10938358306884766
 
 board size: (4, 8)
 start at: (2, 1)
@@ -277,7 +277,7 @@ Move(4, 4, 'R')
 Move(4, 5, 'R')
 Move(4, 6, 'R')
 Move(4, 7, 'R')
-time: 0.14196300506591797
+time: 0.10936713218688965
 
 board size: (5, 4)
 start at: (1, 1)
@@ -299,7 +299,7 @@ Move(5, 0, 'R')
 Move(5, 1, 'R')
 Move(5, 2, 'R')
 Move(5, 3, 'R')
-time: 0.09031009674072266
+time: 0.05483675003051758
 
 board size: (5, 4)
 start at: (1, 0)
@@ -314,7 +314,7 @@ Move(5, 1, 'R')
 Move(5, 2, 'R')
 Move(5, 3, 'R')
 reached time limit: 10
-time: 10.066330671310425
+time: 10.065510988235474
 
 board size: (5, 5)
 start at: (1, 1)
@@ -339,7 +339,7 @@ Move(5, 1, 'R')
 Move(5, 2, 'R')
 Move(5, 3, 'R')
 Move(5, 4, 'R')
-time: 0.10502982139587402
+time: 0.07822227478027344
 
 board size: (5, 5)
 start at: (1, 0)
@@ -355,7 +355,7 @@ Move(5, 2, 'R')
 Move(5, 3, 'R')
 Move(5, 4, 'R')
 reached time limit: 10
-time: 10.115031957626343
+time: 10.076765537261963
 
 board size: (5, 6)
 start at: (1, 1)
@@ -383,7 +383,7 @@ Move(5, 2, 'R')
 Move(5, 3, 'R')
 Move(5, 4, 'R')
 Move(5, 5, 'R')
-time: 0.1044473648071289
+time: 0.07811737060546875
 
 board size: (5, 6)
 start at: (2, 1)
@@ -416,7 +416,7 @@ Move(5, 2, 'R')
 Move(5, 3, 'R')
 Move(5, 4, 'R')
 Move(5, 5, 'R')
-time: 0.1336078643798828
+time: 0.07812356948852539
 
 board size: (5, 7)
 start at: (1, 1)
@@ -449,7 +449,7 @@ Move(5, 3, 'R')
 Move(5, 4, 'R')
 Move(5, 5, 'R')
 Move(5, 6, 'R')
-time: 0.12276339530944824
+time: 0.09374761581420898
 
 board size: (5, 7)
 start at: (1, 0)
@@ -467,7 +467,7 @@ Move(5, 4, 'R')
 Move(5, 5, 'R')
 Move(5, 6, 'R')
 reached time limit: 10
-time: 10.139205694198608
+time: 10.096089839935303
 
 board size: (5, 8)
 start at: (2, 1)
@@ -502,7 +502,7 @@ Move(5, 4, 'R')
 Move(5, 5, 'R')
 Move(5, 6, 'R')
 Move(5, 7, 'R')
-time: 0.12051105499267578
+time: 0.09375452995300293
 
 board size: (5, 8)
 start at: (0, 2)
@@ -542,7 +542,7 @@ Move(5, 4, 'R')
 Move(5, 5, 'R')
 Move(5, 6, 'R')
 Move(5, 7, 'R')
-time: 0.15684843063354492
+time: 0.11237621307373047
 
 board size: (6, 4)
 start at: (1, 1)
@@ -567,7 +567,7 @@ Move(6, 0, 'R')
 Move(6, 1, 'R')
 Move(6, 2, 'R')
 Move(6, 3, 'R')
-time: 0.09574770927429199
+time: 0.06312084197998047
 
 board size: (6, 4)
 start at: (1, 0)
@@ -583,7 +583,7 @@ Move(6, 1, 'R')
 Move(6, 2, 'R')
 Move(6, 3, 'R')
 reached time limit: 10
-time: 10.079196453094482
+time: 10.072714805603027
 
 board size: (6, 5)
 start at: (0, 2)
@@ -615,7 +615,7 @@ Move(6, 1, 'R')
 Move(6, 2, 'R')
 Move(6, 3, 'R')
 Move(6, 4, 'R')
-time: 0.11020374298095703
+time: 0.10937714576721191
 
 board size: (6, 5)
 start at: (1, 2)
@@ -646,7 +646,7 @@ Move(6, 1, 'R')
 Move(6, 2, 'R')
 Move(6, 3, 'R')
 Move(6, 4, 'R')
-time: 0.12225890159606934
+time: 0.07811641693115234
 
 board size: (6, 6)
 start at: (0, 1)
@@ -668,7 +668,7 @@ Move(6, 3, 'R')
 Move(6, 4, 'R')
 Move(6, 5, 'R')
 reached time limit: 10
-time: 10.133642196655273
+time: 10.111680507659912
 
 board size: (6, 6)
 start at: (0, 3)
@@ -724,7 +724,7 @@ Move(6, 2, 'R')
 Move(6, 3, 'R')
 Move(6, 4, 'R')
 Move(6, 5, 'R')
-time: 5.396185398101807
+time: 5.132959365844727
 
 board size: (6, 7)
 start at: (2, 1)
@@ -757,7 +757,7 @@ Move(6, 3, 'R')
 Move(6, 4, 'R')
 Move(6, 5, 'R')
 Move(6, 6, 'R')
-time: 0.12757134437561035
+time: 0.0781252384185791
 
 board size: (6, 7)
 start at: (4, 0)
@@ -803,7 +803,7 @@ Move(6, 3, 'R')
 Move(6, 4, 'R')
 Move(6, 5, 'R')
 Move(6, 6, 'R')
-time: 0.19878101348876953
+time: 0.1406269073486328
 
 board size: (6, 8)
 start at: (0, 1)
@@ -827,7 +827,7 @@ Move(6, 5, 'R')
 Move(6, 6, 'R')
 Move(6, 7, 'R')
 reached time limit: 10
-time: 10.176890850067139
+time: 10.144959211349487
 
 board size: (6, 8)
 start at: (1, 3)
@@ -862,7 +862,7 @@ Move(6, 4, 'R')
 Move(6, 5, 'R')
 Move(6, 6, 'R')
 Move(6, 7, 'R')
-time: 0.16013026237487793
+time: 0.08551692962646484
 
 board size: (7, 4)
 start at: (1, 1)
@@ -888,7 +888,7 @@ Move(7, 0, 'R')
 Move(7, 1, 'R')
 Move(7, 2, 'R')
 Move(7, 3, 'R')
-time: 0.12573528289794922
+time: 0.07812714576721191
 
 board size: (7, 4)
 start at: (1, 0)
@@ -905,7 +905,7 @@ Move(7, 1, 'R')
 Move(7, 2, 'R')
 Move(7, 3, 'R')
 reached time limit: 10
-time: 10.133221864700317
+time: 10.081782817840576
 
 board size: (7, 5)
 start at: (2, 0)
@@ -934,7 +934,7 @@ Move(7, 1, 'R')
 Move(7, 2, 'R')
 Move(7, 3, 'R')
 Move(7, 4, 'R')
-time: 0.09564208984375
+time: 0.09365582466125488
 
 board size: (7, 5)
 start at: (1, 2)
@@ -962,7 +962,7 @@ Move(7, 1, 'R')
 Move(7, 2, 'R')
 Move(7, 3, 'R')
 Move(7, 4, 'R')
-time: 0.14043617248535156
+time: 0.09383988380432129
 
 board size: (7, 6)
 start at: (1, 2)
@@ -991,7 +991,7 @@ Move(7, 2, 'R')
 Move(7, 3, 'R')
 Move(7, 4, 'R')
 Move(7, 5, 'R')
-time: 0.11183619499206543
+time: 0.07812714576721191
 
 board size: (7, 6)
 start at: (0, 4)
@@ -1002,15 +1002,11 @@ Move(1, 4, 'D')
 Move(2, 4, 'D')
 Move(3, 4, 'D')
 Move(4, 4, 'D')
-Move(5, 4, 'D')
-Move(6, 4, 'R')
-Move(6, 5, 'U')
-Move(5, 5, 'L')
-Move(5, 4, 'L')
-Move(5, 3, 'L')
-Move(5, 2, 'L')
-Move(5, 1, 'D')
-Move(6, 1, 'R')
+Move(5, 4, 'R')
+Move(5, 5, 'D')
+Move(6, 5, 'L')
+Move(6, 4, 'L')
+Move(6, 3, 'L')
 Move(6, 2, 'U')
 Move(5, 2, 'U')
 Move(4, 2, 'R')
@@ -1053,7 +1049,7 @@ Move(7, 3, 'R')
 Move(7, 4, 'R')
 Move(7, 5, 'R')
 reached time limit: 10
-time: 10.188087940216064
+time: 10.169486045837402
 
 board size: (7, 7)
 start at: (0, 3)
@@ -1111,7 +1107,7 @@ Move(7, 3, 'R')
 Move(7, 4, 'R')
 Move(7, 5, 'R')
 Move(7, 6, 'R')
-time: 0.23827028274536133
+time: 0.180161714553833
 
 board size: (7, 7)
 start at: (2, 2)
@@ -1144,7 +1140,7 @@ Move(7, 3, 'R')
 Move(7, 4, 'R')
 Move(7, 5, 'R')
 Move(7, 6, 'R')
-time: 0.14503026008605957
+time: 0.10956764221191406
 
 board size: (7, 8)
 start at: (1, 2)
@@ -1185,7 +1181,7 @@ Move(7, 4, 'R')
 Move(7, 5, 'R')
 Move(7, 6, 'R')
 Move(7, 7, 'R')
-time: 0.15883874893188477
+time: 0.1250169277191162
 
 board size: (7, 8)
 start at: (1, 1)
@@ -1207,7 +1203,7 @@ Move(7, 5, 'R')
 Move(7, 6, 'R')
 Move(7, 7, 'R')
 reached time limit: 10
-time: 10.234375476837158
+time: 10.162621974945068
 
 board size: (8, 4)
 start at: (2, 0)
@@ -1234,7 +1230,7 @@ Move(8, 0, 'R')
 Move(8, 1, 'R')
 Move(8, 2, 'R')
 Move(8, 3, 'R')
-time: 0.10988450050354004
+time: 0.08621716499328613
 
 board size: (8, 4)
 start at: (0, 3)
@@ -1245,11 +1241,19 @@ Move(1, 3, 'D')
 Move(2, 3, 'D')
 Move(3, 3, 'D')
 Move(4, 3, 'D')
+Move(5, 3, 'L')
+Move(5, 2, 'L')
+Move(5, 1, 'D')
+Move(6, 1, 'R')
+Move(6, 2, 'D')
+Move(7, 2, 'R')
+Move(7, 3, 'U')
+Move(6, 3, 'U')
 Move(5, 3, 'R')
 Move(5, 4, 'D')
 Move(6, 4, 'L')
-Move(6, 3, 'U')
-Move(5, 3, 'L')
+Move(6, 3, 'L')
+Move(6, 2, 'U')
 Move(5, 2, 'U')
 Move(4, 2, 'R')
 Move(4, 3, 'R')
@@ -1278,7 +1282,7 @@ Move(8, 1, 'R')
 Move(8, 2, 'R')
 Move(8, 3, 'R')
 reached time limit: 10
-time: 10.149997472763062
+time: 10.127641677856445
 
 board size: (8, 5)
 start at: (3, 0)
@@ -1315,7 +1319,7 @@ Move(8, 1, 'R')
 Move(8, 2, 'R')
 Move(8, 3, 'R')
 Move(8, 4, 'R')
-time: 0.15668249130249023
+time: 0.10936760902404785
 
 board size: (8, 5)
 start at: (2, 2)
@@ -1343,7 +1347,7 @@ Move(8, 1, 'R')
 Move(8, 2, 'R')
 Move(8, 3, 'R')
 Move(8, 4, 'R')
-time: 0.10939764976501465
+time: 0.09375762939453125
 
 board size: (8, 6)
 start at: (2, 1)
@@ -1375,7 +1379,7 @@ Move(8, 2, 'R')
 Move(8, 3, 'R')
 Move(8, 4, 'R')
 Move(8, 5, 'R')
-time: 0.12566113471984863
+time: 0.10936975479125977
 
 board size: (8, 6)
 start at: (2, 0)
@@ -1408,7 +1412,7 @@ Move(8, 2, 'R')
 Move(8, 3, 'R')
 Move(8, 4, 'R')
 Move(8, 5, 'R')
-time: 0.12961888313293457
+time: 0.09377193450927734
 
 board size: (8, 7)
 start at: (0, 3)
@@ -1467,7 +1471,7 @@ Move(8, 3, 'R')
 Move(8, 4, 'R')
 Move(8, 5, 'R')
 Move(8, 6, 'R')
-time: 0.30658888816833496
+time: 0.19518113136291504
 
 board size: (8, 7)
 start at: (2, 2)
@@ -1501,7 +1505,7 @@ Move(8, 3, 'R')
 Move(8, 4, 'R')
 Move(8, 5, 'R')
 Move(8, 6, 'R')
-time: 0.15675950050354004
+time: 0.09376692771911621
 
 board size: (8, 8)
 start at: (4, 0)
@@ -1554,7 +1558,7 @@ Move(8, 4, 'R')
 Move(8, 5, 'R')
 Move(8, 6, 'R')
 Move(8, 7, 'R')
-time: 0.23441243171691895
+time: 0.18748688697814941
 
 board size: (8, 8)
 start at: (2, 2)
@@ -1601,4 +1605,4 @@ Move(8, 4, 'R')
 Move(8, 5, 'R')
 Move(8, 6, 'R')
 Move(8, 7, 'R')
-time: 0.1722853183746338
+time: 0.13265299797058105
