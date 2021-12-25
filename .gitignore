@@ -27,3 +27,6 @@ tempCodeRunnerFile.*
 
 # ignore my testing stuff
 *_test.py
+id-dfs.py
+*iddfs*
+beta.py
