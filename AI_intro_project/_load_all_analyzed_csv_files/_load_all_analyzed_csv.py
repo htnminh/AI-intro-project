@@ -39,10 +39,14 @@ df_dfs.sort_values(by='idx', inplace=True)
 df_astar.sort_values(by='idx', inplace=True)
 
 df_merge = deepcopy(df_dfs)
+df_astar_t = deepcopy(df_astar)
 
-#df_merge.merge(df_rbfs, how='right', on='idx', suffixes=['_dfs', '_rbfs'])
-df_merge = df_merge.join(df_rbfs, lsuffix='_dfs', rsuffix='_rbfs')
-df_merge = df_merge.join(df_astar, rsuffix='_astar')
+df_astar_t.columns = ['idx', *[i + "_astar" for i in df_astar_t if i != 'idx']]
+print(df_astar_t.columns)
+#df_merge = df_merge.merge(df_rbfs, how='inner', on='idx', suffixes=['_dfs', '_rbfs'])
+#df_merge = df_merge.merge(df_astar_t, how='inner', on='idx', suffixes=['', '_astar'])
+df_merge = df_merge.join(df_rbfs, lsuffix='_dfs', rsuffix='_rbfs', on='idx')
+df_merge = df_merge.join(df_astar_t)
 
-df_merge.plot(x='idx', y=['ram_usage_dfs', 'ram_usage_rbfs', 'ram_usage'])
-plt.show()
+df_merge.plot(x='idx', y=['iteration_dfs', 'iteration_rbfs', 'iteration_astar'])
+plt.savefig(rf'{output_dir}\analysis\S3-ITER')
