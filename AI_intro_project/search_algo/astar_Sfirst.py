@@ -5,7 +5,9 @@ from AI_intro_project.Coordinate_and_Move import Coordinate, Move
 from AI_intro_project._Utilities import _Utilities
 from copy import deepcopy
 from functools import reduce
-import time
+import time, psutil
+
+def get_ram_usage(): return int(psutil.virtual_memory().total - psutil.virtual_memory().available) / (1024**3)
 
 # GLOBAL DEBUG MODE: print debug info of algorithm
 MODE_DBG = True
@@ -116,8 +118,8 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     ''' init basic vars '''
     #############################################
     # Auxiliary vars
-    global __last_cost, t_limit_r
-    __last_cost = 1
+    global __last_cost, t_limit_r, ite
+    __last_cost = ""
     _board_size = START.board_size
     _mid_point = (_board_size[0]/2, _board_size[1]/2)
     _START_point = START.current_pos
@@ -125,7 +127,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
     _min_path = None
     
     #DBG!: counting iterations
-    if MODE_DBG: ite = 0
+    ite = 0
 
     #############################################
     # GOAL: where we end our path-finding:
@@ -224,7 +226,7 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         # [ Promising node, move there and calculate node.f ]
         for _move in _moves:
             #DBG!: iteration counter
-            if MODE_DBG: ite += 1
+            ite += 1
 
             #DBG!: move where?
             # print("poking:", _move)
@@ -287,15 +289,17 @@ def astar(START, ofile, OBJECTIVE = 'FEASIBLE'):
         return []
 
 if __name__ == "__main__":
-    # TIME LIMIT
+    # TIME LIMIT & ALL R-TIME + ITE
     t_limit = 60
+    t_all = 0
+    t_ite = 0
 
     # Figure of (un-)solved paths
     path = 'AI_intro_project/_s_astar-Sf_solved_state_images/'
 
     #CSV!: open CSV file
     with open("AI_intro_project/search_algo/load_all_output/output-astar.csv", "w") as f_csv:
-        print('m,n,n_moves,tax,time,time_limit_reached', file = f_csv)
+        print('idx,path_length,tax,time,time_limit_reached,iteration,ram_usage', file = f_csv)
     
         # _Utils.load_all()
         with open("AI_intro_project/search_algo/load_all_output/output-astar.txt", "w") as f:
@@ -335,14 +339,14 @@ if __name__ == "__main__":
                 # end counter and print
                 timer -= time.time()
                 print(f"time: {-timer}", file = f)
-
+                
+                if abs(timer + t_limit) >= 2: t_all -= timer
+                t_ite += ite
+                
                 ###############
                 #CSV!
                 # in order: boardSize(m, n), #OfMoves, finalTax, isTimeLimitReached?
-                print(f'{_internalVar.board_size[0]},{_internalVar.board_size[1]},{len(moves)},{__last_cost},{-timer},{t_limit_r}', \
+                print(f'{idx},{len(moves)},{__last_cost},{-timer},{t_limit_r},{ite},{get_ram_usage()}', \
                     file = f_csv)
-
-# c
-#   a     >owo<
-#     t
-# 3 number 3s. Ayyy
+        
+        print(t_all, t_ite)

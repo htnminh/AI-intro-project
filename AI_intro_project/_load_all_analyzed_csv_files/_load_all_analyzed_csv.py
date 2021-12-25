@@ -24,7 +24,14 @@ with open(output_txt_path, 'w') as fo:
     df_astar = pd.read_csv(astar_csv_path, header=0)
     print(df_astar.describe(), file=fo)
 
-print('Saved to', output_txt_path)
+    print('-' * length_count, file=fo)
+    print('A*'.center(80), file=fo)
+    print('-' * length_count, file=fo)
+    rbfs_csv_path = r'AI_intro_project\search_algo\load_all_output\output-rbfs.csv'
+    df_rbfs = pd.read_csv(rbfs_csv_path, header=0)
+    print(df_rbfs.describe(), file=fo)
 
 
-# TODO: plot results in subplots using pd
+df_rbfs.sort_values(by='idx', inplace=True)
+df_dfs.sort_values(by='idx', inplace=True)
+df_astar.sort_values(by='idx', inplace=True)

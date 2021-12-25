@@ -1,13 +1,13 @@
-from typing import List
 from AI_intro_project.State import State
 from AI_intro_project.Coordinate_and_Move import Coordinate, Move
 from AI_intro_project._Utilities import _Utilities
 from copy import deepcopy
-import time
+import time, psutil
 import matplotlib.pyplot as plt
 
 MODE_DBG = False
 if MODE_DBG: print("===\n!DBG: Debug Mode is on\n===")
+def get_ram_usage(): return int(psutil.virtual_memory().total - psutil.virtual_memory().available) / (1024**3)
 
 '''
    .-=-.
@@ -49,8 +49,8 @@ def dfs_prep(START):
     #############################################
     # Auxiliary vars for reduced querying need
     #DBG!: number of recursive DFS iterations
-    global _START_point, _board_size, _START_tax, GOAL, __t
-    if MODE_DBG: global ite; ite = 0
+    global _START_point, _board_size, _START_tax, GOAL, __t, ite
+    ite = 0
     
     __t = -1
     _board_size = START.board_size
@@ -98,7 +98,7 @@ def dfs(cur):
         if not exiting and cur.available_moves_list() is not None:
             for _move in cur.available_moves_list():
                 #DBG!: iter
-                if MODE_DBG: ite += 1
+                ite += 1
 
                 if exiting: break
 
@@ -134,13 +134,15 @@ def dfs(cur):
 
 if __name__ == "__main__":
     t_limit = 10 # seconds
+    t_all = 0
+    t_ite = 0
 
     # Figure of (un-)solved paths
     path = 'AI_intro_project/_s_dfs_solved_state_images/'
     
     #CSV!: open CSV file
     with open("AI_intro_project/search_algo/load_all_output/output-dfs.csv", "w") as f_csv:
-        print('m,n,n_moves,tax,time,time_limit_reached', file = f_csv)
+        print('idx,path_length,tax,time,time_limit_reached,iteration,ram_usage', file = f_csv)
     
         with open(f"AI_intro_project/search_algo/load_all_output/output-dfs-L{t_limit}.txt", "w") as f:
             _var_utils_loadall = _Utilities().load_all(
@@ -182,9 +184,11 @@ if __name__ == "__main__":
                 timer -= time.time()
                 print(f"time: {-timer}", file = f)
 
+                if abs(timer + t_limit) >= 2: t_all -= timer
+                t_ite += ite
                 ###############
                 #CSV!
                 # in order: boardSize(m, n), #OfMoves, finalTax, isTimeLimitReached?
-                print(f'{_internalVar.board_size[0]},{_internalVar.board_size[1]},{len(moves)},{-__t},{-timer},{t_limit_r}', \
+                print(f'{idx},{len(moves)},{-__t},{-timer},{t_limit_r},{ite},{get_ram_usage()}', \
                     file = f_csv)
-                    
+        print(t_all, t_ite)
