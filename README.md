@@ -1,4 +1,4 @@
-Table of Contents _(Updated using VSCode)_
+Table of Contents
 - [The Penniless Pilgrim Riddle: Introduction](#the-penniless-pilgrim-riddle-introduction)
 - [Play the game!](#play-the-game)
 - [Hyperlinks](#hyperlinks)
