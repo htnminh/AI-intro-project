@@ -2,6 +2,7 @@ pip
 pytest
 matplotlib
 PySimpleGUI
+psutil # RAM usage
 
 flake8
 
