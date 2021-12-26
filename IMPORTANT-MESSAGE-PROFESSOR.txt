@@ -1,0 +1,65 @@
+IMPORTANT-MESSAGE-PROFESSOR.txt
+
+--------------------------------------------------
+
+Dear Professor Muriel Visani,
+
+I'm the group leader, and this is a VERY IMPORTANT MESSAGE that might prevent you
+from getting lost in the directory of our project.
+
+It won't take more than a few minutes, so please read it carefully.
+
+1. You asked for Python files only. Unfortunately, our project is too complicated
+to work only with them. WITHOUT the OTHER TYPES of files, the Python files WILL
+NOT WORK PROPERLY. Thank you for your understanding.
+
+2. This is an exhaustive list of VERY IMPORTANT PYTHON FILES. Please don't try to
+run any of them before reading all this instruction.
+
+- `AI_intro_project\Coordinate_and_Move.py` and `AI_intro_project\State.py`:
+    The core game.
+
+- `AI_intro_project\play.py`:
+    The UI of the game.
+
+- `AI_intro_project\StateRandomizer.py`:
+    The file to randomly generate and save initial states.
+    
+- `AI_intro_project\search_algo\astar_Sfirst.py`:
+    The implementation of A*.
+
+- `AI_intro_project\search_algo\dfs.py`:
+    The implementation of DFS.
+
+- `AI_intro_project\search_algo\recursive_BFS.py`:
+    The implementation of RBFS.
+
+3. If you want to RUN THE CODE, FOLLOW this section carefully, otherwise, feel
+free to skip it.
+
+- Make sure that Python (3.9.9) and pip (21.x) are installed on your local machine
+
+- Unzip the zip file (it's safe to use the option `Extract here`)
+
+- Open cmd (yours is terminal), navigate (using `cd`) to that folder
+    (`AI-intro-project-main` by default)
+
+- Run
+    `pip install .`
+
+- Run this line to open the UI of the game
+    `python AI_intro_project\play.py`
+
+If you want to completely remove the game, just delete the zip file and the folder
+specified above.
+
+WARNING: Running algorithms or analytical files might cause your computer to get a
+bit slow and laggy. Use at your own risk.
+
+Sincerely,
+    Hoang Tran Nhat Minh
+
+--------------------------------------------------
+
+Thanks for your attention, you can find out more in:
+    https://github.com/htnminh/AI-intro-project
